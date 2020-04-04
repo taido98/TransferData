@@ -57,6 +57,10 @@ public class ClientActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                    1);
+        }
         initView();
         this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         initAction();
@@ -73,10 +77,6 @@ public class ClientActivity extends AppCompatActivity {
         txtAvailableDevices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-                    requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-                            1);
-                }
                 p2pManager.discoverPeers(channel, null);
             }
         });

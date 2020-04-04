@@ -1,7 +1,9 @@
 package com.example.transferdata;
 
+import android.Manifest;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -47,6 +49,10 @@ public class HostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_host);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                    1);
+        }
         initView();
         this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         initAction();
