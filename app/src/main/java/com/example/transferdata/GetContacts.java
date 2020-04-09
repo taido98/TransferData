@@ -3,6 +3,8 @@ package com.example.transferdata;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -18,15 +20,29 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.transferdata.contact.AndroidCustomFieldScribe;
+import com.example.transferdata.contact.ContactOperations;
+
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.List;
+
+import ezvcard.Ezvcard;
+import ezvcard.VCard;
+import ezvcard.VCardVersion;
+import ezvcard.io.text.VCardReader;
 
 public class GetContacts extends AppCompatActivity {
 
     private Button mBtnGetContact;
+    private Button mBtnRestoreContact;
     private TextView mTxtSize;
     private TextView mTxtPath;
+    private String path = "";
+    private static final String TAG = GetContacts.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,20 +53,28 @@ public class GetContacts extends AppCompatActivity {
     }
 
     private void initView() {
-        mBtnGetContact = (Button) findViewById(R.id.get_contacts);
+        mBtnGetContact = (Button) findViewById(R.id.get_vcf);
+        mBtnRestoreContact = (Button) findViewById(R.id.restore_vcf);
         mTxtSize = (TextView) findViewById(R.id.size_vcf);
         mTxtPath = (TextView) findViewById(R.id.path_vcf);
     }
 
     private void initAction() {
         mBtnGetContact.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-                String path = getVCF(GetContacts.this);
+                path = getVCF(GetContacts.this);
                 File vcf = new File(path);
                 double size = vcf.length();
                 mTxtPath.setText(path);
                 mTxtSize.setText(size + "");
+            }
+        });
+        mBtnRestoreContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                restoreVCF(path, GetContacts.this);
             }
         });
     }
@@ -75,6 +99,7 @@ public class GetContacts extends AppCompatActivity {
                 android.Manifest.permission.WRITE_CONTACTS,
                 android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.GET_ACCOUNTS,
         };
 
         if (!hasPermissions(mContext, PERMISSIONS)) {
@@ -121,8 +146,50 @@ public class GetContacts extends AppCompatActivity {
         return results;
     }
 
-    public static void restoreVCF(String filePath) {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(new File(filePath)), "text/x-vcard"); //storage path is path of your vcf file and vFile is name of that file.
+    public static void restoreVCF(String filePath, Activity activity) throws RuntimeException {
+        File vcardFile;
+
+        if (filePath.equals("")) {
+            filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + "/Contact1.vcf";
+        }
+
+        String state = Environment.getExternalStorageState();
+        if (!Environment.MEDIA_MOUNTED.equals(state)) {
+            throw new RuntimeException("No external storage mounted.");
+        }
+
+        vcardFile = new File(filePath);
+        if (!vcardFile.exists()) {
+            throw new RuntimeException("vCard file does not exist: " + filePath);
+        } else {
+            VCardReader reader = null;
+            try {
+                reader = new VCardReader(vcardFile);
+                reader.registerScribe(new AndroidCustomFieldScribe());
+
+                ContactOperations operations = new ContactOperations(activity.getApplicationContext(), "Phone", "com.motorola.android.buacontactadapter");
+                VCard vcard = null;
+                while ((vcard = reader.readNext()) != null) {
+                    operations.insertContact(vcard);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                closeQuietly(reader);
+            }
+        }
+
+    }
+
+    private static void closeQuietly(Closeable closeable) {
+        if (closeable == null) {
+            return;
+        }
+
+        try {
+            closeable.close();
+        } catch (IOException e) {
+            //ignore
+        }
     }
 }
