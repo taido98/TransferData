@@ -1,4 +1,4 @@
-package com.example.transferdata;
+package com.example.transferdata.contact;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -7,7 +7,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
@@ -20,29 +19,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.transferdata.contact.AndroidCustomFieldScribe;
-import com.example.transferdata.contact.ContactOperations;
+import com.example.transferdata.R;
 
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.List;
 
-import ezvcard.Ezvcard;
 import ezvcard.VCard;
-import ezvcard.VCardVersion;
 import ezvcard.io.text.VCardReader;
 
-public class GetContacts extends AppCompatActivity {
+public class TestContacts extends AppCompatActivity {
 
     private Button mBtnGetContact;
     private Button mBtnRestoreContact;
     private TextView mTxtSize;
     private TextView mTxtPath;
     private String path = "";
-    private static final String TAG = GetContacts.class.getSimpleName();
+    private static final String TAG = TestContacts.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +59,7 @@ public class GetContacts extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-                path = getVCF(GetContacts.this);
+                path = getVCF(TestContacts.this);
                 File vcf = new File(path);
                 double size = vcf.length();
                 mTxtPath.setText(path);
@@ -74,7 +69,7 @@ public class GetContacts extends AppCompatActivity {
         mBtnRestoreContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                restoreVCF(path, GetContacts.this);
+                restoreVCF(path, TestContacts.this);
             }
         });
     }
@@ -105,8 +100,7 @@ public class GetContacts extends AppCompatActivity {
         if (!hasPermissions(mContext, PERMISSIONS)) {
             ActivityCompat.requestPermissions(activity, PERMISSIONS, 100);
         } else {
-            final String vfile = "Contacts.vcf";
-            String path = Environment.getExternalStorageDirectory().toString() + File.separator + vfile;
+            String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + "/Contacts.vcf";
             results = path;
             File fdelete = new File(path);
             if (fdelete.exists()) {
@@ -146,36 +140,36 @@ public class GetContacts extends AppCompatActivity {
         return results;
     }
 
-    public static void restoreVCF(String filePath, Activity activity) throws RuntimeException {
-        File vcardFile;
-
+    public static void restoreVCF(String filePath, Activity activity) {
+        Log.d("PATH", filePath);
         if (filePath.equals("")) {
-            filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + "/Contact1.vcf";
-        }
-
-        String state = Environment.getExternalStorageState();
-        if (!Environment.MEDIA_MOUNTED.equals(state)) {
-            throw new RuntimeException("No external storage mounted.");
-        }
-
-        vcardFile = new File(filePath);
-        if (!vcardFile.exists()) {
-            throw new RuntimeException("vCard file does not exist: " + filePath);
+            Log.e("Restore Error", "vCard path is empty");
         } else {
-            VCardReader reader = null;
-            try {
-                reader = new VCardReader(vcardFile);
-                reader.registerScribe(new AndroidCustomFieldScribe());
+            String state = Environment.getExternalStorageState();
+            if (!Environment.MEDIA_MOUNTED.equals(state)) {
+                Log.e("Restore Error", "No external storage mounted.");
+            }
 
-                ContactOperations operations = new ContactOperations(activity.getApplicationContext(), "Phone", "com.motorola.android.buacontactadapter");
-                VCard vcard = null;
-                while ((vcard = reader.readNext()) != null) {
-                    operations.insertContact(vcard);
+            File vcardFile;
+            vcardFile = new File(filePath);
+            if (!vcardFile.exists()) {
+                Log.e("Restore Error", "vCard file does not exist: " + filePath);
+            } else {
+                VCardReader reader = null;
+                try {
+                    reader = new VCardReader(vcardFile);
+                    reader.registerScribe(new AndroidCustomFieldScribe());
+
+                    ContactOperations operations = new ContactOperations(activity.getApplicationContext(), "Phone", "com.motorola.android.buacontactadapter");
+                    VCard vcard = null;
+                    while ((vcard = reader.readNext()) != null) {
+                        operations.insertContact(vcard);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    closeQuietly(reader);
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                closeQuietly(reader);
             }
         }
 

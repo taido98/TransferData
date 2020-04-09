@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.transferdata.contact.TestContacts;
+
 public class MainActivity extends AppCompatActivity {
     private ImageView mImgSendData, mImgReceiveData;
     protected OnBackPressedListener onBackPressedListener;
@@ -55,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         mBtnContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, GetContacts.class);
+                Intent intent = new Intent(MainActivity.this, TestContacts.class);
                 startActivity(intent);
             }
         });
