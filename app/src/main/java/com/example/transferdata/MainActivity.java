@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.transferdata.contact.TestContacts;
+import com.example.transferdata.video.TestVideo;
 
 public class MainActivity extends AppCompatActivity {
     private ImageView mImgSendData, mImgReceiveData;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private Button mBtnChooseDirectory;
     private Button mBtnContact;
+    private Button mBtnVideo;
     private String chosenDir = "";
     private boolean newFolderEnabled = true;
     private SharedPreferences.Editor sharedPreferencesEditor;
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         mImgReceiveData = findViewById(R.id.img_receive_data);
         mBtnChooseDirectory = findViewById(R.id.btn_choose_directory);
         mBtnContact = findViewById(R.id.btn_contact);
+        mBtnVideo = findViewById(R.id.btn_video);
     }
 
     private void initAction() {
@@ -58,6 +61,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, TestContacts.class);
+                startActivity(intent);
+            }
+        });
+
+        mBtnVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, TestVideo.class);
                 startActivity(intent);
             }
         });

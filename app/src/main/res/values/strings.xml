@@ -31,5 +31,6 @@
 
     <string name="alert">Attention!</string>
     <string name="enable_wifi_direct_before_using">You need to enable Wi-Fi Direct in device settings.</string>
+    <string name="get_video">Get Video</string>
 
 </resources>
