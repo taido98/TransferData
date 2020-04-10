@@ -1,4 +1,4 @@
-package com.example.transferdata.video;
+package com.example.transferdata.media;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +11,7 @@ import com.example.transferdata.R;
 
 import java.util.ArrayList;
 
-public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.ViewHolder> {
+public class MediaItemAdapter extends RecyclerView.Adapter<MediaItemAdapter.ViewHolder> {
     private ArrayList listPath;
 
     // Provide a reference to the views for each data item
@@ -28,13 +28,13 @@ public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.View
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public VideoItemAdapter(ArrayList listPath) {
+    public MediaItemAdapter(ArrayList listPath) {
         this.listPath = listPath;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public VideoItemAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+    public MediaItemAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                           int viewType) {
         // create a new view
         View v = (View) LayoutInflater.from(parent.getContext())

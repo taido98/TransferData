@@ -12,7 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.transferdata.contact.TestContacts;
-import com.example.transferdata.video.TestVideo;
+import com.example.transferdata.media.TestMedia;
 
 public class MainActivity extends AppCompatActivity {
     private ImageView mImgSendData, mImgReceiveData;
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         mBtnVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, TestVideo.class);
+                Intent intent = new Intent(MainActivity.this, TestMedia.class);
                 startActivity(intent);
             }
         });

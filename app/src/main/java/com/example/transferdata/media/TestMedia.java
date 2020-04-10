@@ -1,4 +1,4 @@
-package com.example.transferdata.video;
+package com.example.transferdata.media;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -17,18 +17,19 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.transferdata.R;
-import com.example.transferdata.contact.TestContacts;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-public class TestVideo extends AppCompatActivity {
+public class TestMedia extends AppCompatActivity {
 
     private Button mBtnGetVideo;
+    private Button mBtnGetAudio;
     private RecyclerView mRcvPathVideo;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -36,13 +37,14 @@ public class TestVideo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_video);
+        setContentView(R.layout.activity_media);
         initView();
         initAction();
     }
 
     private void initView() {
         mBtnGetVideo = (Button) findViewById(R.id.get_video);
+        mBtnGetAudio = (Button) findViewById(R.id.get_audio);
         mRcvPathVideo = (RecyclerView) findViewById(R.id.video_paths);
 
         // use this setting to improve performance if you know that changes
@@ -59,7 +61,7 @@ public class TestVideo extends AppCompatActivity {
         mBtnGetVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HashMap<String, ArrayList<String>> listVideoByFolder = getVideo(TestVideo.this);
+                HashMap<String, ArrayList<String>> listVideoByFolder = getVideo(TestMedia.this);
                 ArrayList<String> listPath = new ArrayList<>();
                 for (String key : listVideoByFolder.keySet()) {
                     ArrayList<String> value = listVideoByFolder.get(key);
@@ -71,7 +73,24 @@ public class TestVideo extends AppCompatActivity {
                 }
 
                 // specify an adapter (see also next example)
-                mAdapter = new VideoItemAdapter(listPath);
+                mAdapter = new MediaItemAdapter(listPath);
+                mRcvPathVideo.setAdapter(mAdapter);
+            }
+        });
+
+        mBtnGetAudio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<AudioModel> listAudio = getAllAudioFromDevice(TestMedia.this);
+                ArrayList<String> listPath = new ArrayList<>();
+                System.out.println("audio: " + listAudio.size());
+                for (AudioModel audio : listAudio) {
+                    System.out.println("audio path: " + audio.getaPath());
+                    listPath.add(audio.getaPath());
+                }
+
+                // specify an adapter (see also next example)
+                mAdapter = new MediaItemAdapter(listPath);
                 mRcvPathVideo.setAdapter(mAdapter);
             }
         });
@@ -138,4 +157,32 @@ public class TestVideo extends AppCompatActivity {
         }
         return listVideoByFolder;
     }
+
+    public ArrayList<AudioModel> getAllAudioFromDevice(final Context context) {
+        final ArrayList<AudioModel> tempAudioList = new ArrayList<>();
+
+        ContentResolver contentResolver = getContentResolver();
+        Uri songUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+        Cursor songCursor = contentResolver.query(songUri, null, null, null, null);
+
+        if (songCursor != null && songCursor.moveToFirst()) {
+
+            int songId = songCursor.getColumnIndex(MediaStore.Audio.Media._ID);
+            int songTitle = songCursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
+            int songPath = songCursor.getColumnIndex(MediaStore.Audio.Media.DATA);
+
+            do {
+                AudioModel audioModel = new AudioModel();
+                long currentId = songCursor.getLong(songId);
+                String currentTitle = songCursor.getString(songTitle);
+                String currentPath = songCursor.getString(songPath);
+                audioModel.setaPath(currentPath);
+                tempAudioList.add(audioModel);
+            } while (songCursor.moveToNext());
+        }
+
+        return tempAudioList;
+    }
+
+
 }
