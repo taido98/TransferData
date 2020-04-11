@@ -11,11 +11,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.transferdata.contact.TestContacts;
+import com.example.transferdata.media.TestMedia;
+
 public class MainActivity extends AppCompatActivity {
     private ImageView mImgSendData, mImgReceiveData;
     protected OnBackPressedListener onBackPressedListener;
     private SharedPreferences sharedPreferences;
     private Button mBtnChooseDirectory;
+    private Button mBtnContact;
+    private Button mBtnVideo;
     private String chosenDir = "";
     private boolean newFolderEnabled = true;
     private SharedPreferences.Editor sharedPreferencesEditor;
@@ -27,11 +32,15 @@ public class MainActivity extends AppCompatActivity {
         initView();
         initAction();
     }
+
     private void initView() {
         mImgSendData = findViewById(R.id.img_send_data);
         mImgReceiveData = findViewById(R.id.img_receive_data);
         mBtnChooseDirectory = findViewById(R.id.btn_choose_directory);
+        mBtnContact = findViewById(R.id.btn_contact);
+        mBtnVideo = findViewById(R.id.btn_video);
     }
+
     private void initAction() {
         mImgSendData.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +56,23 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        mBtnContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, TestContacts.class);
+                startActivity(intent);
+            }
+        });
+
+        mBtnVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, TestMedia.class);
+                startActivity(intent);
+            }
+        });
+
         mBtnChooseDirectory.setOnClickListener(l -> {
 
             // Create DirectoryChooserDialog and register a callback
@@ -65,8 +91,10 @@ public class MainActivity extends AppCompatActivity {
             // The registered callback will be called upon final directory selection.
             directoryChooserDialog.chooseDirectory(this.chosenDir);
             this.newFolderEnabled = !this.newFolderEnabled;
+
         });
     }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -76,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
             MainActivity.this.onBackPressedListener = null;
         });
     }
+
     @Override
     public void onBackPressed() {
         if (onBackPressedListener != null)
@@ -83,4 +112,5 @@ public class MainActivity extends AppCompatActivity {
         else
             super.onBackPressed();
     }
+
 }
