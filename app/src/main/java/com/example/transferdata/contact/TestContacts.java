@@ -30,7 +30,7 @@ import java.io.IOException;
 import ezvcard.VCard;
 import ezvcard.io.text.VCardReader;
 
-public class TestContacts extends AppCompatActivity {
+public class  TestContacts extends AppCompatActivity {
 
     private Button mBtnGetContact;
     private Button mBtnRestoreContact;
