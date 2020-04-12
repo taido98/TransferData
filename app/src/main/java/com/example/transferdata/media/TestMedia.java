@@ -17,6 +17,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.transferdata.R;
 
@@ -30,6 +31,7 @@ public class TestMedia extends AppCompatActivity {
 
     private Button mBtnGetVideo;
     private Button mBtnGetAudio;
+    private Button mBtnGetImage;
     private RecyclerView mRcvPathVideo;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -46,6 +48,7 @@ public class TestMedia extends AppCompatActivity {
         mBtnGetVideo = (Button) findViewById(R.id.get_video);
         mBtnGetAudio = (Button) findViewById(R.id.get_audio);
         mRcvPathVideo = (RecyclerView) findViewById(R.id.video_paths);
+        mBtnGetImage = findViewById(R.id.btn_get_image);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -86,6 +89,23 @@ public class TestMedia extends AppCompatActivity {
                 System.out.println("audio: " + listAudio.size());
                 for (AudioModel audio : listAudio) {
                     System.out.println("audio path: " + audio.getaPath());
+                    listPath.add(audio.getaPath());
+                }
+
+                // specify an adapter (see also next example)
+                mAdapter = new MediaItemAdapter(listPath);
+                mRcvPathVideo.setAdapter(mAdapter);
+            }
+        });
+        mBtnGetImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<AudioModel> listImage = getAllImageFromDevice(TestMedia.this);
+                ArrayList<String> listPath = new ArrayList<>();
+                System.out.println("audio: " + listImage.size());
+                for (AudioModel audio : listImage) {
+                    System.out.println("audio path: " + audio.getaPath());
+//                    if(audio.getaPath() == )
                     listPath.add(audio.getaPath());
                 }
 
@@ -182,6 +202,36 @@ public class TestMedia extends AppCompatActivity {
         }
 
         return tempAudioList;
+    }
+
+    public ArrayList<AudioModel> getAllImageFromDevice(final Context context) {
+        final ArrayList<AudioModel> tempImageList = new ArrayList<>();
+
+        ContentResolver contentResolver = getContentResolver();
+        Uri imgUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+        Toast.makeText(this,imgUri.toString(),Toast.LENGTH_LONG).show();
+        Cursor songCursor = contentResolver.query(imgUri, null, null, null, null);
+
+        if (songCursor != null && songCursor.moveToFirst()) {
+
+            int imgId = songCursor.getColumnIndex(MediaStore.Images.Media._ID);
+            int imgTitle = songCursor.getColumnIndex(MediaStore.Images.Media.TITLE);
+            int imgPath = songCursor.getColumnIndex(MediaStore.Images.Media.DATA);
+            Log.d("img path?","ada"+imgPath
+            );
+
+            do {
+                AudioModel audioModel = new AudioModel();
+                long currentId = songCursor.getLong(imgId);
+                String currentTitle = songCursor.getString(imgTitle);
+                String currentPath = songCursor.getString(imgPath);
+
+                audioModel.setaPath(currentPath);
+                tempImageList.add(audioModel);
+            } while (songCursor.moveToNext());
+        }
+
+        return tempImageList;
     }
 
 
