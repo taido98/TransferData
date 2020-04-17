@@ -27,6 +27,8 @@ public class Data {
                 return "Images";
             case VIDEOS:
                 return "Videos";
+            case AUDIO:
+                return "Audios";
             case MESSAGES:
                 return "Messages";
             default:
@@ -93,5 +95,5 @@ public class Data {
 }
 
 enum DataType {
-    CONTACTS, MESSAGES, IMAGES, VIDEOS
+    CONTACTS, MESSAGES, IMAGES, VIDEOS, AUDIO
 }
