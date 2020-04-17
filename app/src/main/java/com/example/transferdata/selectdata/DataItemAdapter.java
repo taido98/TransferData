@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,7 +38,7 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
             dataType = (TextView) itemView.findViewById(R.id.data_type);
             dataSize = (TextView) itemView.findViewById(R.id.data_size);
             dataItem = (ConstraintLayout) itemView.findViewById(R.id.data_item);
-            checkBoxDataItem = itemView.findViewById(R.id.checkBox);
+            checkBoxDataItem = (CheckBox) itemView.findViewById(R.id.checkBox);
         }
     }
 
@@ -65,15 +66,26 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
         final Data data = (Data) listData.get(position);
 
         holder.dataSize.setText(data.sizeToString(data.getSize()));
-        holder.dataType.setText(data. getTypeData());
+        holder.dataType.setText(data.getDataType());
         holder.imageType.setImageResource(data.getImageType());
+        holder.checkBoxDataItem.setChecked(data.getChecker());
 
         holder.dataItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mClickItemDataListener != null){
+                if (mClickItemDataListener != null) {
                     mClickItemDataListener.onItemData(position);
                 }
+            }
+        });
+
+        holder.checkBoxDataItem.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //is chkIos checked?
+                data.setChecker(((CheckBox) v).isChecked());
+                Toast.makeText(mContext, data.getDataType() + " checkbox is checker: " + data.getChecker(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -83,7 +95,8 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
     public int getItemCount() {
         return listData.size();
     }
-    public void setClickItemData(ClickItemDataListener clickItemDataListener){
+
+    public void setClickItemData(ClickItemDataListener clickItemDataListener) {
         this.mClickItemDataListener = clickItemDataListener;
     }
 }

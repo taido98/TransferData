@@ -7,11 +7,19 @@ import java.util.ArrayList;
 
 public class Data {
     private DataType mDataType;
+    private boolean mChecker;
     private ArrayList<String> mDataUrls;
 
     public Data(DataType mDataType, ArrayList<String> mUrlsData) {
         this.mDataType = mDataType;
         this.mDataUrls = mUrlsData;
+        this.mChecker = true;
+    }
+
+    public Data(DataType mDataType, ArrayList<String> mUrlsData, boolean mChecker) {
+        this.mDataType = mDataType;
+        this.mDataUrls = mUrlsData;
+        this.mChecker = mChecker;
     }
 
     public int getImageType() {
@@ -21,7 +29,7 @@ public class Data {
         }
     }
 
-    public String getTypeData() {
+    public String getDataType() {
         switch (mDataType) {
             case IMAGES:
                 return "Images";
@@ -36,7 +44,15 @@ public class Data {
         }
     }
 
-    public void setTypeData(DataType mTypeData) {
+    public boolean getChecker() {
+        return mChecker;
+    }
+
+    public void setChecker(boolean mChecker) {
+        this.mChecker = mChecker;
+    }
+
+    public void setDataType(DataType mTypeData) {
         this.mDataType = mTypeData;
     }
 

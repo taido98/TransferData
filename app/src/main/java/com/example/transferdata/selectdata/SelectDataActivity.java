@@ -35,7 +35,7 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class SelectDataActivity extends AppCompatActivity implements ClickItemDataListener{
+public class SelectDataActivity extends AppCompatActivity implements ClickItemDataListener {
 
     public Button mBtnGetData;
     private RecyclerView mRcvData;
@@ -46,7 +46,7 @@ public class SelectDataActivity extends AppCompatActivity implements ClickItemDa
     private ArrayList<String> mListImage;
     private ArrayList<String> mListAudio;
     private ArrayList<String> mListContact;
-    private  ArrayList<Data> listData;
+    private ArrayList<Data> listData;
     private Button mBtnSend;
 
     @Override
@@ -83,7 +83,7 @@ public class SelectDataActivity extends AppCompatActivity implements ClickItemDa
             @Override
             public void onClick(View v) {
                 String pathContact = getVCF(SelectDataActivity.this);
-                Toast.makeText(SelectDataActivity.this,pathContact,Toast.LENGTH_LONG).show();
+                Toast.makeText(SelectDataActivity.this, pathContact, Toast.LENGTH_LONG).show();
 //                String videoPath = "/storage/emulated/0/Download/VID_20200410_224413.mp4";
 //                String contactPath = "/storage/emulated/0/Download/Contacts.vcf";
 //
@@ -96,7 +96,7 @@ public class SelectDataActivity extends AppCompatActivity implements ClickItemDa
         listData = new ArrayList<>();
 
         Data data2 = new Data(DataType.IMAGES, mListImage);
-        Data data = new Data(DataType.VIDEOS, mListVideo);
+        Data data = new Data(DataType.VIDEOS, mListVideo, false);
         Data data3 = new Data(DataType.AUDIO, mListAudio);
         Data data4 = new Data(DataType.CONTACTS, mListContact);
         listData.add(data2);
@@ -114,6 +114,7 @@ public class SelectDataActivity extends AppCompatActivity implements ClickItemDa
             }
         });
     }
+
     public static String getVCF(Activity activity) {
         String results = "";
         Context mContext = activity.getApplicationContext();
@@ -167,6 +168,7 @@ public class SelectDataActivity extends AppCompatActivity implements ClickItemDa
         }
         return results;
     }
+
     public static boolean hasPermissions(Context context, String... permissions) {
         if (context != null && permissions != null) {
             for (String permission : permissions) {
@@ -209,7 +211,7 @@ public class SelectDataActivity extends AppCompatActivity implements ClickItemDa
 
         ContentResolver contentResolver = getContentResolver();
         Uri imgUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-        Toast.makeText(this,imgUri.toString(),Toast.LENGTH_LONG).show();
+        Toast.makeText(this, imgUri.toString(), Toast.LENGTH_LONG).show();
         Cursor songCursor = contentResolver.query(imgUri, null, null, null, null);
 
         if (songCursor != null && songCursor.moveToFirst()) {
@@ -217,7 +219,7 @@ public class SelectDataActivity extends AppCompatActivity implements ClickItemDa
             int imgId = songCursor.getColumnIndex(MediaStore.Images.Media._ID);
             int imgTitle = songCursor.getColumnIndex(MediaStore.Images.Media.TITLE);
             int imgPath = songCursor.getColumnIndex(MediaStore.Images.Media.DATA);
-            Log.d("img path?","ada"+imgPath
+            Log.d("img path?", "ada" + imgPath
             );
             do {
                 AudioModel audioModel = new AudioModel();
@@ -232,12 +234,13 @@ public class SelectDataActivity extends AppCompatActivity implements ClickItemDa
 
         return tempImageList;
     }
+
     public ArrayList<AudioModel> getVideoFromDevice(final Context context) {
         final ArrayList<AudioModel> tempVideoList = new ArrayList<>();
 
         ContentResolver contentResolver = getContentResolver();
         Uri VideoUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
-        Toast.makeText(this,VideoUri.toString(),Toast.LENGTH_LONG).show();
+        Toast.makeText(this, VideoUri.toString(), Toast.LENGTH_LONG).show();
         Cursor songCursor = contentResolver.query(VideoUri, null, null, null, null);
 
         if (songCursor != null && songCursor.moveToFirst()) {
@@ -245,7 +248,7 @@ public class SelectDataActivity extends AppCompatActivity implements ClickItemDa
             int videoId = songCursor.getColumnIndex(MediaStore.Video.Media._ID);
             int videoTitle = songCursor.getColumnIndex(MediaStore.Video.Media.TITLE);
             int videoPath = songCursor.getColumnIndex(MediaStore.Video.Media.DATA);
-            Log.d("img path?","ada"+videoPath);
+            Log.d("img path?", "ada" + videoPath);
             do {
                 AudioModel audioModel = new AudioModel();
                 long currentId = songCursor.getLong(videoId);
@@ -260,7 +263,7 @@ public class SelectDataActivity extends AppCompatActivity implements ClickItemDa
         return tempVideoList;
     }
 
-    private void getAllImage(){
+    private void getAllImage() {
         ArrayList<AudioModel> listImage = getImageFromDevice(SelectDataActivity.this);
         mListImage = new ArrayList<>();
         System.out.println("audio: " + listImage.size());
@@ -270,7 +273,8 @@ public class SelectDataActivity extends AppCompatActivity implements ClickItemDa
             mListImage.add(audio.getaPath());
         }
     }
-    private void getAllAudio(){
+
+    private void getAllAudio() {
         ArrayList<AudioModel> listAudio = getAudioFromDevice(SelectDataActivity.this);
         mListAudio = new ArrayList<>();
         System.out.println("audio: " + listAudio.size());
@@ -280,7 +284,8 @@ public class SelectDataActivity extends AppCompatActivity implements ClickItemDa
             mListAudio.add(audio.getaPath());
         }
     }
-    private void getAllVideo(){
+
+    private void getAllVideo() {
         ArrayList<AudioModel> listVideo = getVideoFromDevice(SelectDataActivity.this);
         mListVideo = new ArrayList<>();
         for (AudioModel audio : listVideo) {
@@ -289,17 +294,18 @@ public class SelectDataActivity extends AppCompatActivity implements ClickItemDa
             mListVideo.add(audio.getaPath());
         }
     }
-    private void getAllContact(){
+
+    private void getAllContact() {
         mListContact = new ArrayList<>();
         String pathContact = getVCF(this);
-        Toast.makeText(this,pathContact,Toast.LENGTH_LONG).show();
+        Toast.makeText(this, pathContact, Toast.LENGTH_LONG).show();
         mListContact.add(pathContact);
     }
 
     @Override
     public void onItemData(int position) {
         Intent intent = new Intent(SelectDataActivity.this, TestMedia.class);
-        intent.putStringArrayListExtra("List Data",listData.get(position).getUrlData());
+        intent.putStringArrayListExtra("List Data", listData.get(position).getUrlData());
         startActivity(intent);
     }
 //    public static boolean hasPermissions(Context context, String... permissions) {
