@@ -1,5 +1,7 @@
 package com.example.transferdata.selectdata;
 
+import android.content.Context;
+
 import com.example.transferdata.R;
 
 import java.io.File;
@@ -24,23 +26,31 @@ public class Data {
 
     public int getImageType() {
         switch (mDataType) {
+            case IMAGES:
+                return R.drawable.images;
+            case VIDEOS:
+                return R.drawable.videos;
+            case AUDIOS:
+                return R.drawable.musics;
+            case MESSAGES:
+                return R.drawable.messages;
             default:
-                return R.drawable.d_icon_app;
+                return R.drawable.person;
         }
     }
 
-    public String getDataType() {
+    public String getDataType(Context context) {
         switch (mDataType) {
             case IMAGES:
-                return "Images";
+                return context.getString(R.string.images);
             case VIDEOS:
-                return "Videos";
-            case AUDIO:
-                return "Audios";
+                return context.getString(R.string.videos);
+            case AUDIOS:
+                return context.getString(R.string.audios);
             case MESSAGES:
-                return "Messages";
+                return context.getString(R.string.messages);
             default:
-                return "Contacts";
+                return context.getString(R.string.contacts);
         }
     }
 
@@ -111,5 +121,5 @@ public class Data {
 }
 
 enum DataType {
-    CONTACTS, MESSAGES, IMAGES, VIDEOS, AUDIO
+    CONTACTS, MESSAGES, IMAGES, VIDEOS, AUDIOS
 }
