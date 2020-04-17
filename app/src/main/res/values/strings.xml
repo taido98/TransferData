@@ -37,4 +37,13 @@
     <string name="select_data">Select Data</string>
     <string name="activity_media">get Image</string>
 
+
+    <string name="images">Hình ảnh</string>
+    <string name="videos">Video</string>
+    <string name="audios">Nhạc</string>
+    <string name="contacts">Danh bạ</string>
+    <string name="messages">Tin nhắn</string>
+
+
+
 </resources>

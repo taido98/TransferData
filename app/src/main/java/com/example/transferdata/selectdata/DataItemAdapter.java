@@ -66,7 +66,7 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
         final Data data = (Data) listData.get(position);
 
         holder.dataSize.setText(data.sizeToString(data.getSize()));
-        holder.dataType.setText(data.getDataType());
+        holder.dataType.setText(data.getDataType(mContext));
         holder.imageType.setImageResource(data.getImageType());
         holder.checkBoxDataItem.setChecked(data.getChecker());
 
@@ -85,7 +85,7 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
             public void onClick(View v) {
                 //is chkIos checked?
                 data.setChecker(((CheckBox) v).isChecked());
-                Toast.makeText(mContext, data.getDataType() + " checkbox is checker: " + data.getChecker(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, data.getDataType(mContext) + " checkbox is checker: " + data.getChecker(), Toast.LENGTH_SHORT).show();
             }
         });
     }

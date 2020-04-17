@@ -23,17 +23,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.transferdata.MainActivity;
 import com.example.transferdata.R;
 import com.example.transferdata.media.AudioModel;
-import com.example.transferdata.media.MediaItemAdapter;
 import com.example.transferdata.media.TestMedia;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class SelectDataActivity extends AppCompatActivity implements ClickItemDataListener {
 
@@ -97,7 +94,7 @@ public class SelectDataActivity extends AppCompatActivity implements ClickItemDa
 
         Data data2 = new Data(DataType.IMAGES, mListImage);
         Data data = new Data(DataType.VIDEOS, mListVideo, false);
-        Data data3 = new Data(DataType.AUDIO, mListAudio);
+        Data data3 = new Data(DataType.AUDIOS, mListAudio);
         Data data4 = new Data(DataType.CONTACTS, mListContact);
         listData.add(data2);
         listData.add(data);
