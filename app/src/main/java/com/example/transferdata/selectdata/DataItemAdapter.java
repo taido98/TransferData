@@ -1,10 +1,13 @@
 package com.example.transferdata.selectdata;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +18,8 @@ import java.util.ArrayList;
 
 public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHolder> {
     private ArrayList<Data> listData;
+    private ClickItemDataListener mClickItemDataListener;
+    private Context mContext;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -25,6 +30,7 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
         public TextView dataType;
         public TextView dataSize;
         public ConstraintLayout dataItem;
+        private CheckBox checkBoxDataItem;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -32,10 +38,12 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
             dataType = (TextView) itemView.findViewById(R.id.data_type);
             dataSize = (TextView) itemView.findViewById(R.id.data_size);
             dataItem = (ConstraintLayout) itemView.findViewById(R.id.data_item);
+            checkBoxDataItem = (CheckBox) itemView.findViewById(R.id.checkBox);
         }
     }
 
-    public DataItemAdapter(ArrayList<Data> listData) {
+    public DataItemAdapter(Context context, ArrayList<Data> listData) {
+        this.mContext = context;
         this.listData = listData;
     }
 
@@ -58,13 +66,26 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
         final Data data = (Data) listData.get(position);
 
         holder.dataSize.setText(data.sizeToString(data.getSize()));
-        holder.dataType.setText(data.getTypeData());
+        holder.dataType.setText(data.getDataType());
         holder.imageType.setImageResource(data.getImageType());
+        holder.checkBoxDataItem.setChecked(data.getChecker());
 
         holder.dataItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Data position: " + listData.indexOf(data));
+                if (mClickItemDataListener != null) {
+                    mClickItemDataListener.onItemData(position);
+                }
+            }
+        });
+
+        holder.checkBoxDataItem.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //is chkIos checked?
+                data.setChecker(((CheckBox) v).isChecked());
+                Toast.makeText(mContext, data.getDataType() + " checkbox is checker: " + data.getChecker(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -73,5 +94,9 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
     @Override
     public int getItemCount() {
         return listData.size();
+    }
+
+    public void setClickItemData(ClickItemDataListener clickItemDataListener) {
+        this.mClickItemDataListener = clickItemDataListener;
     }
 }

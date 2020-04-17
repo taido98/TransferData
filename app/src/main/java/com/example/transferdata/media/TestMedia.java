@@ -9,6 +9,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -35,13 +36,20 @@ public class TestMedia extends AppCompatActivity {
     private RecyclerView mRcvPathVideo;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private ArrayList<String> mListUrlData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_media);
+        getData();
         initView();
         initAction();
+    }
+
+    private void getData() {
+        Intent intent = getIntent();
+        if(intent!=null) mListUrlData = intent.getStringArrayListExtra("List Data");
     }
 
     private void initView() {
@@ -61,6 +69,8 @@ public class TestMedia extends AppCompatActivity {
     }
 
     private void initAction() {
+        mAdapter = new MediaItemAdapter(mListUrlData);
+        mRcvPathVideo.setAdapter(mAdapter);
         mBtnGetVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -209,7 +219,7 @@ public class TestMedia extends AppCompatActivity {
 
         ContentResolver contentResolver = getContentResolver();
         Uri imgUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-        Toast.makeText(this,imgUri.toString(),Toast.LENGTH_LONG).show();
+
         Cursor songCursor = contentResolver.query(imgUri, null, null, null, null);
 
         if (songCursor != null && songCursor.moveToFirst()) {
@@ -217,6 +227,8 @@ public class TestMedia extends AppCompatActivity {
             int imgId = songCursor.getColumnIndex(MediaStore.Images.Media._ID);
             int imgTitle = songCursor.getColumnIndex(MediaStore.Images.Media.TITLE);
             int imgPath = songCursor.getColumnIndex(MediaStore.Images.Media.DATA);
+            int imgSize = songCursor.getColumnIndex(MediaStore.Images.Media.SIZE);
+
             Log.d("img path?","ada"+imgPath
             );
 
@@ -225,7 +237,8 @@ public class TestMedia extends AppCompatActivity {
                 long currentId = songCursor.getLong(imgId);
                 String currentTitle = songCursor.getString(imgTitle);
                 String currentPath = songCursor.getString(imgPath);
-
+//                String currentSize = songCursor.getString(imgSize);
+//                Toast.makeText(this,currentSize,Toast.LENGTH_LONG).show();
                 audioModel.setaPath(currentPath);
                 tempImageList.add(audioModel);
             } while (songCursor.moveToNext());

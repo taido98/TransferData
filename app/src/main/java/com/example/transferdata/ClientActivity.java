@@ -23,6 +23,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.transferdata.contact.TestContacts;
+import com.example.transferdata.selectdata.SelectDataActivity;
+
 import java.io.File;
 import java.lang.reflect.Method;
 import java.net.InetAddress;
@@ -112,7 +115,9 @@ public class ClientActivity extends AppCompatActivity {
             serverAddress = info.groupOwnerAddress;
             if (serverAddress == null) return;
             callbackSendThisDeviceName.call();
-            ChooseFile.fileChooser(ClientActivity.this);
+            Intent intent = new Intent(this, SelectDataActivity.class);
+            startActivity(intent);
+            //ChooseFile.fileChooser(ClientActivity.this);
         };
 
         //Set p2pManger and channel
