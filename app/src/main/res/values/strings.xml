@@ -45,6 +45,7 @@
     <string name="messages">Tin nhắn</string>
     <string name="data_type">Data Type Image</string>
     <string name="all">Tất cả</string>
+    <string name="selected_item">Mục</string>
 
 
 </resources>

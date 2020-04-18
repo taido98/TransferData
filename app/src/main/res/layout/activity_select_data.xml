@@ -35,10 +35,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_list_data"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/recyleview_rounded"
         app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,4 +64,26 @@
         app:layout_constraintEnd_toEndOf="@+id/select_all"
         app:layout_constraintStart_toStartOf="@+id/select_all"
         app:layout_constraintTop_toBottomOf="@+id/select_all" />
+
+    <TextView
+        android:id="@+id/selected_items"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:text="@string/selected_item"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/select_all"
+        app:layout_constraintStart_toEndOf="@+id/select_all"
+        app:layout_constraintTop_toTopOf="@+id/select_all" />
+
+    <TextView
+        android:id="@+id/selected_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="9GB"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/selected_items"
+        app:layout_constraintTop_toBottomOf="@+id/selected_items" />
 </androidx.constraintlayout.widget.ConstraintLayout>

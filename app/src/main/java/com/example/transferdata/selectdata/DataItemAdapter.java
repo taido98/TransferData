@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHolder> {
     private ArrayList<Data> listData;
     private ClickItemDataListener mClickItemDataListener;
+    private ClickCheckBoxListener mClickCheckBoxListener;
     private Context mContext;
 
     // Provide a reference to the views for each data item
@@ -91,7 +92,9 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
             public void onClick(View v) {
                 //is chkIos checked?
                 data.setChecker(((CheckBox) v).isChecked());
-                Toast.makeText(mContext, data.getDataType(mContext) + " checkbox is checker: " + data.getChecker(), Toast.LENGTH_SHORT).show();
+                if (mClickCheckBoxListener != null) {
+                    mClickCheckBoxListener.onItem(position);
+                }
             }
         });
 
@@ -105,5 +108,9 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
 
     public void setClickItemData(ClickItemDataListener clickItemDataListener) {
         this.mClickItemDataListener = clickItemDataListener;
+    }
+
+    public void setClickCheckBox(ClickCheckBoxListener clickCheckBoxListener) {
+        this.mClickCheckBoxListener = clickCheckBoxListener;
     }
 }

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -23,6 +24,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.transferdata.R;
@@ -49,6 +51,8 @@ public class SelectDataActivity extends AppCompatActivity implements ClickItemDa
     private ArrayList<Data> listData;
     private Button mBtnSend;
     private CheckBox mCheckBoxSelectAll;
+    private TextView mSelectedItems;
+    private TextView mSelectedSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +72,8 @@ public class SelectDataActivity extends AppCompatActivity implements ClickItemDa
 
     private void initView() {
         mCheckBoxSelectAll = (CheckBox) findViewById(R.id.select_all);
+        mSelectedItems = (TextView) findViewById(R.id.selected_items);
+        mSelectedSize = (TextView) findViewById(R.id.selected_size);
         mRcvData = (RecyclerView) findViewById(R.id.rcv_list_data);
         mBtnSend = findViewById(R.id.btn_send);
         // use this setting to improve performance if you know that changes
@@ -99,6 +105,9 @@ public class SelectDataActivity extends AppCompatActivity implements ClickItemDa
         mAdapter = new DataItemAdapter(getApplicationContext(), listData);
         mAdapter.setClickItemData(this);
         mRcvData.setAdapter(mAdapter);
+
+        updateSelectedItem(listData);
+
         mBtnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,6 +122,20 @@ public class SelectDataActivity extends AppCompatActivity implements ClickItemDa
                     data.setChecker(((CheckBox) v).isChecked());
                 }
                 mAdapter.notifyAdapter(listData);
+                updateSelectedItem(listData);
+            }
+
+        });
+
+        mAdapter.setClickCheckBox(new ClickCheckBoxListener() {
+            @Override
+            public void onItem(int position) {
+                mCheckBoxSelectAll.setChecked(true);
+                for (Data dataItem : listData) {
+                    if (!dataItem.getChecker())
+                        mCheckBoxSelectAll.setChecked(false);
+                }
+                updateSelectedItem(listData);
             }
         });
 
@@ -120,6 +143,20 @@ public class SelectDataActivity extends AppCompatActivity implements ClickItemDa
             if (!dataItem.getChecker())
                 mCheckBoxSelectAll.setChecked(false);
         }
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void updateSelectedItem(ArrayList listdata) {
+        long size = 0;
+        int items = 0;
+        for (Data dataItem : listData) {
+            if (dataItem.getChecker()) {
+                items++;
+                size += dataItem.getSize();
+            }
+        }
+        mSelectedSize.setText((new Data()).sizeToString(size));
+        mSelectedItems.setText(items + " " + this.getString(R.string.selected_item));
     }
 
     public static String getVCF(Activity activity) {
