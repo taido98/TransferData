@@ -34,7 +34,7 @@
     <string name="get_video">Get Video</string>
     <string name="textview">TextView</string>
     <string name="get_audio">GET AUDIO</string>
-    <string name="select_data">Select Data</string>
+    <string name="select_data">Chọn dữ liệu để gửi</string>
     <string name="activity_media">get Image</string>
 
 
@@ -46,6 +46,9 @@
     <string name="data_type">Data Type Image</string>
     <string name="all">Tất cả</string>
     <string name="selected_item">Mục</string>
+    <string name="more_info">more_info</string>
+    <string name="_9gb">9GB</string>
+    <string name="transfer">send</string>
 
 
 </resources>

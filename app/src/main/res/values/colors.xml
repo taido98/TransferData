@@ -19,5 +19,5 @@
     <color name="cProgressbar">#eff8f7</color>
     <color name="cBannerBlock">#e7f1f1</color>
 
-    <color name="bGrey">#f2f2f2</color>
+    <color name="bSelectDataColor">#E5E6EB</color>
 </resources>
