@@ -43,7 +43,8 @@
     <string name="audios">Nhạc</string>
     <string name="contacts">Danh bạ</string>
     <string name="messages">Tin nhắn</string>
-
+    <string name="data_type">Data Type Image</string>
+    <string name="all">Tất cả</string>
 
 
 </resources>

@@ -36,6 +36,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'com.jaeger.statusbarutil:library:1.5.1'
     implementation('com.googlecode.ez-vcard:ez-vcard:0.9.5') {
         exclude group: 'org.jsoup'
         exclude group: 'org.freemarker'

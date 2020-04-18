@@ -31,7 +31,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="q">
-        <activity android:name=".selectdata.SelectDataActivity"></activity>
+        <activity
+            android:name=".selectdata.SelectDataActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".media.TestMedia" />
         <activity android:name=".contact.TestContacts" />
 

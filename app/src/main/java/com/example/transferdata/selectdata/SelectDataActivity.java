@@ -1,5 +1,6 @@
 package com.example.transferdata.selectdata;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,11 +22,13 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.example.transferdata.R;
 import com.example.transferdata.media.AudioModel;
 import com.example.transferdata.media.TestMedia;
+import com.jaeger.library.StatusBarUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -45,6 +48,7 @@ public class SelectDataActivity extends AppCompatActivity implements ClickItemDa
     private ArrayList<String> mListContact;
     private ArrayList<Data> listData;
     private Button mBtnSend;
+    private CheckBox mCheckBoxSelectAll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +67,7 @@ public class SelectDataActivity extends AppCompatActivity implements ClickItemDa
     }
 
     private void initView() {
-        mBtnGetData = (Button) findViewById(R.id.get_data);
+        mCheckBoxSelectAll = (CheckBox) findViewById(R.id.select_all);
         mRcvData = (RecyclerView) findViewById(R.id.rcv_list_data);
         mBtnSend = findViewById(R.id.btn_send);
         // use this setting to improve performance if you know that changes
@@ -73,27 +77,17 @@ public class SelectDataActivity extends AppCompatActivity implements ClickItemDa
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         mRcvData.setLayoutManager(layoutManager);
+
+        StatusBarUtil.setTransparent(this);
+        StatusBarUtil.setLightMode(this);
     }
 
     private void initAction() {
-        mBtnGetData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String pathContact = getVCF(SelectDataActivity.this);
-                Toast.makeText(SelectDataActivity.this, pathContact, Toast.LENGTH_LONG).show();
-//                String videoPath = "/storage/emulated/0/Download/VID_20200410_224413.mp4";
-//                String contactPath = "/storage/emulated/0/Download/Contacts.vcf";
-//
-//                ArrayList<String> listVideos = new ArrayList<>();
-//                ArrayList<String> listContacts = new ArrayList<>();
-//                listVideos.add(videoPath);
-//                listContacts.add(contactPath);
-            }
-        });
+
         listData = new ArrayList<>();
 
         Data data2 = new Data(DataType.IMAGES, mListImage);
-        Data data = new Data(DataType.VIDEOS, mListVideo, false);
+        Data data = new Data(DataType.VIDEOS, mListVideo);
         Data data3 = new Data(DataType.AUDIOS, mListAudio);
         Data data4 = new Data(DataType.CONTACTS, mListContact);
         listData.add(data2);
@@ -110,6 +104,22 @@ public class SelectDataActivity extends AppCompatActivity implements ClickItemDa
             public void onClick(View v) {
             }
         });
+
+        mCheckBoxSelectAll.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                for (Data data : listData) {
+                    data.setChecker(((CheckBox) v).isChecked());
+                }
+                mAdapter.notifyAdapter(listData);
+            }
+        });
+
+        for (Data dataItem : listData) {
+            if (!dataItem.getChecker())
+                mCheckBoxSelectAll.setChecked(false);
+        }
     }
 
     public static String getVCF(Activity activity) {
