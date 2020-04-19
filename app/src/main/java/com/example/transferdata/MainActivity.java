@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.transferdata.contact.TestContacts;
 import com.example.transferdata.media.TestMedia;
@@ -17,7 +18,7 @@ import com.example.transferdata.selectdata.SelectDataActivity;
 import com.jaeger.library.StatusBarUtil;
 
 public class MainActivity extends AppCompatActivity {
-    private ImageView mImgSendData, mImgReceiveData;
+    private ConstraintLayout mImgSendData, mImgReceiveData;
     protected OnBackPressedListener onBackPressedListener;
     private SharedPreferences sharedPreferences;
 //    private Button mBtnChooseDirectory;
