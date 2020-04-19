@@ -1,100 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#FFFFFF"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/img_send_data"
-        android:layout_width="130dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="130dp"
-        android:layout_marginLeft="130dp"
-        android:layout_marginTop="152dp"
-        android:layout_marginEnd="131dp"
-        android:layout_marginRight="131dp"
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="110dp"
+        android:src="@mipmap/transfer"
+        app:layout_constraintBottom_toTopOf="@+id/rcv_list_data"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_arrow_upward_black_24dp"
-        tools:ignore="VectorDrawableCompat" />
-
-    <ImageView
-        android:id="@+id/img_receive_data"
-        android:layout_width="130dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="140dp"
-        android:layout_marginLeft="140dp"
-        android:layout_marginTop="80dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        app:srcCompat="@drawable/ic_arrow_downward_black_24dp"
-        tools:ignore="VectorDrawableCompat" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:id="@+id/slogan"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginLeft="176dp"
-        android:text="Gửi dữ liệu"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_send_data" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="170dp"
-        android:layout_marginLeft="170dp"
-        android:text="Nhận dữ liệu"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_receive_data" />
-
-    <Button
-        android:id="@+id/btn_choose_directory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="48dp"
-        android:text="directory"
+        android:layout_marginEnd="48dp"
+        android:gravity="center"
+        android:text="@string/slogan"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btn_contact"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/subtitle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Contact"
-        app:layout_constraintStart_toEndOf="@+id/btn_choose_directory"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="@string/subtitle"
+        app:layout_constraintEnd_toEndOf="@+id/slogan"
+        app:layout_constraintStart_toStartOf="@+id/slogan"
+        app:layout_constraintTop_toBottomOf="@+id/slogan" />
 
-    <Button
-        android:id="@+id/btn_select_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
-        android:layout_marginLeft="7dp"
-        android:layout_marginTop="50dp"
-        android:text="@string/select_data"
-        app:layout_constraintStart_toEndOf="@+id/btn_contact"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="170dp"
+        android:layout_height="159dp"
+        app:srcCompat="@mipmap/new_phone_foreground"
+        tools:layout_editor_absoluteX="200dp"
+        tools:layout_editor_absoluteY="428dp" />
 
-    <Button
-        android:id="@+id/btn_video"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="Media"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_select_data"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

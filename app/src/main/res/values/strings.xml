@@ -49,6 +49,8 @@
     <string name="more_info">more_info</string>
     <string name="_9gb">9GB</string>
     <string name="transfer">send</string>
+    <string name="slogan">Slogan</string>
+    <string name="subtitle">subtitle</string>
 
 
 </resources>
