@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHolder> {
     private ArrayList<Data> listData;
     private ClickItemDataListener mClickItemDataListener;
+    private ClickCheckBoxListener mClickCheckBoxListener;
     private Context mContext;
 
     // Provide a reference to the views for each data item
@@ -26,11 +27,12 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
     // you provide access to all the views for a data item in a view holder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public ImageView imageType;
-        public TextView dataType;
-        public TextView dataSize;
-        public ConstraintLayout dataItem;
+        private ImageView imageType;
+        private TextView dataType;
+        private TextView dataSize;
+        private ConstraintLayout dataItem;
         private CheckBox checkBoxDataItem;
+        private CheckBox checkBoxAll;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -38,13 +40,18 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
             dataType = (TextView) itemView.findViewById(R.id.data_type);
             dataSize = (TextView) itemView.findViewById(R.id.data_size);
             dataItem = (ConstraintLayout) itemView.findViewById(R.id.data_item);
-            checkBoxDataItem = (CheckBox) itemView.findViewById(R.id.checkBox);
+            checkBoxDataItem = (CheckBox) itemView.findViewById(R.id.select_all);
         }
     }
 
     public DataItemAdapter(Context context, ArrayList<Data> listData) {
         this.mContext = context;
         this.listData = listData;
+    }
+
+    public void notifyAdapter(ArrayList<Data> listData) {
+        this.listData = listData;
+        this.notifyDataSetChanged();
     }
 
     // Create new views (invoked by the layout manager)
@@ -85,9 +92,12 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
             public void onClick(View v) {
                 //is chkIos checked?
                 data.setChecker(((CheckBox) v).isChecked());
-                Toast.makeText(mContext, data.getDataType(mContext) + " checkbox is checker: " + data.getChecker(), Toast.LENGTH_SHORT).show();
+                if (mClickCheckBoxListener != null) {
+                    mClickCheckBoxListener.onItem(position);
+                }
             }
         });
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -98,5 +108,9 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
 
     public void setClickItemData(ClickItemDataListener clickItemDataListener) {
         this.mClickItemDataListener = clickItemDataListener;
+    }
+
+    public void setClickCheckBox(ClickCheckBoxListener clickCheckBoxListener) {
+        this.mClickCheckBoxListener = clickCheckBoxListener;
     }
 }

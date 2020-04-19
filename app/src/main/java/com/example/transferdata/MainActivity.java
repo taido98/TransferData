@@ -10,19 +10,21 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.transferdata.contact.TestContacts;
 import com.example.transferdata.media.TestMedia;
 import com.example.transferdata.selectdata.SelectDataActivity;
+import com.jaeger.library.StatusBarUtil;
 
 public class MainActivity extends AppCompatActivity {
-    private ImageView mImgSendData, mImgReceiveData;
+    private ConstraintLayout mImgSendData, mImgReceiveData;
     protected OnBackPressedListener onBackPressedListener;
     private SharedPreferences sharedPreferences;
-    private Button mBtnChooseDirectory;
-    private Button mBtnContact;
-    private Button mBtnVideo;
-    private Button mBtnSelectData;
+//    private Button mBtnChooseDirectory;
+//    private Button mBtnContact;
+//    private Button mBtnVideo;
+//    private Button mBtnSelectData;
     private String chosenDir = "";
     private boolean newFolderEnabled = true;
     private SharedPreferences.Editor sharedPreferencesEditor;
@@ -38,10 +40,13 @@ public class MainActivity extends AppCompatActivity {
     private void initView() {
         mImgSendData = findViewById(R.id.img_send_data);
         mImgReceiveData = findViewById(R.id.img_receive_data);
-        mBtnChooseDirectory = findViewById(R.id.btn_choose_directory);
-        mBtnContact = findViewById(R.id.btn_contact);
-        mBtnVideo = findViewById(R.id.btn_video);
-        mBtnSelectData = findViewById(R.id.btn_select_data);
+//        mBtnChooseDirectory = findViewById(R.id.btn_choose_directory);
+//        mBtnContact = findViewById(R.id.btn_contact);
+//        mBtnVideo = findViewById(R.id.btn_video);
+//        mBtnSelectData = findViewById(R.id.btn_select_data);
+
+        StatusBarUtil.setTransparent(this);
+        StatusBarUtil.setLightMode(this);
     }
 
     private void initAction() {
@@ -60,50 +65,50 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mBtnContact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, TestContacts.class);
-                startActivity(intent);
-            }
-        });
-
-        mBtnSelectData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SelectDataActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        mBtnVideo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, TestMedia.class);
-                startActivity(intent);
-            }
-        });
-
-        mBtnChooseDirectory.setOnClickListener(l -> {
-
-            // Create DirectoryChooserDialog and register a callback
-            DirectoryChooserDialog directoryChooserDialog =
-                    new DirectoryChooserDialog(MainActivity.this, chosenDir -> {
-                        this.chosenDir = chosenDir;
-                        Toast.makeText(MainActivity.this, "Chosen directory: " + chosenDir, Toast.LENGTH_LONG).show();
-
-                        sharedPreferencesEditor = sharedPreferences.edit();
-                        sharedPreferencesEditor.putString(Variables.APP_TYPE, chosenDir);
-                        sharedPreferencesEditor.commit();
-                    });
-            // Toggle new folder button enabling
-            directoryChooserDialog.setNewFolderEnabled(this.newFolderEnabled);
-            // Load directory chooser dialog for initial 'm_chosenDir' directory.
-            // The registered callback will be called upon final directory selection.
-            directoryChooserDialog.chooseDirectory(this.chosenDir);
-            this.newFolderEnabled = !this.newFolderEnabled;
-
-        });
+//        mBtnContact.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, TestContacts.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        mBtnSelectData.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, SelectDataActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        mBtnVideo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, TestMedia.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        mBtnChooseDirectory.setOnClickListener(l -> {
+//
+//            // Create DirectoryChooserDialog and register a callback
+//            DirectoryChooserDialog directoryChooserDialog =
+//                    new DirectoryChooserDialog(MainActivity.this, chosenDir -> {
+//                        this.chosenDir = chosenDir;
+//                        Toast.makeText(MainActivity.this, "Chosen directory: " + chosenDir, Toast.LENGTH_LONG).show();
+//
+//                        sharedPreferencesEditor = sharedPreferences.edit();
+//                        sharedPreferencesEditor.putString(Variables.APP_TYPE, chosenDir);
+//                        sharedPreferencesEditor.commit();
+//                    });
+//            // Toggle new folder button enabling
+//            directoryChooserDialog.setNewFolderEnabled(this.newFolderEnabled);
+//            // Load directory chooser dialog for initial 'm_chosenDir' directory.
+//            // The registered callback will be called upon final directory selection.
+//            directoryChooserDialog.chooseDirectory(this.chosenDir);
+//            this.newFolderEnabled = !this.newFolderEnabled;
+//
+//        });
     }
 
     @Override

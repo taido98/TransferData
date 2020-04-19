@@ -18,6 +18,9 @@ public class Data {
         this.mChecker = true;
     }
 
+    public Data() {
+    }
+
     public Data(DataType mDataType, ArrayList<String> mUrlsData, boolean mChecker) {
         this.mDataType = mDataType;
         this.mDataUrls = mUrlsData;
@@ -93,13 +96,13 @@ public class Data {
         }
 
         if (unit == 1)
-            return round(size, 0) + "KB";
+            return round(size, 0) + " KB";
         else if (unit == 2)
-            return round(size, 1) + "MB";
+            return round(size, 1) + " MB";
         else if (unit == 3)
-            return round(size, 1) + "GB";
+            return round(size, 1) + " GB";
         else if (unit == 4)
-            return round(size, 1) + "TB";
+            return round(size, 1) + " TB";
 
         return size + "B";
     }
