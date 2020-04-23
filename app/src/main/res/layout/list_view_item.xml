@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:background="#ffffffff"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/cb_item"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:button="@drawable/custom_checkbox" />
+            <ImageView
+                android:layout_gravity="center"
+                android:id="@+id/img_item"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="10dp"
+                android:contentDescription="TODO" />
+            <LinearLayout
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:minHeight="80dp"
+                android:layout_weight="0.5">
+                <TextView
+                    android:textSize="20sp"
+                    android:textColor="#ff000000"
+                    android:gravity="bottom"
+                    android:id="@+id/txt_item"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginStart="10dp"
+                    android:text="contact"
+                    android:layout_weight="0.5" />
+                <TextView
+                    android:textColor="#ffacacac"
+                    android:gravity="top"
+                    android:id="@+id/total_item_select"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginStart="10dp"
+                    android:text="Selected : 10 item - 1,45MB"
+                    android:layout_weight="0.5" />
+            </LinearLayout>
+            <pl.droidsonroids.gif.GifImageView
+                android:layout_gravity="center"
+                android:id="@+id/iconWaitGetData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/tranfer" />
+            <ImageView
+                android:layout_gravity="center"
+                android:id="@+id/img_show_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:srcCompat="@drawable/ic_detail"
+                android:contentDescription="detailItem" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

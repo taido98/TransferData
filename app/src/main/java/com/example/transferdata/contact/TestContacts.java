@@ -74,16 +74,16 @@ public class  TestContacts extends AppCompatActivity {
         });
     }
 
-    public static boolean hasPermissions(Context context, String... permissions) {
-        if (context != null && permissions != null) {
-            for (String permission : permissions) {
-                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
+//    public static boolean hasPermissions(Context context, String... permissions) {
+//        if (context != null && permissions != null) {
+//            for (String permission : permissions) {
+//                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+//                    return false;
+//                }
+//            }
+//        }
+//        return true;
+//    }
 
     ///Return path of vcf file
     public static String getVCF(Activity activity) {
@@ -97,7 +97,7 @@ public class  TestContacts extends AppCompatActivity {
                 Manifest.permission.GET_ACCOUNTS,
         };
 
-        if (!hasPermissions(mContext, PERMISSIONS)) {
+        if (true) {
             ActivityCompat.requestPermissions(activity, PERMISSIONS, 100);
         } else {
             String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + "/Contacts.vcf";

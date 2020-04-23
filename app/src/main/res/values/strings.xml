@@ -51,6 +51,10 @@
     <string name="transfer">send</string>
     <string name="slogan">Bring your data to your new phone</string>
     <string name="subtitle">What should this phone do?</string>
+    <string name="activity_sender_title">No device</string>
+    <string name="activity_sender_find_device">No Device</string>
+    <string name="ClientActivity_button_cancel">cancel</string>
+    <string name="ClientActivity_button_send">send</string>
 
 
 </resources>
