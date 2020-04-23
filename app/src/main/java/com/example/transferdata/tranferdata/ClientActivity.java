@@ -17,6 +17,7 @@ import com.example.transferdata.R;
 import com.example.transferdata.adapter.DataItemAdapter;
 import com.example.transferdata.adapter.DataItem;
 import com.example.transferdata.connect.ConnectActivity;
+import com.example.transferdata.media.getAudio;
 import com.example.transferdata.security.AES;
 import com.example.transferdata.media.DetailListVideo;
 import com.example.transferdata.media.DetailListFile;
@@ -46,6 +47,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
     private getCallLog callLog;
     private getContact contact;
     private getFile file;
+    private getAudio audio;
     private final getDataImage getImage = new getDataImage();
     final String info = "Selected : 0 item - 0 MB";
     private DataItem item;
@@ -85,6 +87,9 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
         DataItem item8 = new DataItem(true, R.drawable.ic_file, "File", "Selected : 0 item - 0 MB", true);
         this.item = item8;
         listItem.add(item8);
+        DataItem Audio = new DataItem(true, R.drawable.musics, "Audio", "Selected : 0 item - 0 MB", true);
+        this.item = Audio;
+        listItem.add(Audio);
         mDataItemAdapter = new DataItemAdapter(this,listItem);
         RecyclerView mRcvListItem = findViewById(R.id.list_item);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -179,6 +184,9 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
             ClientActivity client2 = ClientActivity.this;
             client2.item = new DataItem(true, R.drawable.videos, "Video", ClientActivity.this.video.getleng(), false);
             listItem.set(4, ClientActivity.this.item);
+            ClientActivity.this.audio.getAudioPath();
+            ClientActivity.this.item =  new DataItem(true, R.drawable.musics, "Audio", ClientActivity.this.audio.getleng(), false);
+            listItem.set(7, ClientActivity.this.item);
             ClientActivity.this.updateUI();
         }).start();
         Thread threadApplication = new Thread(() -> {
@@ -259,10 +267,16 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
             PrintStream printStream = System.out;
             String sb2 = "get SIZE " +
                     this.file.getSize();
-            printStream.println(sb2);
             DataItem item5 = new DataItem(true, R.drawable.ic_file, "File", this.file.getSize(), Boolean.FALSE);
             this.item = item5;
             listItem.set(6, item5);
+            updateUI();
+        }  else if (requestCode == 7 && resultCode == -1) {
+            listItem.get(7).setStatusLoad(true);
+            updateUI();
+            DataItem audio = new DataItem(true, R.drawable.musics, "Audio", this.audio.getleng(), Boolean.FALSE);
+            this.item = audio;
+            listItem.set(7, audio);
             updateUI();
         }
     }
@@ -297,6 +311,10 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
                 intent = new Intent(this, DetailListFile.class);
                 intent.putParcelableArrayListExtra("listFile", (ArrayList) getFile.listFile);
                 break;
+            case 7:
+                intent = new Intent(this, DetailListVideo.class);
+                intent.putParcelableArrayListExtra("listAudio", (ArrayList) getAudio.listAudio);
+                break;
             default:
                 intent = new Intent();
                 break;
@@ -305,10 +323,6 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
             this.startActivityForResult(intent, position);
         }
     }
-    /* access modifiers changed from: 0000 */
-//    private void updateUI() {
-//        runOnUiThread(() -> adapter.notifyDataSetChanged());
-//    }
     public void updateUI() {
         runOnUiThread(() -> mDataItemAdapter.notifyDataSetChanged());
     }
