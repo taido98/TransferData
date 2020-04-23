@@ -18,6 +18,7 @@ import com.example.transferdata.service.getCallLog;
 import com.example.transferdata.service.getContact;
 import com.example.transferdata.service.getMessenger;
 import com.example.transferdata.socket.serverSocket;
+import com.jaeger.library.StatusBarUtil;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -78,6 +79,8 @@ public class ReceiverActivity extends Activity {
             }
         }).start();
         clickButtonDone();
+        StatusBarUtil.setTransparent(this);
+        StatusBarUtil.setLightMode(this);
     }
 
     public void speedTranfile() {

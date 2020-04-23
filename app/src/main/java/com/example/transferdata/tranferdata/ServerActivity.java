@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.example.transferdata.R;
 import com.example.transferdata.connect.ConnectActivity;
 import com.example.transferdata.socket.serverSocket;
+import com.jaeger.library.StatusBarUtil;
 
 
 public class ServerActivity extends Activity {
@@ -24,7 +25,7 @@ public class ServerActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.phone_conect);
-        if(getIntent()!=null){
+        if (getIntent() != null) {
             deviceConnected = getIntent().getStringExtra("Device Connected");
         }
         WifiP2pManager wifiP2pManager = (WifiP2pManager) getSystemService(WIFI_P2P_SERVICE);
@@ -37,6 +38,8 @@ public class ServerActivity extends Activity {
         this.socket = serversocket;
         serversocket.execute(new String[0]);
         show_name_server();
+        StatusBarUtil.setTransparent(this);
+        StatusBarUtil.setLightMode(this);
     }
 
     public void onBackPressed() {

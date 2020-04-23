@@ -19,6 +19,7 @@ import com.example.transferdata.media.getFile;
 import com.example.transferdata.media.getVideo;
 import com.example.transferdata.service.getApplication;
 import com.example.transferdata.socket.clientSocket;
+import com.jaeger.library.StatusBarUtil;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -81,6 +82,8 @@ public class TransferActivity extends Activity {
         listView.setAdapter(adapter);
         tranferAllData();
         clickButtonDone();
+        StatusBarUtil.setTransparent(this);
+        StatusBarUtil.setLightMode(this);
     }
 
     /* access modifiers changed from: 0000 */

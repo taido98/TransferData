@@ -8,10 +8,13 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.transferdata.R;
 import com.example.transferdata.Interface.ClickCheckBoxListener;
 import com.example.transferdata.Interface.ClickItemDataListener;
+
 import java.util.List;
 
 import pl.droidsonroids.gif.GifImageView;
@@ -33,6 +36,7 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
         private GifImageView mGifWait;
         private ImageView mImgDetailItem;
         private TextView mTxtTotalItemSelected;
+        private ConstraintLayout mConsDataItem;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -42,10 +46,11 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
             mGifWait = itemView.findViewById(R.id.iconWaitGetData);
             mImgDetailItem = itemView.findViewById(R.id.img_show_more);
             mTxtTotalItemSelected = itemView.findViewById(R.id.total_item_select);
+            mConsDataItem = itemView.findViewById(R.id.data_item);
         }
     }
 
-    public DataItemAdapter(Context context,List<DataItem> list) {
+    public DataItemAdapter(Context context, List<DataItem> list) {
         this.mContext = context;
         this.mListItem = list;
     }
@@ -60,7 +65,7 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
     public DataItemAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                          int viewType) {
         // create a new view
-        View view = (View) LayoutInflater.from(parent.getContext()).inflate(R.layout.list_view_item, parent, false);
+        View view = (View) LayoutInflater.from(parent.getContext()).inflate(R.layout.data_item, parent, false);
         ViewHolder vh = new ViewHolder(view);
         return vh;
     }
@@ -81,7 +86,7 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
         } else {
             holder.mGifWait.setVisibility(View.GONE);
         }
-        holder.mImgDetailItem.setOnClickListener(new View.OnClickListener() {
+        holder.mConsDataItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mClickItemDataListener != null) {

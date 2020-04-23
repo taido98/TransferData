@@ -8,7 +8,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/image_type"
+        android:id="@+id/img_item"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="24dp"
@@ -17,24 +17,24 @@
         android:contentDescription="@string/data_type"
         android:padding="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/select_all"
+        app:layout_constraintStart_toEndOf="@+id/cb_item"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/d_icon_app" />
 
     <TextView
-        android:id="@+id/data_type"
+        android:id="@+id/txt_item"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="24dp"
         android:textColor="#000000"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/more_info"
-        app:layout_constraintStart_toEndOf="@+id/image_type"
+        app:layout_constraintEnd_toStartOf="@+id/iconWaitGetData"
+        app:layout_constraintStart_toEndOf="@+id/img_item"
         app:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox
-        android:id="@+id/select_all"
+        android:id="@+id/cb_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -42,23 +42,34 @@
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:button="@drawable/custom_checkbox"
-        app:layout_constraintBottom_toBottomOf="@+id/image_type"
-        app:layout_constraintEnd_toStartOf="@+id/image_type"
+        app:layout_constraintBottom_toBottomOf="@+id/img_item"
+        app:layout_constraintEnd_toStartOf="@+id/img_item"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/image_type" />
+        app:layout_constraintTop_toTopOf="@+id/img_item" />
 
     <TextView
-        android:id="@+id/data_size"
+        android:id="@+id/total_item_select"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/data_type"
-        app:layout_constraintStart_toStartOf="@+id/data_type"
-        app:layout_constraintTop_toBottomOf="@+id/data_type" />
+        app:layout_constraintEnd_toEndOf="@+id/txt_item"
+        app:layout_constraintStart_toStartOf="@+id/txt_item"
+        app:layout_constraintTop_toBottomOf="@+id/txt_item" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/iconWaitGetData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/tranfer"
+        app:layout_constraintBottom_toBottomOf="@+id/img_show_more"
+        app:layout_constraintEnd_toStartOf="@+id/img_show_more"
+        app:layout_constraintTop_toTopOf="@+id/img_show_more" />
 
     <ImageView
-        android:id="@+id/more_info"
+        android:id="@+id/img_show_more"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"

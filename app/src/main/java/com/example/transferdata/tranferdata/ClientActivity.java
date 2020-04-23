@@ -1,4 +1,5 @@
 package com.example.transferdata.tranferdata;
+
 import android.content.Intent;
 import android.net.ParseException;
 import android.os.Build;
@@ -8,9 +9,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.transferdata.Interface.ClickCheckBoxListener;
 import com.example.transferdata.Interface.ClickItemDataListener;
 import com.example.transferdata.R;
@@ -30,6 +33,7 @@ import com.example.transferdata.service.getApplication;
 import com.example.transferdata.service.getCallLog;
 import com.example.transferdata.service.getContact;
 import com.example.transferdata.service.getMessenger;
+import com.jaeger.library.StatusBarUtil;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -42,7 +46,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
     public static List<DataItem> listItem;
     private String Address;
     private getApplication application;
-    private TextView mSelectedItems;
+    private TextView mSelectedItems, mSelectedSize;
     private getCallLog callLog;
     private getContact contact;
     private getFile file;
@@ -57,6 +61,8 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_data);
+        StatusBarUtil.setTransparent(this);
+        StatusBarUtil.setLightMode(this);
         initData();
         getData();
         updateSelectedItem(listItem);
@@ -85,7 +91,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
         DataItem item8 = new DataItem(true, R.drawable.ic_file, "File", "Selected : 0 item - 0 MB", true);
         this.item = item8;
         listItem.add(item8);
-        mDataItemAdapter = new DataItemAdapter(this,listItem);
+        mDataItemAdapter = new DataItemAdapter(this, listItem);
         RecyclerView mRcvListItem = findViewById(R.id.list_item);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         mRcvListItem.setLayoutManager(layoutManager);
@@ -101,14 +107,15 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
 
     /* access modifiers changed from: 0000 */
     private void click_button() {
-        mCheckBoxSelectAll = findViewById(R.id.select_all);
-        mSelectedItems =findViewById(R.id.selected_items);
+        mCheckBoxSelectAll = findViewById(R.id.cb_item);
+        mSelectedItems = findViewById(R.id.selected_items);
+        mSelectedSize = (TextView) findViewById(R.id.selected_size);
         mCheckBoxSelectAll.setOnClickListener(v -> {
 //            int totalSize=0;
             for (DataItem item : listItem) {
                 item.setChecked(((CheckBox) v).isChecked());
 //                totalSize+=item.getSize();
-                Log.d("Size??",""+item.getSize());
+                Log.d("Size??", "" + item.getSize());
             }
             mDataItemAdapter.notifyDataSetChanged();
             updateSelectedItem(listItem);
@@ -128,8 +135,8 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
             Toast.makeText(ClientActivity.this, "Failed to connect ", Toast.LENGTH_LONG).show();
             ClientActivity.this.finish();
         }));
-        Button button2 = findViewById(R.id.btn_cancel);
-        button2.setOnClickListener(v -> ConnectActivity.isConnect(ClientActivity.this));
+//        Button button2 = findViewById(R.id.btn_cancel);
+//        button2.setOnClickListener(v -> ConnectActivity.isConnect(ClientActivity.this));
     }
 
     public void onBackPressed() {
@@ -202,7 +209,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 0 && resultCode == -1) {
             new Thread(() -> {
-                ( ClientActivity.listItem.get(0)).setStatusLoad(true);
+                (ClientActivity.listItem.get(0)).setStatusLoad(true);
                 ClientActivity.this.updateUI();
                 ClientActivity client = ClientActivity.this;
                 client.item = new DataItem(true, R.drawable.person, "Contact", getContact.backupContacts(), Boolean.FALSE);
@@ -212,7 +219,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
         } else if (requestCode == 2 && resultCode == -1) {
             new Thread(() -> {
                 try {
-                    ( ClientActivity.listItem.get(2)).setStatusLoad(true);
+                    (ClientActivity.listItem.get(2)).setStatusLoad(true);
                     ClientActivity.this.updateUI();
                     ClientActivity client = ClientActivity.this;
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -238,7 +245,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
             this.item = item2;
             listItem.set(3, item2);
             updateUI();
-            Log.d("Image select??",listItem.get(3).getInfo());
+            Log.d("Image select??", listItem.get(3).getInfo());
         } else if (requestCode == 4 && resultCode == -1) {
             listItem.get(4).setStatusLoad(true);
             updateUI();
@@ -305,6 +312,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
             this.startActivityForResult(intent, position);
         }
     }
+
     /* access modifiers changed from: 0000 */
 //    private void updateUI() {
 //        runOnUiThread(() -> adapter.notifyDataSetChanged());
@@ -312,6 +320,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
     public void updateUI() {
         runOnUiThread(() -> mDataItemAdapter.notifyDataSetChanged());
     }
+
     public void updateSelectedItem(List<DataItem> listItem) {
         long size = 0;
         int items = 0;
@@ -321,6 +330,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
                 size += dataItem.getSize();
             }
         }
+        mSelectedSize.setText((new DataItem()).sizeToString(size));
         mSelectedItems.setText(items + " " + this.getString(R.string.selected_item));
     }
 

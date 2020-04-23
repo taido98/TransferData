@@ -35,7 +35,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox
-        android:id="@+id/select_all"
+        android:id="@+id/cb_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -64,9 +64,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/all"
-        app:layout_constraintEnd_toEndOf="@+id/select_all"
-        app:layout_constraintStart_toStartOf="@+id/select_all"
-        app:layout_constraintTop_toBottomOf="@+id/select_all" />
+        app:layout_constraintEnd_toEndOf="@+id/cb_item"
+        app:layout_constraintStart_toStartOf="@+id/cb_item"
+        app:layout_constraintTop_toBottomOf="@+id/cb_item" />
 
     <TextView
         android:id="@+id/selected_items"
@@ -76,9 +76,9 @@
         android:text="@string/selected_item"
         android:textColor="#000000"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/select_all"
-        app:layout_constraintStart_toEndOf="@+id/select_all"
-        app:layout_constraintTop_toTopOf="@+id/select_all" />
+        app:layout_constraintBottom_toBottomOf="@+id/cb_item"
+        app:layout_constraintStart_toEndOf="@+id/cb_item"
+        app:layout_constraintTop_toTopOf="@+id/cb_item" />
 
     <TextView
         android:id="@+id/selected_size"
@@ -99,37 +99,20 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/btn_cancel"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="39dp"
-            android:layout_marginBottom="15dp"
-            android:textSize="16sp"
-            android:text="@string/ClientActivity_button_cancel"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn_send"
-            app:layout_constraintStart_toStartOf="parent"
-            android:textColor="#718fd0"
-            android:background="@drawable/button"
-            android:stateListAnimator="@null"
-            tools:targetApi="lollipop"/>
-
-        <Button
             android:id="@+id/btn_send"
-            android:layout_width="160dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="39dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="15dp"
-            android:stateListAnimator="@null"
-            android:textSize="16sp"
-            android:textColor="#718fd0"
+            android:layout_marginStart="48dp"
+            android:layout_marginEnd="48dp"
             android:background="@drawable/button"
+            android:stateListAnimator="@null"
             android:text="@string/ClientActivity_button_send"
+            android:textColor="#718fd0"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btn_cancel"
-            tools:targetApi="lollipop"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:targetApi="lollipop" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

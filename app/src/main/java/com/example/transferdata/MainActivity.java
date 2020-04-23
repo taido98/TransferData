@@ -19,7 +19,7 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
 public class MainActivity extends AppCompatActivity {
-    String[] PERMISSIONS = {"android.permission.READ_CONTACTS", "android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.READ_EXTERNAL_STORAGE", "android.permission.ACCESS_FINE_LOCATION", "android.permission.READ_CONTACTS", "android.permission.WRITE_CONTACTS", "android.permission.READ_SMS", "android.permission.READ_CALL_LOG", "android.permission.WRITE_CALL_LOG", "android.permission.INSTALL_PACKAGES","android.permission.ACCESS_COARSE_LOCATION"};
+    String[] PERMISSIONS = {"android.permission.READ_CONTACTS", "android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.READ_EXTERNAL_STORAGE", "android.permission.ACCESS_FINE_LOCATION", "android.permission.READ_CONTACTS", "android.permission.WRITE_CONTACTS", "android.permission.READ_SMS", "android.permission.READ_CALL_LOG", "android.permission.WRITE_CALL_LOG", "android.permission.INSTALL_PACKAGES", "android.permission.ACCESS_COARSE_LOCATION"};
     int PERMISSION_ALL = 1;
     private ConstraintLayout mImgSendData, mImgReceiveData;
 
@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         checkAndRequestPermission();
         initView();
         initAction();
+        StatusBarUtil.setTransparent(this);
+        StatusBarUtil.setLightMode(this);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
             MainActivity.this.startActivity(intent);
         });
     }
+
     public void checkAndRequestPermission() {
         if (!hasPermissions(this, this.PERMISSIONS)) {
             ActivityCompat.requestPermissions(this, this.PERMISSIONS, this.PERMISSION_ALL);
