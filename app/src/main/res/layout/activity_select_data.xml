@@ -31,7 +31,7 @@
         android:gravity="center"
         android:text="@string/select_data"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="24sp"
+        android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,7 +94,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="419dp"
+        android:layout_width="0dp"
         android:layout_height="75dp"
         android:background="#fafafa"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -110,7 +110,7 @@
             android:background="@drawable/button"
             android:stateListAnimator="@null"
             android:text="@string/ClientActivity_button_send"
-            android:textColor="#718fd0"
+            android:textColor="@color/doneButton"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
