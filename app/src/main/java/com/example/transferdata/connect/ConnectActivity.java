@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.transferdata.R;
+import com.jaeger.library.StatusBarUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,6 +82,8 @@ public class ConnectActivity extends Activity implements PeerListListener {
                 System.out.println("false");
             }
         });
+        StatusBarUtil.setTransparent(this);
+        StatusBarUtil.setLightMode(this);
     }
 
     /* access modifiers changed from: 0000 */

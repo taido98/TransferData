@@ -47,7 +47,7 @@
     <string name="all">Tất cả</string>
     <string name="selected_item">Mục</string>
     <string name="more_info">more_info</string>
-    <string name="_9gb">9GB</string>
+    <string name="total_size_text">9 GB</string>
     <string name="transfer">send</string>
     <string name="slogan">Bring your data to your new phone</string>
     <string name="subtitle">What should this phone do?</string>
@@ -55,6 +55,7 @@
     <string name="activity_sender_find_device">No Device</string>
     <string name="ClientActivity_button_cancel">cancel</string>
     <string name="ClientActivity_button_send">send</string>
+    <string name="prepair_connection">Prepair Connection</string>
 
 
 </resources>
