@@ -107,7 +107,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
 
     /* access modifiers changed from: 0000 */
     private void click_button() {
-        mCheckBoxSelectAll = findViewById(R.id.cb_item);
+        mCheckBoxSelectAll = findViewById(R.id.detail_check);
         mSelectedItems = findViewById(R.id.selected_items);
         mSelectedSize = (TextView) findViewById(R.id.selected_size);
         mCheckBoxSelectAll.setOnClickListener(v -> {
@@ -122,7 +122,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
 //            mSelectedItems.setText((new item()).sizeToString(totalSize));
         });
 
-        Button button = findViewById(R.id.btn_send);
+        Button button = findViewById(R.id.detail_save);
         button.setOnClickListener(v -> ConnectActivity.manager.requestConnectionInfo(ConnectActivity.channel, info -> {
             if (info.groupFormed) {
                 Intent intent = new Intent(ClientActivity.this, TransferActivity.class);

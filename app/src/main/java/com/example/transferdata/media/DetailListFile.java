@@ -12,7 +12,7 @@ import com.example.transferdata.R;
 import com.example.transferdata.adapter.adapterDetail;
 
 public class DetailListFile extends AppCompatActivity {
-    TextView btn_cancel;
+//    TextView btn_cancel;
     TextView btn_save;
     public CheckBox checkAll;
     ClickItemListener detail;
@@ -69,9 +69,9 @@ public class DetailListFile extends AppCompatActivity {
 
     /* access modifiers changed from: 0000 */
     public void clickButton() {
-        this.btn_cancel = findViewById(R.id.detail_cancel);
+//        this.btn_cancel = findViewById(R.id.detail_cancel);
         this.btn_save = findViewById(R.id.detail_save);
-        this.btn_cancel.setOnClickListener(v -> DetailListFile.this.onBackPressed());
+//        this.btn_cancel.setOnClickListener(v -> DetailListFile.this.onBackPressed());
         this.btn_save.setOnClickListener(v -> {
             DetailListFile.this.setResult(-1);
             DetailListFile.this.finish();

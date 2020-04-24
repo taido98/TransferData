@@ -40,9 +40,9 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mTxtItem = itemView.findViewById(R.id.txt_item);
-            mImgItem = itemView.findViewById(R.id.img_item);
-            mCbItem = itemView.findViewById(R.id.cb_item);
+            mTxtItem = itemView.findViewById(R.id.detail_name);
+            mImgItem = itemView.findViewById(R.id.detail_icon);
+            mCbItem = itemView.findViewById(R.id.detail_check);
             mGifWait = itemView.findViewById(R.id.iconWaitGetData);
             mImgDetailItem = itemView.findViewById(R.id.img_show_more);
             mTxtTotalItemSelected = itemView.findViewById(R.id.total_item_select);

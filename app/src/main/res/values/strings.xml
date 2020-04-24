@@ -60,6 +60,7 @@
     <string name="device_name">Device Name</string>
     <string name="device_name_label">Your phone:</string>
     <string name="tutorial">Kết nối với thiết bị của bạn trên máy mới</string>
+    <string name="done">Done</string>
 
 
 </resources>

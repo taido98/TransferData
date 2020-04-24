@@ -38,7 +38,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox
-        android:id="@+id/cb_item"
+        android:id="@+id/detail_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -67,9 +67,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/all"
-        app:layout_constraintEnd_toEndOf="@+id/cb_item"
-        app:layout_constraintStart_toStartOf="@+id/cb_item"
-        app:layout_constraintTop_toBottomOf="@+id/cb_item" />
+        app:layout_constraintEnd_toEndOf="@+id/detail_check"
+        app:layout_constraintStart_toStartOf="@+id/detail_check"
+        app:layout_constraintTop_toBottomOf="@+id/detail_check" />
 
     <TextView
         android:id="@+id/selected_items"
@@ -79,9 +79,9 @@
         android:text="@string/selected_item"
         android:textColor="#000000"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/cb_item"
-        app:layout_constraintStart_toEndOf="@+id/cb_item"
-        app:layout_constraintTop_toTopOf="@+id/cb_item" />
+        app:layout_constraintBottom_toBottomOf="@+id/detail_check"
+        app:layout_constraintStart_toEndOf="@+id/detail_check"
+        app:layout_constraintTop_toTopOf="@+id/detail_check" />
 
     <TextView
         android:id="@+id/selected_size"
@@ -102,7 +102,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/btn_send"
+            android:id="@+id/detail_save"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"

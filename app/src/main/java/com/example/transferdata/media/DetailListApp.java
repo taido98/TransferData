@@ -34,21 +34,21 @@ public class DetailListApp extends Activity implements OnClickListener, ClickIte
     }
 
     private void getData() {
-       if(getIntent()!=null){
-           ArrayList<DataItem> list = getIntent().getParcelableArrayListExtra("listApp");
-           for (int i = 0; i < list.size(); i++) {
-               getApplication.listItem.get(i).setChecked(list.get(i).isChecked());
-           }
-       }
+        if (getIntent() != null) {
+            ArrayList<DataItem> list = getIntent().getParcelableArrayListExtra("listApp");
+            for (int i = 0; i < list.size(); i++) {
+                getApplication.listItem.get(i).setChecked(list.get(i).isChecked());
+            }
+        }
     }
 
     public void mapping() {
         this.lvListItem = findViewById(R.id.list_detail);
         TextView btnSave = findViewById(R.id.detail_save);
-        TextView btnCancel = findViewById(R.id.detail_cancel);
+//        TextView btnCancel = findViewById(R.id.detail_cancel);
         this.checkAll = findViewById(R.id.detail_checl_all);
         btnSave.setOnClickListener(this);
-        btnCancel.setOnClickListener(this);
+//        btnCancel.setOnClickListener(this);
     }
 
     /* access modifiers changed from: 0000 */
@@ -72,9 +72,10 @@ public class DetailListApp extends Activity implements OnClickListener, ClickIte
 
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.detail_cancel) {
-            onBackPressed();
-        } else if (id == R.id.detail_save) {
+//        if (id == R.id.detail_cancel) {
+//            onBackPressed();
+//        } else
+        if (id == R.id.detail_save) {
             setResult(-1);
             finish();
         }

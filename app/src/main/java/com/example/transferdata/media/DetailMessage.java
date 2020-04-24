@@ -17,6 +17,7 @@ import com.example.transferdata.R;
 import com.example.transferdata.adapter.adapterDetail;
 import com.example.transferdata.adapter.DataItem;
 import com.example.transferdata.service.getMessenger;
+import com.jaeger.library.StatusBarUtil;
 
 import java.text.ParseException;
 import java.util.List;
@@ -36,15 +37,17 @@ public class DetailMessage extends Activity implements OnClickListener, ClickIte
         ((TextView) findViewById(R.id.detail_title)).setText("Choose messenger");
         mapping();
         addItem();
+        StatusBarUtil.setTransparent(this);
+        StatusBarUtil.setLightMode(this);
     }
 
     public void mapping() {
         this.lvListItem = findViewById(R.id.list_detail);
         TextView btnSave = findViewById(R.id.detail_save);
-        TextView btnCancel = findViewById(R.id.detail_cancel);
+//        TextView btnCancel = findViewById(R.id.detail_cancel);
         this.checkAll = findViewById(R.id.detail_checl_all);
         btnSave.setOnClickListener(this);
-        btnCancel.setOnClickListener(this);
+//        btnCancel.setOnClickListener(this);
     }
 
     /* access modifiers changed from: 0000 */
@@ -79,7 +82,7 @@ public class DetailMessage extends Activity implements OnClickListener, ClickIte
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void onClick(View v) {
         int id = v.getId();
-        if (id != R.id.detail_cancel) {
+//        if (id != R.id.detail_cancel) {
             if (id == R.id.detail_save) {
                 try {
                     if (isEmtyCheck()) {
@@ -97,8 +100,8 @@ public class DetailMessage extends Activity implements OnClickListener, ClickIte
                 return;
             }
         }
-        onBackPressed();
-    }
+//        onBackPressed();
+//    }
 
     public void onBackPressed() {
         getMessenger.listItem = getIntent().getParcelableArrayListExtra("listMessenger");

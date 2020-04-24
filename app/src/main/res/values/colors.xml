@@ -22,4 +22,5 @@
     <color name="cBannerBlock">#e7f1f1</color>
 
     <color name="bSelectDataColor">#E5E6EB</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>

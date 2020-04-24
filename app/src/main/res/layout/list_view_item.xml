@@ -17,7 +17,7 @@
             android:layout_height="wrap_content">
 
             <CheckBox
-                android:id="@+id/cb_item"
+                android:id="@+id/detail_check"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_gravity="center"
@@ -25,7 +25,7 @@
                 android:button="@drawable/custom_checkbox" />
             <ImageView
                 android:layout_gravity="center"
-                android:id="@+id/img_item"
+                android:id="@+id/detail_icon"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginStart="10dp"
@@ -41,7 +41,7 @@
                     android:textSize="20sp"
                     android:textColor="#ff000000"
                     android:gravity="bottom"
-                    android:id="@+id/txt_item"
+                    android:id="@+id/detail_name"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_marginStart="10dp"
