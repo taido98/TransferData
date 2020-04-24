@@ -13,7 +13,7 @@
         android:layout_height="90dp"
         android:layout_gravity="center"
         android:layout_marginTop="70dp"
-        android:src="@mipmap/loading"
+        android:src="@drawable/loading"
         app:layout_constraintBottom_toBottomOf="@+id/img_show_more"
         app:layout_constraintEnd_toStartOf="@+id/img_show_more"
         app:layout_constraintStart_toStartOf="parent"

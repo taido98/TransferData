@@ -62,7 +62,7 @@ public class DetailListImage extends AppCompatActivity {
 
     /* access modifiers changed from: 0000 */
     public void saveChooseImage() {
-        findViewById(R.id.save_choose_image).setOnClickListener(v -> {
+        findViewById(R.id.btn_done).setOnClickListener(v -> {
             DetailListImage.this.setResult(-1);
             DetailListImage.this.finish();
         });

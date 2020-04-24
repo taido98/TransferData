@@ -49,7 +49,7 @@
     <string name="more_info">more_info</string>
     <string name="total_size_text">9 GB</string>
     <string name="transfer">send</string>
-    <string name="slogan">Bring your data to your new phone</string>
+    <string name="main_title">Bring your data to your new phone</string>
     <string name="subtitle">What should this phone do?</string>
     <string name="activity_sender_title">No device</string>
     <string name="activity_sender_find_device">No Device</string>
@@ -61,6 +61,8 @@
     <string name="device_name_label">Your phone:</string>
     <string name="tutorial">Kết nối với thiết bị của bạn trên máy mới</string>
     <string name="done">Done</string>
+    <string name="receive_data_title">Đang sao chép dữ liệu...</string>
+    <string name="receive_data_subtitle">Please don\'t move or use your phone, the data will be save for your new phone affter sending process</string>
 
 
 </resources>

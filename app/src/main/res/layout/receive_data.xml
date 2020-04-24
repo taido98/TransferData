@@ -1,115 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#ffffffff"
-    android:orientation="vertical">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImageView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="48dp"
+        android:src="@drawable/processing"
+        app:layout_constraintBottom_toTopOf="@+id/number_progress_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/subtitle" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="48dp"
+        android:gravity="center"
+        android:text="@string/receive_data_title"
+        android:textColor="#000000"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/subtitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/receive_data_subtitle"
+        app:layout_constraintEnd_toEndOf="@+id/title"
+        app:layout_constraintStart_toStartOf="@+id/title"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <com.daimajia.numberprogressbar.NumberProgressBar
+        android:id="@+id/number_progress_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
         android:layout_weight="0.5"
-        android:orientation="vertical">
+        app:layout_constraintBottom_toTopOf="@+id/txt_speed"
+        app:layout_constraintEnd_toEndOf="@+id/txt_speed"
+        app:layout_constraintStart_toStartOf="@+id/txt_speed" />
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="0.5"
-            android:fontFamily="sans-serif-black"
-            android:gravity="bottom"
-            android:text="Receive Data"
-            android:textColor="#ff000000"
-            android:textSize="30sp" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="0.5"
-            android:text="Please don't move or use your phone, the data will be save for your new phone affter sending process" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+    <TextView
+        android:id="@+id/txt_speed"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="48dp"
         android:layout_weight="0.5"
-        android:orientation="horizontal">
+        android:gravity="center|top"
+        android:text="5 mins left"
+        android:textColor="#000"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <pl.droidsonroids.gif.GifImageView
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_weight="0.5"
-            android:src="@drawable/animation" />
-
-        <pl.droidsonroids.gif.GifImageView
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_marginEnd="10dp"
-            android:layout_weight="0.6"
-            android:src="@drawable/client" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="0.5"
-        android:orientation="vertical">
-
-        <FrameLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-            <LinearLayout
-                android:id="@+id/linear_progress"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:orientation="vertical">
-
-                <com.daimajia.numberprogressbar.NumberProgressBar
-                    android:id="@+id/number_progress_bar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5" />
-
-                <TextView
-                    android:id="@+id/title_time"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:gravity="bottom|center"
-                    android:text="Estimated time remaining" />
-
-                <pl.droidsonroids.gif.GifImageView
-                    android:id="@+id/restore_load"
-                    android:layout_width="fill_parent"
-                    android:layout_height="25dp"
-                    android:src="@drawable/load_device"
-                    android:visibility="gone" />
-
-                <TextView
-                    android:id="@+id/txt_speed"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:fontFamily="sans-serif-black"
-                    android:gravity="center|top"
-                    android:text="5 min"
-                    android:textColor="#ff000000"
-                    android:textSize="30sp" />
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/btn_done"
-                android:layout_width="200dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:background="@drawable/custom_btn_2"
-                android:text="DONE"
-                android:textColor="#ffffffff"
-                android:textSize="20sp"
-                android:visibility="gone" />
-        </FrameLayout>
-    </LinearLayout>
-</LinearLayout>
+    <Button
+        android:id="@+id/btn_done"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/button"
+        android:stateListAnimator="@null"
+        android:text="@string/done"
+        android:textColor="@color/doneButton"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:targetApi="lollipop" />
+</androidx.constraintlayout.widget.ConstraintLayout>

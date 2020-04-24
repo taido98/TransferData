@@ -122,7 +122,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
 //            mSelectedItems.setText((new item()).sizeToString(totalSize));
         });
 
-        Button button = findViewById(R.id.save_choose_image);
+        Button button = findViewById(R.id.btn_done);
         button.setOnClickListener(v -> ConnectActivity.manager.requestConnectionInfo(ConnectActivity.channel, info -> {
             if (info.groupFormed) {
                 Intent intent = new Intent(ClientActivity.this, TransferActivity.class);
