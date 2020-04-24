@@ -28,7 +28,7 @@ public class DetailListApp extends Activity implements OnClickListener, ClickIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail);
         getData();
-        ((TextView) findViewById(R.id.detail_title)).setText("Choose app");
+        ((TextView) findViewById(R.id.type)).setText("Choose app");
         mapping();
         addItem();
     }
@@ -44,7 +44,7 @@ public class DetailListApp extends Activity implements OnClickListener, ClickIte
 
     public void mapping() {
         this.lvListItem = findViewById(R.id.list_detail);
-        TextView btnSave = findViewById(R.id.detail_save);
+        TextView btnSave = findViewById(R.id.save_choose_image);
 //        TextView btnCancel = findViewById(R.id.detail_cancel);
         this.checkAll = findViewById(R.id.detail_checl_all);
         btnSave.setOnClickListener(this);
@@ -75,7 +75,7 @@ public class DetailListApp extends Activity implements OnClickListener, ClickIte
 //        if (id == R.id.detail_cancel) {
 //            onBackPressed();
 //        } else
-        if (id == R.id.detail_save) {
+        if (id == R.id.save_choose_image) {
             setResult(-1);
             finish();
         }

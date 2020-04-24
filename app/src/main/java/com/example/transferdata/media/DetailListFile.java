@@ -24,7 +24,7 @@ public class DetailListFile extends AppCompatActivity {
         setContentView(R.layout.detail);
         getData();
         this.checkAll = findViewById(R.id.detail_checl_all);
-        ((TextView) findViewById(R.id.detail_title)).setText("Choose file");
+        ((TextView) findViewById(R.id.type)).setText("Choose file");
         this.detail = check -> DetailListFile.this.checkAll.setChecked(check);
         adapterDetail adapterDetail = new adapterDetail(this, R.layout.list_item_detail, getFile.listFile, this.detail);
         ListView listView = findViewById(R.id.list_detail);
@@ -70,7 +70,7 @@ public class DetailListFile extends AppCompatActivity {
     /* access modifiers changed from: 0000 */
     public void clickButton() {
 //        this.btn_cancel = findViewById(R.id.detail_cancel);
-        this.btn_save = findViewById(R.id.detail_save);
+        this.btn_save = findViewById(R.id.save_choose_image);
 //        this.btn_cancel.setOnClickListener(v -> DetailListFile.this.onBackPressed());
         this.btn_save.setOnClickListener(v -> {
             DetailListFile.this.setResult(-1);

@@ -34,7 +34,7 @@ public class DetailMessage extends Activity implements OnClickListener, ClickIte
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail);
-        ((TextView) findViewById(R.id.detail_title)).setText("Choose messenger");
+        ((TextView) findViewById(R.id.type)).setText("Choose messenger");
         mapping();
         addItem();
         StatusBarUtil.setTransparent(this);
@@ -43,7 +43,7 @@ public class DetailMessage extends Activity implements OnClickListener, ClickIte
 
     public void mapping() {
         this.lvListItem = findViewById(R.id.list_detail);
-        TextView btnSave = findViewById(R.id.detail_save);
+        TextView btnSave = findViewById(R.id.save_choose_image);
 //        TextView btnCancel = findViewById(R.id.detail_cancel);
         this.checkAll = findViewById(R.id.detail_checl_all);
         btnSave.setOnClickListener(this);
@@ -83,7 +83,7 @@ public class DetailMessage extends Activity implements OnClickListener, ClickIte
     public void onClick(View v) {
         int id = v.getId();
 //        if (id != R.id.detail_cancel) {
-            if (id == R.id.detail_save) {
+            if (id == R.id.save_choose_image) {
                 try {
                     if (isEmtyCheck()) {
                         getMessenger.backupMessages();
