@@ -49,7 +49,7 @@ public class ReceiverActivity extends Activity {
         this.numberProgressBar = findViewById(R.id.number_progress_bar);
         this.txt_speed = findViewById(R.id.txt_speed);
         this.title_time = findViewById(R.id.title_time);
-        this.btn_done = findViewById(R.id.btn_done);
+        this.btn_done = findViewById(R.id.tranfer_done);
         this.restoreLoad = findViewById(R.id.restore_load);
         this.linear_progress = findViewById(R.id.linear_progress);
         this.numberProgressBar.setMax(serverSocket.SIZE_ALL_FILE);

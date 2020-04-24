@@ -35,7 +35,7 @@ public class contact extends Activity implements OnClickListener, ClickItemListe
 
     public void mapping() {
         this.lvListItem = findViewById(R.id.list_detail);
-        TextView btnSave = findViewById(R.id.btn_done);
+        TextView btnSave = findViewById(R.id.tranfer_done);
         TextView btnCancel = findViewById(R.id.detail_cancel);
         this.checkAll = findViewById(R.id.detail_checl_all);
         btnSave.setOnClickListener(this);
@@ -75,7 +75,7 @@ public class contact extends Activity implements OnClickListener, ClickItemListe
         int id = v.getId();
         if (id == R.id.detail_cancel) {
             onBackPressed();
-        } else if (id == R.id.btn_done) {
+        } else if (id == R.id.tranfer_done) {
             if (isEmtyCheck()) {
                 setResult(-1);
                 finish();

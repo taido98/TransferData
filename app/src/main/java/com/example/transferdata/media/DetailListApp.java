@@ -47,7 +47,7 @@ public class DetailListApp extends Activity implements OnClickListener, ClickIte
 
     public void mapping() {
         this.lvListItem = findViewById(R.id.list_detail);
-        TextView btnSave = findViewById(R.id.btn_done);
+        TextView btnSave = findViewById(R.id.tranfer_done);
 //        TextView btnCancel = findViewById(R.id.detail_cancel);
         this.checkAll = findViewById(R.id.detail_checl_all);
         btnSave.setOnClickListener(this);
@@ -78,7 +78,7 @@ public class DetailListApp extends Activity implements OnClickListener, ClickIte
 //        if (id == R.id.detail_cancel) {
 //            onBackPressed();
 //        } else
-        if (id == R.id.btn_done) {
+        if (id == R.id.tranfer_done) {
             setResult(-1);
             finish();
         }

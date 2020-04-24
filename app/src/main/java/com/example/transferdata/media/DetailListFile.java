@@ -73,7 +73,7 @@ public class DetailListFile extends AppCompatActivity {
     /* access modifiers changed from: 0000 */
     public void clickButton() {
 //        this.btn_cancel = findViewById(R.id.detail_cancel);
-        this.btn_save = findViewById(R.id.btn_done);
+        this.btn_save = findViewById(R.id.tranfer_done);
 //        this.btn_cancel.setOnClickListener(v -> DetailListFile.this.onBackPressed());
         this.btn_save.setOnClickListener(v -> {
             DetailListFile.this.setResult(-1);

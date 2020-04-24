@@ -39,7 +39,7 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/btn_done"
+                android:id="@+id/tranfer_done"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="0.6"

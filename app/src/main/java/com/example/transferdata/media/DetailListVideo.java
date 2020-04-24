@@ -64,7 +64,7 @@ public class DetailListVideo extends AppCompatActivity {
 
     /* access modifiers changed from: 0000 */
     public void saveChooseVideo() {
-        findViewById(R.id.btn_done).setOnClickListener(v -> {
+        findViewById(R.id.tranfer_done).setOnClickListener(v -> {
             DetailListVideo.this.setResult(-1);
             DetailListVideo.this.finish();
         });
