@@ -1,0 +1,12 @@
+<vector android:autoMirrored="true" android:height="512dp"
+    android:viewportHeight="512" android:viewportWidth="512"
+    android:width="512dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#FF2E2E" android:name="Rounded Rectangle 1" android:pathData="m102 299h48c30.9 0 56 25.1 56 56v48c0 30.9 -25.1 56 -56 56h-48c-30.9 0 -56 -25.1 -56 -56v-48c0 -30.9 25.1 -56 56 -56z"/>
+    <path android:fillColor="#FF2E2E" android:name="Rounded Rectangle 1" android:pathData="m150 324c17.1 0 31 13.9 31 31v48c0 17.1 -13.9 31 -31 31h-48c-17.1 0 -31 -13.9 -31 -31v-48c0 -17.1 13.9 -31 31 -31zm-48 -25c-30.9 0 -56 25.1 -56 56v48c0 30.9 25.1 56 56 56h48c30.9 0 56 -25.1 56 -56v-48c0 -30.9 -25.1 -56 -56 -56z"/>
+    <path android:fillColor="#FF2E2E" android:name="Rounded Rectangle 2" android:pathData="m354 297h48c30.9 0 56 25.1 56 56v48c0 30.9 -25.1 56 -56 56h-48c-30.9 0 -56 -25.1 -56 -56v-48c0 -30.9 25.1 -56 56 -56z"/>
+    <path android:fillColor="#FF2E2E" android:name="Rounded Rectangle 2" android:pathData="m402 322c17.1 0 31 13.9 31 31v48c0 17.1 -13.9 31 -31 31h-48c-17.1 0 -31 -13.9 -31 -31v-48c0 -17.1 13.9 -31 31 -31zm-48 -25c-30.9 0 -56 25.1 -56 56v48c0 30.9 25.1 56 56 56h48c30.9 0 56 -25.1 56 -56v-48c0 -30.9 -25.1 -56 -56 -56z"/>
+    <path android:fillColor="#FF2E2E" android:name="Rounded Rectangle 3" android:pathData="m355 46h48c30.9 0 56 25.1 56 56v48c0 30.9 -25.1 56 -56 56h-48c-30.9 0 -56 -25.1 -56 -56v-48c0 -30.9 25.1 -56 56 -56z"/>
+    <path android:fillColor="#FF2E2E" android:name="Rounded Rectangle 3" android:pathData="m403 71c17.1 0 31 13.9 31 31v48c0 17.1 -13.9 31 -31 31h-48c-17.1 0 -31 -13.9 -31 -31v-48c0 -17.1 13.9 -31 31 -31zm-48 -25c-30.9 0 -56 25.1 -56 56v48c0 30.9 25.1 56 56 56h48c30.9 0 56 -25.1 56 -56v-48c0 -30.9 -25.1 -56 -56 -56z"/>
+    <path android:fillColor="#FF2E2E" android:name="Rounded Rectangle 4" android:pathData="m102 46h48c30.9 0 56 25.1 56 56v48c0 30.9 -25.1 56 -56 56h-48c-30.9 0 -56 -25.1 -56 -56v-48c0 -30.9 25.1 -56 56 -56z"/>
+    <path android:fillColor="#FF2E2E" android:name="Rounded Rectangle 4" android:pathData="m150 71c17.1 0 31 13.9 31 31v48c0 17.1 -13.9 31 -31 31h-48c-17.1 0 -31 -13.9 -31 -31v-48c0 -17.1 13.9 -31 31 -31zm-48 -25c-30.9 0 -56 25.1 -56 56v48c0 30.9 25.1 56 56 56h48c30.9 0 56 -25.1 56 -56v-48c0 -30.9 -25.1 -56 -56 -56z"/>
+</vector>

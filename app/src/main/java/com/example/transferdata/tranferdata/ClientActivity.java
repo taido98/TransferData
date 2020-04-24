@@ -85,10 +85,10 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
         DataItem item6 = new DataItem(true, R.drawable.videos, "Video", "Selected : 0 item - 0 MB", true);
         this.item = item6;
         listItem.add(item6);
-        DataItem item7 = new DataItem(true, R.drawable.ic_apps, "App", "Selected : 0 item - 0 MB", true);
+        DataItem item7 = new DataItem(true, R.drawable.apps, "App", "Selected : 0 item - 0 MB", true);
         this.item = item7;
         listItem.add(item7);
-        DataItem item8 = new DataItem(true, R.drawable.ic_file, "File", "Selected : 0 item - 0 MB", true);
+        DataItem item8 = new DataItem(true, R.drawable.files, "File", "Selected : 0 item - 0 MB", true);
         this.item = item8;
         listItem.add(item8);
         mDataItemAdapter = new DataItemAdapter(this, listItem);
@@ -191,7 +191,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
         Thread threadApplication = new Thread(() -> {
             ClientActivity.this.application = new getApplication(ClientActivity.this);
             ClientActivity client = ClientActivity.this;
-            client.item = new DataItem(true, R.drawable.ic_apps, "App", ClientActivity.this.application.backupApps(), Boolean.FALSE);
+            client.item = new DataItem(true, R.drawable.apps, "App", ClientActivity.this.application.backupApps(), Boolean.FALSE);
             listItem.set(5, ClientActivity.this.item);
             ClientActivity.this.updateUI();
         });
@@ -199,7 +199,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
             ClientActivity.this.file = new getFile(ClientActivity.this);
             ClientActivity.this.file.getAllFile();
             ClientActivity client = ClientActivity.this;
-            client.item = new DataItem(true, R.drawable.ic_file, "File", ClientActivity.this.file.getSize(), Boolean.FALSE);
+            client.item = new DataItem(true, R.drawable.files, "File", ClientActivity.this.file.getSize(), Boolean.FALSE);
             listItem.set(6, ClientActivity.this.item);
         }).start();
         threadApplication.start();
@@ -256,7 +256,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
         } else if (requestCode == 5 && resultCode == -1) {
             listItem.get(5).setStatusLoad(true);
             updateUI();
-            DataItem item4 = new DataItem(true, R.drawable.ic_apps, "App", DetailListApp.getInfo(), Boolean.FALSE);
+            DataItem item4 = new DataItem(true, R.drawable.apps, "App", DetailListApp.getInfo(), Boolean.FALSE);
             this.item = item4;
             listItem.set(5, item4);
             updateUI();
@@ -267,7 +267,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
             String sb2 = "get SIZE " +
                     this.file.getSize();
             printStream.println(sb2);
-            DataItem item5 = new DataItem(true, R.drawable.ic_file, "File", this.file.getSize(), Boolean.FALSE);
+            DataItem item5 = new DataItem(true, R.drawable.files, "File", this.file.getSize(), Boolean.FALSE);
             this.item = item5;
             listItem.set(6, item5);
             updateUI();
