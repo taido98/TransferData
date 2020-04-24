@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.transferdata.R;
 import com.example.transferdata.adapter.adapterVideo;
 import com.example.transferdata.adapter.itemVideo;
+import com.jaeger.library.StatusBarUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,8 @@ public class DetailListVideo extends AppCompatActivity {
         gridView3.setAdapter(this.adapterVideo);
         clickItemGridView(this.gridView, this.adapterVideo);
         saveChooseVideo();
+        StatusBarUtil.setTransparent(this);
+        StatusBarUtil.setLightMode(this);
     }
 
     private void getData() {

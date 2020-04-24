@@ -14,6 +14,7 @@ import com.example.transferdata.adapter.DataItem;
 import com.example.transferdata.Interface.ClickItemListener;
 import com.example.transferdata.service.getApplication;
 import com.example.transferdata.tranferdata.ClientActivity;
+import com.jaeger.library.StatusBarUtil;
 
 import java.util.ArrayList;
 
@@ -31,6 +32,8 @@ public class DetailListApp extends Activity implements OnClickListener, ClickIte
         ((TextView) findViewById(R.id.type)).setText("Choose app");
         mapping();
         addItem();
+        StatusBarUtil.setTransparent(this);
+        StatusBarUtil.setLightMode(this);
     }
 
     private void getData() {

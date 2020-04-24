@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.transferdata.Interface.ClickItemListener;
 import com.example.transferdata.R;
 import com.example.transferdata.adapter.adapterDetail;
+import com.jaeger.library.StatusBarUtil;
 
 public class DetailListFile extends AppCompatActivity {
 //    TextView btn_cancel;
@@ -33,6 +34,8 @@ public class DetailListFile extends AppCompatActivity {
         this.checkAll.setChecked(setCheckAll());
         checkAll(this.checkAll, adapterDetail);
         clickButton();
+        StatusBarUtil.setTransparent(this);
+        StatusBarUtil.setLightMode(this);
     }
 
     private void getData() {

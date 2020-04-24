@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.transferdata.R;
 import com.example.transferdata.adapter.adapterImage;
 import com.example.transferdata.adapter.itemImage;
+import com.jaeger.library.StatusBarUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,8 @@ public class DetailListImage extends AppCompatActivity {
         gridView3.setAdapter(this.adapterImage);
         clickItemGridView(this.gridView, this.adapterImage);
         saveChooseImage();
+        StatusBarUtil.setTransparent(this);
+        StatusBarUtil.setLightMode(this);
     }
 
     private void getData() {
