@@ -32,7 +32,7 @@ public class adapterVideo extends BaseAdapter {
     }
 
     public int getCount() {
-        if (this.listVideo.isEmpty()) {
+        if (listVideo.isEmpty()) {
             return 0;
         }
         if (this.folder) {

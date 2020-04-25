@@ -1,6 +1,7 @@
 package com.example.transferdata.service;
 
 import android.app.Activity;
+import android.app.DirectAction;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
@@ -26,6 +27,7 @@ import java.util.Objects;
 public class getApplication {
     public static ArrayList<DataItem> listItem = new ArrayList<>();
     private Activity context;
+    DataItem dataItem = new DataItem();
 
     public getApplication(Activity context2) {
         this.context = context2;
@@ -95,13 +97,8 @@ public class getApplication {
                 }
             }
         }
-        float size = (float) (((double) (((float) sizeApp) / 1024.0f)) * 0.001d);
-        ClientActivity.SIZE_ALL_ITEM[5] = (int) size;
-        return "Selected : " +
-                countApp +
-                " item  - " +
-                String.format("%.03f", new Object[]{Float.valueOf(size)}) +
-                " MB";
+        ClientActivity.SIZE_ALL_ITEM[5] = sizeApp;
+        return dataItem.sizeToString(sizeApp);
     }
 
     public void restoreApps() {
@@ -113,7 +110,7 @@ public class getApplication {
                 Intent intent = new Intent("android.intent.action.VIEW");
                 String str = "application/vnd.android.package-archive";
                 if (VERSION.SDK_INT >= 24) {
-                    Uri data = FileProvider.getUriForFile(this.context, "tranferdata.home.provider", file);
+                    Uri data = FileProvider.getUriForFile(this.context, "com.example.transferdata.provider", file);
 //                    intent.addFlags(1);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.setDataAndType(data, str);

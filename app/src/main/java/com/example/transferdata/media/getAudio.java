@@ -31,11 +31,11 @@ public class getAudio {
         getAudio.folder.clear();
         listAudio.clear();
         Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-        String str = "_size";
+        String size = "_size";
         String str2 = "_id";
         String str3 = "bucket_display_name";
         String str4 = "_data";
-        String[] projection = {str4, str3, str2, str, str4};
+        String[] projection = {str4, str3, str2, size, str4};
         Cursor cursor = getAudio.context.getApplicationContext().getContentResolver().query(uri, projection, null, null, "datetaken DESC");
         int column_index_data = Objects.requireNonNull(cursor).getColumnIndexOrThrow(str4);
         int column_index_folder_name = cursor.getColumnIndexOrThrow(str3);
@@ -53,7 +53,7 @@ public class getAudio {
             while (Objects.requireNonNull(cursor2).moveToNext()) {
                 if (f.equals(cursor2.getString(column_index_folder_name))) {
                     Uri uri2 = uri;
-                    path.add(new infoItemVideo(cursor2.getString(column_index_data), cursor2.getString(thum), true, cursor2.getInt(cursor2.getColumnIndexOrThrow(str))));
+                    path.add(new infoItemVideo(cursor2.getString(column_index_data), cursor2.getString(thum), true, cursor2.getInt(cursor2.getColumnIndexOrThrow(size))));
                     uri = uri2;
                 }
             }
@@ -65,23 +65,20 @@ public class getAudio {
     }
 
     public String getleng() {
+        DataItem dataItem = new DataItem();
         int count = 0;
         int size = 0;
-        int sizeRound = 0;
+//        int sizeRound = 0;
         for (itemVideo item : listAudio) {
             for (infoItemVideo video : item.getListVideo()) {
                 if (video.isSelect()) {
                     count++;
                     size += video.getSize();
-                    sizeRound = (int) (((double) sizeRound) + (((double) video.getSize()) * 1.0E-6d));
+//                    sizeRound = (int) (((double) sizeRound) + (((double) video.getSize()) * 1.0E-6d));
                 }
             }
         }
-        ClientActivity.SIZE_ALL_ITEM[7] = sizeRound;
-        return "Selected : " +
-                count +
-                " item - " +
-                String.format("%.02f", new Object[]{Double.valueOf(((double) size) * 1.0E-6d)}) +
-                " MB";
+        ClientActivity.SIZE_ALL_ITEM[7] = size;
+        return dataItem.sizeToString(size);
     }
 }

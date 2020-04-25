@@ -33,7 +33,7 @@ public class TransferActivity extends Activity {
     public static Button btn_done;
     public static List<DataItem> listItem;
     public static ListView listView_tranfer;
-    public static LinkedList<Integer> sizeItem;
+    public static LinkedList<Long> sizeItem;
     String Address;
     DataItem item;
     clientSocket socket;

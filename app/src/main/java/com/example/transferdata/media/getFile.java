@@ -110,21 +110,18 @@ public class getFile {
     }
 
     public String getSize() {
+        DataItem dataItem = new DataItem();
         int count = 0;
         int size = 0;
-        int sizeRound = 0;
+//        int sizeRound = 0;
         for (DataItem it : listFile) {
             if (it.isChecked()) {
                 size += it.getSize();
-                sizeRound = (int) (((double) sizeRound) + (((double) it.getSize()) * 1.0E-6d));
+//                sizeRound = (int) (((double) sizeRound) + (((double) it.getSize()) * 1.0E-6d));
                 count++;
             }
         }
-        ClientActivity.SIZE_ALL_ITEM[6] = sizeRound;
-        return "Selected : " +
-                count +
-                " item - " +
-                String.format("%.02f", new Object[]{Double.valueOf(((double) size) * 1.0E-6d)}) +
-                " MB";
+        ClientActivity.SIZE_ALL_ITEM[6] = size;
+        return dataItem.sizeToString(size);
     }
 }

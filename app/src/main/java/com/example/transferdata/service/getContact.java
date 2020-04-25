@@ -110,25 +110,27 @@ public class getContact {
                     }
                     new CSVWriter(new FileWriter(fileContacts), ',', (char) 0, '\"', "\n").close();
                 }
-                float sizeKb = ((float) fileContacts.length()) / 1024.0f;
-                float sizeMb = (float) (((double) sizeKb) * 0.001d);
-                ClientActivity.SIZE_ALL_ITEM[0] = (int) sizeMb;
-                String str2 = "%.02f";
-                String str3 = " item  - ";
-                String str4 = "Selected : ";
-                if (sizeMb < 1.0f) {
-                    result = str4 +
-                            countContact +
-                            str3 +
-                            String.format(str2, sizeKb) +
-                            " KB";
-                } else {
-                    result = str4 +
-                            countContact +
-                            str3 +
-                            String.format(str2, sizeMb) +
-                            " MB";
-                }
+//                float sizeKb = ((float) fileContacts.length()) / 1024.0f;
+//                float sizeMb = (float) (((double) sizeKb) * 0.001d);
+                DataItem dataItem = new DataItem();
+                ClientActivity.SIZE_ALL_ITEM[0] = fileContacts.length();
+//                String str2 = "%.02f";
+//                String str3 = " item  - ";
+//                String str4 = "Selected : ";
+//                if (sizeMb < 1.0f) {
+//                    result = str4 +
+//                            countContact +
+//                            str3 +
+//                            String.format(str2, sizeKb) +
+//                            " KB";
+//                } else {
+//                    result = str4 +
+//                            countContact +
+//                            str3 +
+//                            String.format(str2, sizeMb) +
+//                            " MB";
+//                }
+                result = dataItem.sizeToString(fileContacts.length());
                 AES encryptaes = new AES();
                 encryptaes.encrypt(fileContacts);
                 return result;

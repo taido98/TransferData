@@ -13,14 +13,15 @@ import com.example.transferdata.adapter.itemVideo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class DetailListVideo extends AppCompatActivity {
     public adapterVideo adapterVideo;
     GridView gridView;
     GridView gridViewFolder;
     List<itemVideo> list;
-    List<itemVideo> listData;
-    
+    List<itemVideo> mListAudio,mListVideo;
+
     TextView txt_type;
 
     /* access modifiers changed from: protected */
@@ -31,14 +32,14 @@ public class DetailListVideo extends AppCompatActivity {
         TextView textView = findViewById(R.id.type);
         this.txt_type = textView;
         textView.setText("Videos");
-        adapterVideo = new adapterVideo(this, R.layout.grid_item_image, listData, Boolean.TRUE);
+        adapterVideo = new adapterVideo(this, R.layout.grid_item_image, mListVideo, Boolean.TRUE);
         gridView = findViewById(R.id.grid_image);
         gridView.setAdapter(this.adapterVideo);
         this.list = new ArrayList();
-        if (!listData.isEmpty()) {
-            this.list.add(listData.get(0));
+        if (!mListVideo.isEmpty()) {
+            this.list.add(mListVideo.get(0));
         }
-        this.adapterVideo = new adapterVideo(this, R.layout.grid_item_image,list, Boolean.FALSE);
+        this.adapterVideo = new adapterVideo(this, R.layout.grid_item_image, list, Boolean.FALSE);
         gridViewFolder = findViewById(R.id.grid_image_folder);
         gridViewFolder.setAdapter(adapterVideo);
         clickItemGridView(gridView, adapterVideo);
@@ -46,13 +47,13 @@ public class DetailListVideo extends AppCompatActivity {
     }
 
     private void getData() {
-        if(getIntent()!=null){
-            listData = new ArrayList<>();
-            if(listData.size()==0){
-                listData = getIntent().getParcelableArrayListExtra("listVideo");
-                listData = getIntent().getParcelableArrayListExtra("listAudio");
-            }
-            else listData.clear();
+        if (getIntent() != null) {
+            mListVideo = new ArrayList<>();
+            mListAudio = new ArrayList<>();
+            getVideo.listVideo = getIntent().getParcelableArrayListExtra("listVideo");
+            getAudio.listAudio = getIntent().getParcelableArrayListExtra("listAudio");
+            mListVideo = getVideo.listVideo;
+            mListAudio = getAudio.listAudio;
         }
     }
 
@@ -60,7 +61,7 @@ public class DetailListVideo extends AppCompatActivity {
     public void clickItemGridView(GridView gridView2, final adapterVideo adapter2) {
         gridView2.setOnItemClickListener((adapterView, view, position, id) -> {
             DetailListVideo.this.list.clear();
-            DetailListVideo.this.list.add(listData.get(position));
+            DetailListVideo.this.list.add(mListVideo.get(position));
             adapter2.notifyDataSetChanged();
         });
     }

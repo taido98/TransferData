@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.transferdata.R;
 import com.example.transferdata.Interface.ClickCheckBoxListener;
 import com.example.transferdata.Interface.ClickItemDataListener;
+import com.example.transferdata.tranferdata.ClientActivity;
+
 import java.util.List;
 
 import pl.droidsonroids.gif.GifImageView;
@@ -75,30 +77,23 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
         holder.mTxtItem.setText(mListItem.get(position).name);
         holder.mImgItem.setImageResource((mListItem.get(position)).img_resource);
         holder.mCbItem.setChecked((mListItem.get(position)).checked);
-        holder.mTxtTotalItemSelected.setText(mListItem.get(position).info);
+        holder.mTxtTotalItemSelected.setText(item.sizeToString((ClientActivity.SIZE_ALL_ITEM[position])));
         if ((mListItem.get(position)).statusLoad) {
             holder.mGifWait.setVisibility(View.VISIBLE);
         } else {
             holder.mGifWait.setVisibility(View.GONE);
         }
-        holder.mImgDetailItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mClickItemDataListener != null) {
-                    mClickItemDataListener.onItemData(position);
-                }
+        holder.mImgDetailItem.setOnClickListener(v -> {
+            if (mClickItemDataListener != null) {
+                mClickItemDataListener.onItemData(position);
             }
         });
 
-        holder.mCbItem.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                //is chkIos checked?
-                item.setChecked(((CheckBox) v).isChecked());
-                if (mClickCheckBoxListener != null) {
-                    mClickCheckBoxListener.onItem(position);
-                }
+        holder.mCbItem.setOnClickListener(v -> {
+            //is chkIos checked?
+            item.setChecked(((CheckBox) v).isChecked());
+            if (mClickCheckBoxListener != null) {
+                mClickCheckBoxListener.onItem(position);
             }
         });
 

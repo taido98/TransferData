@@ -40,11 +40,7 @@
         <activity
             android:name=".tranferdata.ClientActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".media.DetailListImage"
@@ -108,7 +104,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.transferdata"
+            android:authorities="com.example.transferdata.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -119,7 +115,11 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".connect.ConnectActivity"

@@ -85,27 +85,23 @@ public class DetailListApp extends Activity implements OnClickListener, ClickIte
     }
 
     public static String getInfo() {
+        DataItem dataItem = new DataItem();
         int dem = 0;
-        long s = 0;
+        long size = 0;
         for (DataItem i : getApplication.listItem) {
             if (i.isChecked()) {
                 dem++;
-                s += i.getSize();
+                size += i.getSize();
             }
         }
-        float size = (float) (((double) (((float) s) / 1024.0f)) * 0.001d);
-        ClientActivity.SIZE_ALL_ITEM[5] = (int) size;
-        return "Selected : " +
-                dem +
-                " item  - " +
-                String.format("%.03f", new Object[]{Float.valueOf(size)}) +
-                " MB";
+
+        ClientActivity.SIZE_ALL_ITEM[5] =size;
+        return dataItem.sizeToString(size);
     }
 
     public void statusCheck(boolean check) {
     }
 
-    /* access modifiers changed from: 0000 */
     public void checkAll(final CheckBox checkBox, final adapterDetail adapter) {
         checkBox.setOnClickListener(v -> {
             if (checkBox.isChecked()) {

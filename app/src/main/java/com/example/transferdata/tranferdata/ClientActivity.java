@@ -31,14 +31,12 @@ import com.example.transferdata.service.getApplication;
 import com.example.transferdata.service.getCallLog;
 import com.example.transferdata.service.getContact;
 import com.example.transferdata.service.getMessenger;
-
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class ClientActivity extends AppCompatActivity implements ClickItemDataListener, ClickCheckBoxListener {
-    public static int[] SIZE_ALL_ITEM;
+    public static long[] SIZE_ALL_ITEM;
     private DataItemAdapter mDataItemAdapter;
     public static List<DataItem> listItem;
     private String Address;
@@ -49,14 +47,13 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
     private getFile file;
 //    private getAudio audio;
     private final getDataImage getImage = new getDataImage();
-    final String info = "Selected : 0 item - 0 MB";
+    final String info = "0 MB";
     private DataItem item;
     private getMessenger messenger;
     private final getVideo video = new getVideo(this);
-    private final getAudio audio = new getAudio(this);
+//    private final getAudio audio = new getAudio(this);
     CheckBox mCheckBoxSelectAll;
 
-    /* access modifiers changed from: protected */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_data);
@@ -67,30 +64,30 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
 
     private void initData() {
         listItem = new ArrayList();
-        DataItem item2 = new DataItem(true, R.drawable.person, "Contact", "Selected : 0 item - 0 MB", true);
+        DataItem item2 = new DataItem(true, R.drawable.person, "Contact", "0 MB", true);
         this.item = item2;
         listItem.add(item2);
-        DataItem item3 = new DataItem(true, R.drawable.call_log, "Call log", "Selected : 0 item - 0 MB", true);
+        DataItem item3 = new DataItem(true, R.drawable.call_log, "Call log", "0 MB", true);
         this.item = item3;
         listItem.add(item3);
-        DataItem item4 = new DataItem(true, R.drawable.messages, "Messenger", "Selected : 0 item - 0 MB", true);
+        DataItem item4 = new DataItem(true, R.drawable.messages, "Messenger", "0 MB", true);
         this.item = item4;
         listItem.add(item4);
-        DataItem item5 = new DataItem(true, R.drawable.images, "Photo", "Selected : 0 item - 0 MB", true);
+        DataItem item5 = new DataItem(true, R.drawable.images, "Photo", "0 MB", true);
         this.item = item5;
         listItem.add(item5);
-        DataItem item6 = new DataItem(true, R.drawable.videos, "Video", "Selected : 0 item - 0 MB", true);
+        DataItem item6 = new DataItem(true, R.drawable.videos, "Video", "0 MB", true);
         this.item = item6;
         listItem.add(item6);
-        DataItem item7 = new DataItem(true, R.drawable.ic_apps, "App", "Selected : 0 item - 0 MB", true);
+        DataItem item7 = new DataItem(true, R.drawable.ic_apps, "App", "0 MB", true);
         this.item = item7;
         listItem.add(item7);
-        DataItem item8 = new DataItem(true, R.drawable.ic_file, "File", "Selected : 0 item - 0 MB", true);
+        DataItem item8 = new DataItem(true, R.drawable.ic_file, "File", "0 MB", true);
         this.item = item8;
         listItem.add(item8);
-        DataItem Audio = new DataItem(true, R.drawable.musics, "Audio", "Selected : 0 item - 0 MB", true);
-        this.item = Audio;
-        listItem.add(Audio);
+//        DataItem Audio = new DataItem(true, R.drawable.musics, "Audio", "0 MB", true);
+//        this.item = Audio;
+//        listItem.add(Audio);
         mDataItemAdapter = new DataItemAdapter(this,listItem);
         RecyclerView mRcvListItem = findViewById(R.id.list_item);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -98,7 +95,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
         mDataItemAdapter.setClickItemData(this);
         mDataItemAdapter.setClickCheckBox(this);
         mRcvListItem.setAdapter(mDataItemAdapter);
-        SIZE_ALL_ITEM = new int[listItem.size()];
+        SIZE_ALL_ITEM = new long[listItem.size()];
         this.Address = getIntent().getStringExtra("address");
         click_button();
         AES encryptaes = new AES();
@@ -154,7 +151,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
         new Thread(() -> {
             ClientActivity.this.callLog = new getCallLog(ClientActivity.this);
             ClientActivity client = ClientActivity.this;
-            client.item = new DataItem(true, R.drawable.call_log, "Call log", ClientActivity.this.callLog.backupCallogs(), Boolean.FALSE);
+            client.item = new DataItem(true, R.drawable.call_log, "Call log", callLog.backupCallogs(), Boolean.FALSE);
             listItem.set(1, ClientActivity.this.item);
             ClientActivity.this.updateUI();
         }).start();
@@ -173,27 +170,22 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
         }).start();
         new Thread(() -> {
             ClientActivity.this.getImage.getImagesPath(ClientActivity.this);
-            String s = "Selected : " +
-                    ClientActivity.this.getImage.getLeng() +
-                    " item - " +
-                    ClientActivity.this.getImage.getSize() +
-                    " MB";
             ClientActivity client = ClientActivity.this;
-            client.item = new DataItem(true, R.drawable.images, "Images", s, false);
+            client.item = new DataItem(true, R.drawable.images, "Images", getImage.getSize(), false);
             listItem.set(3, ClientActivity.this.item);
             ClientActivity.this.video.getVideoPath();
             ClientActivity client2 = ClientActivity.this;
-            client2.item = new DataItem(true, R.drawable.videos, "Video", ClientActivity.this.video.getleng(), false);
+            client2.item = new DataItem(true, R.drawable.videos, "Video", video.getleng(), false);
             listItem.set(4, ClientActivity.this.item);
-            ClientActivity.this.audio.getAudioPath();
-            ClientActivity.this.item =  new DataItem(true, R.drawable.musics, "Audio", ClientActivity.this.audio.getleng(), false);
-            listItem.set(7, ClientActivity.this.item);
+//            ClientActivity.this.audio.getAudioPath();
+//            ClientActivity.this.item =  new DataItem(true, R.drawable.musics, "Audio", audio.getleng(), false);
+//            listItem.set(7, ClientActivity.this.item);
             ClientActivity.this.updateUI();
         }).start();
         Thread threadApplication = new Thread(() -> {
             ClientActivity.this.application = new getApplication(ClientActivity.this);
             ClientActivity client = ClientActivity.this;
-            client.item = new DataItem(true, R.drawable.ic_apps, "App", ClientActivity.this.application.backupApps(), Boolean.FALSE);
+            client.item = new DataItem(true, R.drawable.ic_apps, "App", application.backupApps(), Boolean.FALSE);
             listItem.set(5, ClientActivity.this.item);
             ClientActivity.this.updateUI();
         });
@@ -201,7 +193,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
             ClientActivity.this.file = new getFile(ClientActivity.this);
             ClientActivity.this.file.getAllFile();
             ClientActivity client = ClientActivity.this;
-            client.item = new DataItem(true, R.drawable.ic_file, "File", ClientActivity.this.file.getSize(), Boolean.FALSE);
+            client.item = new DataItem(true, R.drawable.ic_file, "File", file.getSize(), Boolean.FALSE);
             listItem.set(6, ClientActivity.this.item);
         }).start();
         threadApplication.start();
@@ -238,16 +230,10 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
         } else if (requestCode == 3 && resultCode == -1) {
             listItem.get(3).setStatusLoad(true);
             updateUI();
-            String sb = "Selected : " +
-                    this.getImage.getLeng() +
-                    " item - " +
-                    this.getImage.getSize() +
-                    " MB";
-            DataItem item2 = new DataItem(true, R.drawable.images, "Images", sb, Boolean.FALSE);
+            DataItem item2 = new DataItem(true, R.drawable.images, "Images", getImage.getSize(), Boolean.FALSE);
             this.item = item2;
             listItem.set(3, item2);
             updateUI();
-            Log.d("Image select??",listItem.get(3).getInfo());
         } else if (requestCode == 4 && resultCode == -1) {
             listItem.get(4).setStatusLoad(true);
             updateUI();
@@ -265,22 +251,19 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
         } else if (requestCode == 6 && resultCode == -1) {
             listItem.get(6).setStatusLoad(true);
             updateUI();
-            PrintStream printStream = System.out;
-            String sb2 = "get SIZE " +
-                    this.file.getSize();
-            DataItem item5 = new DataItem(true, R.drawable.ic_file, "File", this.file.getSize(), Boolean.FALSE);
+            DataItem item5 = new DataItem(true, R.drawable.ic_file, "File", file.getSize(), Boolean.FALSE);
             this.item = item5;
             listItem.set(6, item5);
             updateUI();
         }
-        else if (requestCode == 7 && resultCode == -1) {
-            listItem.get(7).setStatusLoad(true);
-            updateUI();
-            DataItem audio = new DataItem(true, R.drawable.musics, "Audio", this.audio.getleng(), Boolean.FALSE);
-            this.item = audio;
-            listItem.set(7, audio);
-            updateUI();
-        }
+//        else if (requestCode == 7 && resultCode == -1) {
+//            listItem.get(7).setStatusLoad(true);
+//            updateUI();
+//            DataItem audioItem = new DataItem(true, R.drawable.musics, "Audio", audio.getleng(), Boolean.FALSE);
+//            this.item = audioItem;
+//            listItem.set(7, audioItem);
+//            updateUI();
+//        }
     }
 
     @Override

@@ -8,6 +8,7 @@ import android.provider.CallLog.Calls;
 import android.util.Log;
 import androidx.core.app.ActivityCompat;
 
+import com.example.transferdata.adapter.DataItem;
 import com.example.transferdata.security.AES;
 import com.example.transferdata.tranferdata.ClientActivity;
 
@@ -31,6 +32,7 @@ import org.xml.sax.SAXException;
 
 public class getCallLog {
     Activity context;
+    DataItem dataItem = new DataItem();
 
     public getCallLog(Activity context2) {
         this.context = context2;
@@ -91,26 +93,14 @@ public class getCallLog {
                     tr.setOutputProperty("doctype-system", "messages.dtd");
                     tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
                     tr.transform(new DOMSource(dom), new StreamResult(new FileOutputStream(fileCallLog)));
-                    float sizekb = ((float) fileCallLog.length()) / 1024.0f;
-                    float sizeMb = (float) (((double) sizekb) * 0.001d);
+//                    float sizekb = ((float) fileCallLog.length()) / 1024.0f;
+//                    float sizeMb = (float) (((double) sizekb) * 0.001d);
                     try {
-                        ClientActivity.SIZE_ALL_ITEM[1] = (int) sizeMb;
-                        String str3 = "%.02f";
-                        String str4 = " item  - ";
-                        String vfile2 = "Selected : ";
-                        if (sizeMb < 1.0f) {
-                            result = vfile2 +
-                                    cursor.getCount() +
-                                    str4 +
-                                    String.format(str3, new Object[]{Float.valueOf(sizekb)}) +
-                                    " KB";
-                        } else {
-                            result = vfile2 +
-                                    cursor.getCount() +
-                                    str4 +
-                                    String.format(str3, new Object[]{Float.valueOf(sizeMb)}) +
-                                    " MB";
-                        }
+                        ClientActivity.SIZE_ALL_ITEM[1] =fileCallLog.length();
+//                        String str3 = "%.02f";
+//                        String str4 = " item  - ";
+//                        String vfile2 = "Selected : ";
+                        result = dataItem.sizeToString(fileCallLog.length());
                         AES encryptaes = new AES();
                         encryptaes.encrypt(fileCallLog);
                         return result;

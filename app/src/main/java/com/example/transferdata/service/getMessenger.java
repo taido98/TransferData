@@ -49,6 +49,7 @@ public class getMessenger {
     private static int lengMessage;
     public static ArrayList<DataItem> listItem;
 
+
     public getMessenger(Activity contex) {
         context = contex;
         ArrayList<DataItem> arrayList = new ArrayList<>();
@@ -235,31 +236,33 @@ public class getMessenger {
                         tr.setOutputProperty("doctype-system", "messages.dtd");
                         tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
                         tr.transform(new DOMSource(dom), new StreamResult(new FileOutputStream(fileMessages)));
-                        float sizeKb = ((float) fileMessages.length()) / 1024.0f;
-                        float sizeMb = (float) (((double) sizeKb) * 0.001d);
-                        ClientActivity.SIZE_ALL_ITEM[2] = (int) sizeMb;
+//                        float sizeKb = ((float) fileMessages.length()) / 1024.0f;
+//                        float sizeMb = (float) (((double) sizeKb) * 0.001d);
+                        DataItem dataItem = new DataItem();
+                        ClientActivity.SIZE_ALL_ITEM[2] = fileMessages.length();
                         String str25 = "%.02f";
                         String selection3 = " item  - ";
                         String str27 = "Selected : ";
-                        if (sizeMb < 1.0f) {
-                            try {
-                                result = str27 +
-                                        lengMessage +
-                                        selection3 +
-                                        String.format(str25, new Object[]{Float.valueOf(sizeKb)}) +
-                                        " KB";
-                            } catch (Exception e31) {
-                                e6 = e31;
-                                e6.printStackTrace();
-                                return "Selected : 0 item - 0 MB";
-                            }
-                        } else {
-                            result = str27 +
-                                    lengMessage +
-                                    selection3 +
-                                    String.format(str25, new Object[]{Float.valueOf(sizeMb)}) +
-                                    " MB";
-                        }
+//                        if (sizeMb < 1.0f) {
+//                            try {
+//                                result = str27 +
+//                                        lengMessage +
+//                                        selection3 +
+//                                        String.format(str25, new Object[]{Float.valueOf(sizeKb)}) +
+//                                        " KB";
+//                            } catch (Exception e31) {
+//                                e6 = e31;
+//                                e6.printStackTrace();
+//                                return "Selected : 0 item - 0 MB";
+//                            }
+//                        } else {
+//                            result = str27 +
+//                                    lengMessage +
+//                                    selection3 +
+//                                    String.format(str25, new Object[]{Float.valueOf(sizeMb)}) +
+//                                    " MB";
+//                        }
+                        result = dataItem.sizeToString(fileMessages.length());
                         AES encryptaes = new AES();
                         encryptaes.encrypt(fileMessages);
                         return result;

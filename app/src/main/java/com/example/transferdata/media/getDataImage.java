@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore.Images.Media;
 
+import com.example.transferdata.adapter.DataItem;
 import com.example.transferdata.adapter.infoImage;
 import com.example.transferdata.adapter.itemImage;
 import com.example.transferdata.tranferdata.ClientActivity;
@@ -55,29 +56,19 @@ public class getDataImage {
     }
 
     public String getSize() {
+        DataItem dataItem = new DataItem();
         int size = 0;
-        int sizeRound = 0;
+//        int sizeRound = 0;
         for (itemImage item : listImage) {
             for (infoImage info : item.getListPathImage()) {
                 if (info.isSelect()) {
                     size += info.getSize();
-                    sizeRound = (int) (((double) sizeRound) + (((double) info.getSize()) * 1.0E-6d));
+//                    sizeRound = (int) (((double) sizeRound) + (((double) info.getSize()) * 1.0E-6d));
                 }
             }
         }
-        ClientActivity.SIZE_ALL_ITEM[3] = sizeRound;
-        return String.format("%.02f", new Object[]{Double.valueOf(((double) size) * 1.0E-6d)});
+        ClientActivity.SIZE_ALL_ITEM[3] = size;
+        return dataItem.sizeToString(size);
     }
 
-    public int getLeng() {
-        int count = 0;
-        for (itemImage item : listImage) {
-            for (infoImage info : item.getListPathImage()) {
-                if (info.isSelect()) {
-                    count++;
-                }
-            }
-        }
-        return count;
-    }
 }

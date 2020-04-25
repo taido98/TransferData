@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore.Video.Media;
 
+import com.example.transferdata.adapter.DataItem;
 import com.example.transferdata.adapter.infoItemVideo;
 import com.example.transferdata.adapter.itemVideo;
 import com.example.transferdata.tranferdata.ClientActivity;
@@ -61,23 +62,25 @@ public class getVideo {
     }
 
     public String getleng() {
+        DataItem dataItem = new DataItem();
         int count = 0;
         int size = 0;
-        int sizeRound = 0;
+//        int sizeRound = 0;
         for (itemVideo item : listVideo) {
             for (infoItemVideo video : item.getListVideo()) {
                 if (video.isSelect()) {
                     count++;
                     size += video.getSize();
-                    sizeRound = (int) (((double) sizeRound) + (((double) video.getSize()) * 1.0E-6d));
+//                    sizeRound = (int) (((double) sizeRound) + (((double) video.getSize())));
                 }
             }
         }
-        ClientActivity.SIZE_ALL_ITEM[4] = sizeRound;
-        return "Selected : " +
-                count +
-                " item - " +
-                String.format("%.02f", new Object[]{Double.valueOf(((double) size) * 1.0E-6d)}) +
-                " MB";
+        ClientActivity.SIZE_ALL_ITEM[4] = size;
+//        return "Selected : " +
+//                count +
+//                " item - " +
+//                String.format("%.02f", new Object[]{Double.valueOf(((double) size) )}) +
+//                " MB";
+        return dataItem.sizeToString(size);
     }
 }

@@ -124,7 +124,7 @@ public class ReceiverActivity extends Activity {
     public void restoreData() {
         countThreadStop = 0;
         for (int i = 0; i < serverSocket.listItem.length; i++) {
-            if (!(i == 3 || i == 4 || i == 6 || !serverSocket.listItem[i])) {
+            if (!(i == 3 || i == 4 || i == 6|| i == 7 || !serverSocket.listItem[i])) {
                 countThreadStop++;
             }
         }
