@@ -30,7 +30,7 @@ public class getAudio {
         getAudio getAudio = this;
         getAudio.folder.clear();
         listAudio.clear();
-        Uri uri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+        Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         String str = "_size";
         String str2 = "_id";
         String str3 = "bucket_display_name";
@@ -77,7 +77,7 @@ public class getAudio {
                 }
             }
         }
-        ClientActivity.SIZE_ALL_ITEM[4] = sizeRound;
+        ClientActivity.SIZE_ALL_ITEM[7] = sizeRound;
         return "Selected : " +
                 count +
                 " item - " +

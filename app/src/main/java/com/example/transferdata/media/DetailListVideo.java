@@ -1,6 +1,7 @@
 package com.example.transferdata.media;
 
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -14,39 +15,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DetailListVideo extends AppCompatActivity {
-    public com.example.transferdata.adapter.adapterVideo adapter;
     public adapterVideo adapterVideo;
     GridView gridView;
     GridView gridViewFolder;
     List<itemVideo> list;
+    List<itemVideo> listData;
+    
     TextView txt_type;
 
     /* access modifiers changed from: protected */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getData();
         setContentView(R.layout.image);
         TextView textView = findViewById(R.id.type);
         this.txt_type = textView;
         textView.setText("Videos");
-        this.adapter = new adapterVideo(this, R.layout.grid_item_image, getVideo.listVideo, Boolean.TRUE);
-        GridView gridView2 = findViewById(R.id.grid_image);
-        this.gridView = gridView2;
-        gridView2.setAdapter(this.adapter);
+        adapterVideo = new adapterVideo(this, R.layout.grid_item_image, listData, Boolean.TRUE);
+        gridView = findViewById(R.id.grid_image);
+        gridView.setAdapter(this.adapterVideo);
         this.list = new ArrayList();
-        if (!getVideo.listVideo.isEmpty()) {
-            this.list.add(getVideo.listVideo.get(0));
+        if (!listData.isEmpty()) {
+            this.list.add(listData.get(0));
         }
-        this.adapterVideo = new adapterVideo(this, R.layout.grid_item_image, this.list, Boolean.FALSE);
-        GridView gridView3 = findViewById(R.id.grid_image_folder);
-        this.gridViewFolder = gridView3;
-        gridView3.setAdapter(this.adapterVideo);
-        clickItemGridView(this.gridView, this.adapterVideo);
+        this.adapterVideo = new adapterVideo(this, R.layout.grid_item_image,list, Boolean.FALSE);
+        gridViewFolder = findViewById(R.id.grid_image_folder);
+        gridViewFolder.setAdapter(adapterVideo);
+        clickItemGridView(gridView, adapterVideo);
         saveChooseVideo();
     }
 
     private void getData() {
         if(getIntent()!=null){
-            getVideo.listVideo = getIntent().getParcelableArrayListExtra("listVideo");
+            listData = new ArrayList<>();
+            if(listData.size()==0){
+                listData = getIntent().getParcelableArrayListExtra("listVideo");
+                listData = getIntent().getParcelableArrayListExtra("listAudio");
+            }
+            else listData.clear();
         }
     }
 
@@ -54,7 +60,7 @@ public class DetailListVideo extends AppCompatActivity {
     public void clickItemGridView(GridView gridView2, final adapterVideo adapter2) {
         gridView2.setOnItemClickListener((adapterView, view, position, id) -> {
             DetailListVideo.this.list.clear();
-            DetailListVideo.this.list.add(getVideo.listVideo.get(position));
+            DetailListVideo.this.list.add(listData.get(position));
             adapter2.notifyDataSetChanged();
         });
     }
@@ -69,6 +75,5 @@ public class DetailListVideo extends AppCompatActivity {
 
     public void onBackPressed() {
         super.onBackPressed();
-        getData();
     }
 }

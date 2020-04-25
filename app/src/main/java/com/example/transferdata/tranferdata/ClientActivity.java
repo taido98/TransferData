@@ -47,12 +47,13 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
     private getCallLog callLog;
     private getContact contact;
     private getFile file;
-    private getAudio audio;
+//    private getAudio audio;
     private final getDataImage getImage = new getDataImage();
     final String info = "Selected : 0 item - 0 MB";
     private DataItem item;
     private getMessenger messenger;
     private final getVideo video = new getVideo(this);
+    private final getAudio audio = new getAudio(this);
     CheckBox mCheckBoxSelectAll;
 
     /* access modifiers changed from: protected */
@@ -271,7 +272,8 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
             this.item = item5;
             listItem.set(6, item5);
             updateUI();
-        }  else if (requestCode == 7 && resultCode == -1) {
+        }
+        else if (requestCode == 7 && resultCode == -1) {
             listItem.get(7).setStatusLoad(true);
             updateUI();
             DataItem audio = new DataItem(true, R.drawable.musics, "Audio", this.audio.getleng(), Boolean.FALSE);

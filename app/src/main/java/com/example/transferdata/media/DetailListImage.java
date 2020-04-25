@@ -23,11 +23,9 @@ public class DetailListImage extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.image);
-        getData();
-        this.listImage = new ArrayList();
         new getDataImage();
-        this.listImage = getDataImage.listImage;
-        this.adapter = new adapterImage(this, R.layout.grid_item_image, this.listImage, Boolean.TRUE);
+        getData();
+        this.adapter = new adapterImage(this, R.layout.grid_item_image, listImage, Boolean.TRUE);
         GridView gridView2 = findViewById(R.id.grid_image);
         this.gridView = gridView2;
         gridView2.setAdapter(this.adapter);
@@ -44,8 +42,10 @@ public class DetailListImage extends AppCompatActivity {
     }
 
     private void getData() {
+        listImage = new ArrayList();
         new getDataImage();
         getDataImage.listImage = getIntent().getParcelableArrayListExtra("listImage");
+        this.listImage = getDataImage.listImage;
     }
 
     /* access modifiers changed from: 0000 */
