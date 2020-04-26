@@ -65,6 +65,9 @@
             android:name=".media.DetailListFile"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".media.DetailListAudio"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".tranferdata.ReceiverActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -118,7 +121,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.transfer"
+            android:authorities="com.example.transferdata.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

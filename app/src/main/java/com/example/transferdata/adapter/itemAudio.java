@@ -2,30 +2,30 @@ package com.example.transferdata.adapter;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
+
 import java.util.List;
 
-public class itemImage implements Parcelable {
-    public static final Creator<itemImage> CREATOR = new Creator<itemImage>() {
-        public itemImage createFromParcel(Parcel in) {
-            return new itemImage(in);
+public class itemAudio implements Parcelable {
+    public static final Creator<itemAudio> CREATOR = new Creator<itemAudio>() {
+        public itemAudio createFromParcel(Parcel in) {
+            return new itemAudio(in);
         }
 
-        public itemImage[] newArray(int size) {
-            return new itemImage[size];
+        public itemAudio[] newArray(int size) {
+            return new itemAudio[size];
         }
     };
     String folderName;
-    List<infoImage> listPathImage;
+    List<infoItemAudio> listPathAudio;
     Boolean select;
 
-    public itemImage(String folderName2, Boolean select2, List<infoImage> listPathImage2) {
+    public itemAudio(String folderName2, Boolean select2, List<infoItemAudio> listPathAudio2) {
         this.folderName = folderName2;
         this.select = select2;
-        this.listPathImage = listPathImage2;
+        this.listPathAudio = listPathAudio2;
     }
 
-    private itemImage(Parcel in) {
+    private itemAudio(Parcel in) {
         Boolean bool;
         this.folderName = in.readString();
         byte tmpSelect = in.readByte();
@@ -39,7 +39,7 @@ public class itemImage implements Parcelable {
             bool = check;
         }
         this.select = bool;
-        this.listPathImage = in.createTypedArrayList(infoImage.CREATOR);
+        this.listPathAudio = in.createTypedArrayList(infoItemAudio.CREATOR);
     }
 
     public String getFolderName() {
@@ -50,12 +50,12 @@ public class itemImage implements Parcelable {
         this.folderName = folderName2;
     }
 
-    public List<infoImage> getListPathImage() {
-        return this.listPathImage;
+    public List<infoItemAudio> getListPathAudio() {
+        return this.listPathAudio;
     }
 
-    public void setListPathImage(List<infoImage> listPathImage2) {
-        this.listPathImage = listPathImage2;
+    public void setListPathAudio(List<infoItemAudio> listPathAudio2) {
+        this.listPathAudio = listPathAudio2;
     }
 
     public int describeContents() {
@@ -67,6 +67,7 @@ public class itemImage implements Parcelable {
         Boolean bool = this.select;
         int i = bool == null ? 0 : bool ? 1 : 2;
         dest.writeByte((byte) i);
-        dest.writeTypedList(this.listPathImage);
+        dest.writeTypedList(this.listPathAudio);
     }
 }
+

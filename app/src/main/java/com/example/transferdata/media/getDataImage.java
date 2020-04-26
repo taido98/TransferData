@@ -32,25 +32,20 @@ public class getDataImage {
             }
         }
         for (String folder : arrayList) {
-            ArrayList arrayList2 = arrayList;
-            String str5 = str4;
+//            ArrayList arrayList2 = arrayList;
             Cursor cursor2 = activity.getContentResolver().query(uri, projection, null, null, null);
             List<infoImage> listPathImage = new ArrayList<>();
             while (cursor2.moveToNext()) {
                 String folder2 = folder;
-                if (folder2.equals(cursor2.getString(cursor2.getColumnIndexOrThrow(str5)))) {
-                    String str6 = str5;
+                if (folder2.equals(cursor2.getString(cursor2.getColumnIndexOrThrow(str4)))) {
                     listPathImage.add(new infoImage(true, cursor2.getInt(cursor2.getColumnIndexOrThrow(str2)), cursor2.getString(cursor2.getColumnIndexOrThrow(str)), cursor2.getString(cursor2.getColumnIndexOrThrow(str3))));
                     folder = folder2;
-                    str5 = str6;
                 } else {
                     folder = folder2;
                 }
             }
-            String str8 = str5;
-            listItemImage.add(new itemImage(folder, Boolean.valueOf(true), listPathImage));
-            arrayList = arrayList2;
-            str4 = str8;
+            listItemImage.add(new itemImage(folder, Boolean.TRUE, listPathImage));
+//            arrayList = arrayList2;
         }
         listImage = listItemImage;
     }
@@ -58,12 +53,10 @@ public class getDataImage {
     public String getSize() {
         DataItem dataItem = new DataItem();
         int size = 0;
-//        int sizeRound = 0;
         for (itemImage item : listImage) {
             for (infoImage info : item.getListPathImage()) {
                 if (info.isSelect()) {
                     size += info.getSize();
-//                    sizeRound = (int) (((double) sizeRound) + (((double) info.getSize()) * 1.0E-6d));
                 }
             }
         }

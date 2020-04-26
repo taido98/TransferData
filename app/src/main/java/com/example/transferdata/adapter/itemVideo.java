@@ -24,29 +24,21 @@ public class itemVideo implements Parcelable {
         this.listVideo = listVideo;
     }
 
-    protected itemVideo(Parcel in) {
+    private itemVideo(Parcel in) {
         Boolean bool;
         this.folderName = in.readString();
         byte tmpSelect = in.readByte();
         if (tmpSelect == 0) {
             bool = null;
         } else {
-            boolean z = true;
+            boolean check = true;
             if (tmpSelect != 1) {
-                z = false;
+                check = false;
             }
-            bool = Boolean.valueOf(z);
+            bool = check;
         }
         this.select = bool;
         this.listVideo = in.createTypedArrayList(infoItemVideo.CREATOR);
-    }
-
-    public boolean isSelect() {
-        return this.select.booleanValue();
-    }
-
-    public void setSelect(boolean select2) {
-        this.select = Boolean.valueOf(select2);
     }
 
     public String getFolderName() {

@@ -17,6 +17,7 @@ import com.example.transferdata.R;
 import com.example.transferdata.adapter.DataItemAdapter;
 import com.example.transferdata.adapter.DataItem;
 import com.example.transferdata.connect.ConnectActivity;
+import com.example.transferdata.media.DetailListAudio;
 import com.example.transferdata.media.getAudio;
 import com.example.transferdata.security.AES;
 import com.example.transferdata.media.DetailListVideo;
@@ -45,13 +46,12 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
     private getCallLog callLog;
     private getContact contact;
     private getFile file;
-//    private getAudio audio;
     private final getDataImage getImage = new getDataImage();
     final String info = "0 MB";
     private DataItem item;
     private getMessenger messenger;
-    private final getVideo video = new getVideo(this);
-//    private final getAudio audio = new getAudio(this);
+    private final getVideo getvideo = new getVideo();
+    private final getAudio getAudio = new getAudio();
     CheckBox mCheckBoxSelectAll;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -85,9 +85,9 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
         DataItem item8 = new DataItem(true, R.drawable.ic_file, "File", "0 MB", true);
         this.item = item8;
         listItem.add(item8);
-//        DataItem Audio = new DataItem(true, R.drawable.musics, "Audio", "0 MB", true);
-//        this.item = Audio;
-//        listItem.add(Audio);
+        DataItem Audio = new DataItem(true, R.drawable.musics, "Audio", "0 MB", true);
+        this.item = Audio;
+        listItem.add(Audio);
         mDataItemAdapter = new DataItemAdapter(this,listItem);
         RecyclerView mRcvListItem = findViewById(R.id.list_item);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -173,13 +173,13 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
             ClientActivity client = ClientActivity.this;
             client.item = new DataItem(true, R.drawable.images, "Images", getImage.getSize(), false);
             listItem.set(3, ClientActivity.this.item);
-            ClientActivity.this.video.getVideoPath();
+            ClientActivity.this.getvideo.getVideosPath(ClientActivity.this);
             ClientActivity client2 = ClientActivity.this;
-            client2.item = new DataItem(true, R.drawable.videos, "Video", video.getleng(), false);
+            client2.item = new DataItem(true, R.drawable.videos, "Video", getvideo.getSize(), false);
             listItem.set(4, ClientActivity.this.item);
-//            ClientActivity.this.audio.getAudioPath();
-//            ClientActivity.this.item =  new DataItem(true, R.drawable.musics, "Audio", audio.getleng(), false);
-//            listItem.set(7, ClientActivity.this.item);
+            ClientActivity.this.getAudio.getAudiosPath(ClientActivity.this);
+            ClientActivity.this.item =  new DataItem(true, R.drawable.musics, "Audio", getAudio.getSize(), false);
+            listItem.set(7, ClientActivity.this.item);
             ClientActivity.this.updateUI();
         }).start();
         Thread threadApplication = new Thread(() -> {
@@ -237,7 +237,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
         } else if (requestCode == 4 && resultCode == -1) {
             listItem.get(4).setStatusLoad(true);
             updateUI();
-            DataItem item3 = new DataItem(true, R.drawable.videos, "Video", this.video.getleng(), Boolean.FALSE);
+            DataItem item3 = new DataItem(true, R.drawable.videos, "Video", getvideo.getSize(), Boolean.FALSE);
             this.item = item3;
             listItem.set(4, item3);
             updateUI();
@@ -256,14 +256,14 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
             listItem.set(6, item5);
             updateUI();
         }
-//        else if (requestCode == 7 && resultCode == -1) {
-//            listItem.get(7).setStatusLoad(true);
-//            updateUI();
-//            DataItem audioItem = new DataItem(true, R.drawable.musics, "Audio", audio.getleng(), Boolean.FALSE);
-//            this.item = audioItem;
-//            listItem.set(7, audioItem);
-//            updateUI();
-//        }
+        else if (requestCode == 7 && resultCode == -1) {
+            listItem.get(7).setStatusLoad(true);
+            updateUI();
+            DataItem audioItem = new DataItem(true, R.drawable.musics, "Audio", getAudio.getSize(), Boolean.FALSE);
+            this.item = audioItem;
+            listItem.set(7, audioItem);
+            updateUI();
+        }
     }
 
     @Override
@@ -286,7 +286,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
                 break;
             case 4:
                 intent = new Intent(this, DetailListVideo.class);
-                intent.putParcelableArrayListExtra("listVideo", (ArrayList) getVideo.listVideo);
+                intent.putParcelableArrayListExtra("listVideo", (ArrayList) getvideo.listVideo);
                 break;
             case 5:
                 intent = new Intent(this, DetailListApp.class);
@@ -297,7 +297,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
                 intent.putParcelableArrayListExtra("listFile", (ArrayList) getFile.listFile);
                 break;
             case 7:
-                intent = new Intent(this, DetailListVideo.class);
+                intent = new Intent(this, DetailListAudio.class);
                 intent.putParcelableArrayListExtra("listAudio", (ArrayList) getAudio.listAudio);
                 break;
             default:

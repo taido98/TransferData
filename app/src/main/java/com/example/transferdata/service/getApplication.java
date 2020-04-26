@@ -110,7 +110,7 @@ public class getApplication {
                 Intent intent = new Intent("android.intent.action.VIEW");
                 String str = "application/vnd.android.package-archive";
                 if (VERSION.SDK_INT >= 24) {
-                    Uri data = FileProvider.getUriForFile(this.context, "com.example.transfer", file);
+                    Uri data = FileProvider.getUriForFile(this.context, "com.example.transferdata.provider", file);
 //                    intent.addFlags(1);
                     intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
                     intent.setDataAndType(data, str);

@@ -16,11 +16,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class DetailListVideo extends AppCompatActivity {
-    public adapterVideo adapterVideo;
+    public adapterVideo adapterVideo, adapterFolder;
     GridView gridView;
     GridView gridViewFolder;
     List<itemVideo> list;
-    List<itemVideo> mListAudio,mListVideo;
+    List<itemVideo> mListVideo;
 
     TextView txt_type;
 
@@ -30,11 +30,12 @@ public class DetailListVideo extends AppCompatActivity {
         getData();
         setContentView(R.layout.image);
         TextView textView = findViewById(R.id.type);
+        new getVideo();
         this.txt_type = textView;
         textView.setText("Videos");
-        adapterVideo = new adapterVideo(this, R.layout.grid_item_image, mListVideo, Boolean.TRUE);
+        this.adapterFolder = new adapterVideo(this, R.layout.grid_item_image, mListVideo, Boolean.TRUE);
         gridView = findViewById(R.id.grid_image);
-        gridView.setAdapter(this.adapterVideo);
+        gridView.setAdapter(this.adapterFolder);
         this.list = new ArrayList();
         if (!mListVideo.isEmpty()) {
             this.list.add(mListVideo.get(0));
@@ -49,11 +50,8 @@ public class DetailListVideo extends AppCompatActivity {
     private void getData() {
         if (getIntent() != null) {
             mListVideo = new ArrayList<>();
-            mListAudio = new ArrayList<>();
             getVideo.listVideo = getIntent().getParcelableArrayListExtra("listVideo");
-            getAudio.listAudio = getIntent().getParcelableArrayListExtra("listAudio");
             mListVideo = getVideo.listVideo;
-            mListAudio = getAudio.listAudio;
         }
     }
 

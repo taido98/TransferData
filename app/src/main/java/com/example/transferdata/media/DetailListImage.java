@@ -12,8 +12,7 @@ import com.example.transferdata.adapter.itemImage;
 import java.util.ArrayList;
 import java.util.List;
 public class DetailListImage extends AppCompatActivity {
-    public com.example.transferdata.adapter.adapterImage adapter;
-    public adapterImage adapterImage;
+    public adapterImage adapterImage,adapterFolder;
     GridView gridView;
     GridView gridViewFolder;
     List<itemImage> list;
@@ -25,10 +24,10 @@ public class DetailListImage extends AppCompatActivity {
         setContentView(R.layout.image);
         new getDataImage();
         getData();
-        this.adapter = new adapterImage(this, R.layout.grid_item_image, listImage, Boolean.TRUE);
+        adapterFolder = new adapterImage(this, R.layout.grid_item_image, listImage, Boolean.TRUE);
         GridView gridView2 = findViewById(R.id.grid_image);
         this.gridView = gridView2;
-        gridView2.setAdapter(this.adapter);
+        gridView2.setAdapter(adapterFolder);
         this.list = new ArrayList();
         if (!this.listImage.isEmpty()) {
             this.list.add(this.listImage.get(0));
@@ -45,14 +44,14 @@ public class DetailListImage extends AppCompatActivity {
         listImage = new ArrayList();
         new getDataImage();
         getDataImage.listImage = getIntent().getParcelableArrayListExtra("listImage");
-        this.listImage = getDataImage.listImage;
+        listImage = getDataImage.listImage;
     }
 
     /* access modifiers changed from: 0000 */
     public void clickItemGridView(GridView gridView2, final adapterImage adapter2) {
         gridView2.setOnItemClickListener((adapterView, view, position, id) -> {
             DetailListImage.this.list.clear();
-            DetailListImage.this.list.add(DetailListImage.this.listImage.get(position));
+            DetailListImage.this.list.add(listImage.get(position));
             adapter2.notifyDataSetChanged();
         });
     }

@@ -9,11 +9,14 @@ import android.widget.ListView;
 import com.example.transferdata.R;
 import com.example.transferdata.adapter.adapterTransfer;
 import com.example.transferdata.adapter.infoImage;
+import com.example.transferdata.adapter.infoItemAudio;
 import com.example.transferdata.adapter.infoItemVideo;
 import com.example.transferdata.adapter.DataItem;
+import com.example.transferdata.adapter.itemAudio;
 import com.example.transferdata.adapter.itemImage;
 import com.example.transferdata.adapter.itemVideo;
 import com.example.transferdata.connect.ConnectActivity;
+import com.example.transferdata.media.getAudio;
 import com.example.transferdata.media.getDataImage;
 import com.example.transferdata.media.getFile;
 import com.example.transferdata.media.getVideo;
@@ -134,22 +137,31 @@ public class TransferActivity extends Activity {
                 }
             }
         }
+        if (( ClientActivity.listItem.get(7)).isChecked()) {
+            for (itemAudio audio : getAudio.listAudio) {
+                for (infoItemAudio info2 : audio.getListPathAudio()) {
+                    if (info2.isSelect()) {
+                        data.add(info2.getSource());
+                    }
+                }
+            }
+        }
         clientSocket clientsocket = new clientSocket(this.Address, this, data);
         this.socket = clientsocket;
         clientsocket.start();
     }
 
     public static void speedTranfer() {
-        int size_tranfer = 0;
+        int size_transfer = 0;
         for (int i = 0; i < sizeItem.size(); i++) {
-            size_tranfer += sizeItem.get(i);
+            size_transfer += sizeItem.get(i);
             PrintStream printStream = System.out;
             String sb = "SIZE " +
                     clientSocket.size +
                     StringUtils.SPACE +
-                    size_tranfer;
+                    size_transfer;
             printStream.println(sb);
-            if (clientSocket.size >= size_tranfer && listItem.get(i).isStatusLoad()) {
+            if (clientSocket.size >= size_transfer && listItem.get(i).isStatusLoad()) {
                 listItem.get(i).setStatusLoad(false);
                 listView_tranfer.post(() -> TransferActivity.adapter.notifyDataSetChanged());
             }
