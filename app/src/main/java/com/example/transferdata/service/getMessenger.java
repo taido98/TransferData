@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Build.VERSION;
+import android.os.CancellationSignal;
 import android.provider.Telephony.Sms;
 import android.util.Log;
 import androidx.annotation.RequiresApi;
@@ -106,10 +107,10 @@ public class getMessenger {
                 String str4 = " 00:00:00";
                 String str5 = StringUtils.SPACE;
                 Object obj2 = obj;
-                String selection2 = "test:";
+                String selection2 = "Do:";
                 if (integer == i) {
-                    arrayList = arrayList2;
-                    calendar.add(11, -24);
+//                    arrayList = arrayList2;
+                    calendar.add(Calendar.HOUR_OF_DAY, -24);
                     String dateType = dateFormat.format(calendar.getTime());
                     StringBuilder sb = new StringBuilder();
                     Date date = currentDate;
@@ -123,10 +124,10 @@ public class getMessenger {
                     minDate = Objects.requireNonNull(currentDate).getTime();
                 } else {
                     str2 = str3;
-                    arrayList = arrayList2;
+//                    arrayList = arrayList2;
                 }
                 if (integer == 2) {
-                    calendar.add(7, -7);
+                    calendar.add(Calendar.DAY_OF_WEEK, -7);
                     String dateType2 = dateFormat.format(calendar.getTime());
                     String sb3 = dateType2.substring(0, dateType2.indexOf(str5)) +
                             str4;
@@ -137,9 +138,9 @@ public class getMessenger {
                     minDate = Objects.requireNonNull(currentDate).getTime();
                 }
                 if (integer == 3) {
-                    calendar.add(5, -31);
-                    int month = calendar.get(2) + 1;
-                    int year = calendar.get(1);
+                    calendar.add(Calendar.DAY_OF_MONTH, -31);
+                    int month = calendar.get(Calendar.MONTH) + 1;
+                    int year = calendar.get(Calendar.YEAR);
                     String sb5 = year +
                             "-" +
                             month +
@@ -151,8 +152,8 @@ public class getMessenger {
                     minDate = Objects.requireNonNull(currentDate).getTime();
                 }
                 if (integer == 4) {
-                    calendar.add(6, -365);
-                    int year2 = calendar.get(1);
+                    calendar.add(Calendar.DAY_OF_YEAR, -365);
+                    int year2 = calendar.get(Calendar.YEAR);
                     String sb7 = year2 +
                             "-01-01 00:00:00";
                     Date currentDate2 = dateFormat.parse(sb7);
@@ -160,7 +161,7 @@ public class getMessenger {
                     currentDate = currentDate2;
                 }
                 obj = obj2;
-                arrayList2 = arrayList;
+//                arrayList2 = arrayList;
                 str3 = str2;
                 i = 1;
             }
@@ -184,7 +185,7 @@ public class getMessenger {
                     } catch (Exception e12) {
                         e6 = e12;
                         e6.printStackTrace();
-                        return "Selected : 0 item - 0 MB";
+                        return "0 KB";
                     }
                 }
                 File fileMessages = new File(file, vfile);
@@ -213,7 +214,7 @@ public class getMessenger {
                                     } catch (Exception e19) {
                                         e6 = e19;
                                         e6.printStackTrace();
-                                        return "Selected : 0 item - 0 MB";
+                                        return "0 KB";
                                     }
                                 } else {
                                     contentResolver = contentResolver2;
@@ -224,7 +225,7 @@ public class getMessenger {
                         } catch (Exception e25) {
                             e6 = e25;
                             e6.printStackTrace();
-                            return "Selected : 0 item - 0 MB";
+                            return "0 KB";
                         }
                     }
                     try {
@@ -236,32 +237,8 @@ public class getMessenger {
                         tr.setOutputProperty("doctype-system", "messages.dtd");
                         tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
                         tr.transform(new DOMSource(dom), new StreamResult(new FileOutputStream(fileMessages)));
-//                        float sizeKb = ((float) fileMessages.length()) / 1024.0f;
-//                        float sizeMb = (float) (((double) sizeKb) * 0.001d);
                         DataItem dataItem = new DataItem();
                         ClientActivity.SIZE_ALL_ITEM[2] = fileMessages.length();
-                        String str25 = "%.02f";
-                        String selection3 = " item  - ";
-                        String str27 = "Selected : ";
-//                        if (sizeMb < 1.0f) {
-//                            try {
-//                                result = str27 +
-//                                        lengMessage +
-//                                        selection3 +
-//                                        String.format(str25, new Object[]{Float.valueOf(sizeKb)}) +
-//                                        " KB";
-//                            } catch (Exception e31) {
-//                                e6 = e31;
-//                                e6.printStackTrace();
-//                                return "Selected : 0 item - 0 MB";
-//                            }
-//                        } else {
-//                            result = str27 +
-//                                    lengMessage +
-//                                    selection3 +
-//                                    String.format(str25, new Object[]{Float.valueOf(sizeMb)}) +
-//                                    " MB";
-//                        }
                         result = dataItem.sizeToString(fileMessages.length());
                         AES encryptaes = new AES();
                         encryptaes.encrypt(fileMessages);
@@ -269,40 +246,40 @@ public class getMessenger {
                     } catch (FileNotFoundException e32) {
                         e = e32;
                         e.printStackTrace();
-                        return "Selected : 0 item - 0 MB";
+                        return "0 KB";
                     } catch (TransformerConfigurationException e35) {
                         e4 = e35;
                         e4.printStackTrace();
-                        return "Selected : 0 item - 0 MB";
+                        return "0 KB";
                     } catch (TransformerException e36) {
                         e5 = e36;
                         e5.printStackTrace();
-                        return "Selected : 0 item - 0 MB";
+                        return "0 KB";
                     } catch (Exception e37) {
                         e6 = e37;
                         e6.printStackTrace();
-                        return "Selected : 0 item - 0 MB";
+                        return "0 KB";
                     }
                 }
             } catch (FileNotFoundException e38) {
                 e = e38;
                 e.printStackTrace();
-                return "Selected : 0 item - 0 MB";
+                return "0 KB";
             } catch (IOException e39) {
                 e2 = e39;
                 e2.printStackTrace();
-                return "Selected : 0 item - 0 MB";
+                return "0 KB";
             } catch (ParserConfigurationException e40) {
                 e3 = e40;
                 e3.printStackTrace();
-                return "Selected : 0 item - 0 MB";
+                return "0 KB";
             } catch (Exception e43) {
                 e6 = e43;
                 e6.printStackTrace();
-                return "Selected : 0 item - 0 MB";
+                return "0 KB";
             }
         }
-        return "Selected : 0 item - 0 MB";
+        return "0 KB";
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)

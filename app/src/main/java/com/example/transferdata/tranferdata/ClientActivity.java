@@ -42,7 +42,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
     public static List<DataItem> listItem;
     private String Address;
     private getApplication application;
-    private TextView mSelectedItems;
+    private TextView mSelectedItems,mTxtSizeSelected;
     private getCallLog callLog;
     private getContact contact;
     private getFile file;
@@ -73,7 +73,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
         DataItem item4 = new DataItem(true, R.drawable.messages, "Messenger", "0 MB", true);
         this.item = item4;
         listItem.add(item4);
-        DataItem item5 = new DataItem(true, R.drawable.images, "Photo", "0 MB", true);
+        DataItem item5 = new DataItem(true, R.drawable.images, "Images", "0 MB", true);
         this.item = item5;
         listItem.add(item5);
         DataItem item6 = new DataItem(true, R.drawable.videos, "Video", "0 MB", true);
@@ -104,6 +104,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
 
     /* access modifiers changed from: 0000 */
     private void click_button() {
+        mTxtSizeSelected = findViewById(R.id.selected_size);
         mCheckBoxSelectAll = findViewById(R.id.select_all);
         mSelectedItems =findViewById(R.id.selected_items);
         mCheckBoxSelectAll.setOnClickListener(v -> {
@@ -307,6 +308,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
         if (position != 1) {
             this.startActivityForResult(intent, position);
         }
+        updateSelectedItem(listItem);
     }
     public void updateUI() {
         runOnUiThread(() -> mDataItemAdapter.notifyDataSetChanged());
@@ -316,10 +318,12 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
         int items = 0;
         for (DataItem dataItem : listItem) {
             if (dataItem.isChecked()) {
-                items++;
-                size += dataItem.getSize();
+                size += SIZE_ALL_ITEM[items];
             }
+            items++;
         }
+        DataItem dataItem = new DataItem();
+        mTxtSizeSelected.setText(dataItem.sizeToString(size));
         mSelectedItems.setText(items + " " + this.getString(R.string.selected_item));
     }
 
