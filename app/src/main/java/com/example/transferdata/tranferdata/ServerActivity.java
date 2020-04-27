@@ -24,7 +24,7 @@ public class ServerActivity extends Activity {
     /* access modifiers changed from: protected */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.phone_conect);
+        setContentView(R.layout.phone_connect);
         if (getIntent() != null) {
             deviceConnected = getIntent().getStringExtra("Device Connected");
         }

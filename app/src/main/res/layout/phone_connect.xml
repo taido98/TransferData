@@ -1,34 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF">
+    android:background="#FFF"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/gifImageView2"
-        android:layout_width="0dp"
+        android:id="@+id/gifImageView"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="32dp"
-        android:src="@drawable/processing"
-        app:layout_constraintBottom_toTopOf="@+id/list_tranfer"
+        android:layout_marginTop="110dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/pairing"
+        app:layout_constraintBottom_toTopOf="@id/btn_disconnect"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_server" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/slogan"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="48dp"
         android:gravity="center"
-        android:text="@string/receive_data_title"
+        android:text="@string/phone_connect_title"
         android:textColor="#000000"
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,22 +37,13 @@
         android:id="@+id/name_server"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="@string/receive_data_subtitle"
-        app:layout_constraintEnd_toEndOf="@+id/title"
-        app:layout_constraintStart_toStartOf="@+id/title"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
-
-    <ListView
-        android:id="@+id/list_tranfer"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@drawable/recyleview_rounded"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_disconnect"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.35"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:text="@string/subtitle"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/slogan"
+        app:layout_constraintStart_toStartOf="@+id/slogan"
+        app:layout_constraintTop_toBottomOf="@+id/slogan" />
 
     <Button
         android:id="@+id/btn_disconnect"
@@ -63,14 +52,15 @@
         android:layout_marginStart="48dp"
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="24dp"
-        android:background="@drawable/button"
+        android:background="@drawable/button_cancel"
         android:stateListAnimator="@null"
-        android:text="@string/done"
-        android:textColor="@color/doneButton"
+        android:text="@string/disconnect"
+        android:textAllCaps="false"
+        android:textColor="@color/cancelButton"
         android:textSize="16sp"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:targetApi="lollipop" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

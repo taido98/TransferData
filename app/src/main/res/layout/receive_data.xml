@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#FFF"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -12,12 +13,26 @@
         android:layout_marginStart="48dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="48dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="64dp"
         android:src="@drawable/processing"
         app:layout_constraintBottom_toTopOf="@+id/number_progress_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subtitle" />
+        app:layout_constraintTop_toBottomOf="@+id/name_server" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/restore_load"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/loading"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/txt_speed"
+        app:layout_constraintEnd_toEndOf="@+id/txt_speed"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txt_speed"
+        app:layout_constraintTop_toBottomOf="@+id/gifImageView2"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/title"
@@ -35,7 +50,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/subtitle"
+        android:id="@+id/name_server"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -72,7 +87,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/choose_done"
+        android:id="@+id/btn_disconnect"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"

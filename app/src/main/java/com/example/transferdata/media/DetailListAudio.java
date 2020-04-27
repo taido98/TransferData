@@ -62,7 +62,7 @@ public class DetailListAudio extends AppCompatActivity {
     }
 
     public void saveChooseVideo() {
-        findViewById(R.id.choose_done).setOnClickListener(v -> {
+        findViewById(R.id.btn_disconnect).setOnClickListener(v -> {
             DetailListAudio.this.setResult(-1);
             DetailListAudio.this.finish();
         });

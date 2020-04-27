@@ -54,7 +54,7 @@
     <string name="activity_sender_title">No device</string>
     <string name="activity_sender_find_device">No Device</string>
     <string name="ClientActivity_button_cancel">cancel</string>
-    <string name="ClientActivity_button_send">send</string>
+    <string name="ClientActivity_button_send">Send</string>
     <string name="prepair_connection">Prepair Connection</string>
     <string name="activity_host_title">Chờ kết nối</string>
     <string name="device_name">Device Name</string>
@@ -63,6 +63,8 @@
     <string name="done">Done</string>
     <string name="receive_data_title">Đang sao chép dữ liệu...</string>
     <string name="receive_data_subtitle">Please don\'t move or use your phone, the data will be save for your new phone affter sending process</string>
+    <string name="phone_connect_title">Đã kết nối với</string>
+    <string name="disconnect">Disconnect</string>
 
 
 </resources>
