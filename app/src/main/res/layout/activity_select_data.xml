@@ -96,18 +96,20 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
-        android:layout_height="75dp"
+        android:layout_height="wrap_content"
         android:background="#fafafa"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/choose_done"
+            android:id="@+id/btn_disconnect"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="48dp"
+            android:layout_marginBottom="24dp"
             android:background="@drawable/button"
             android:stateListAnimator="@null"
             android:text="@string/ClientActivity_button_send"

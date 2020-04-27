@@ -46,7 +46,7 @@ public class TransferActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.transfer_data);
-        btn_done = findViewById(R.id.choose_done);
+        btn_done = findViewById(R.id.btn_disconnect);
         this.Address = getIntent().getStringExtra("address");
         listItem = new ArrayList();
         sizeItem = new LinkedList<>();

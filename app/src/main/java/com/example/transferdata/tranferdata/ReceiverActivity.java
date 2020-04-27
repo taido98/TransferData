@@ -31,7 +31,6 @@ public class ReceiverActivity extends Activity {
     Button btn_done;
     int estimated_time = 0;
     Handler handler;
-    LinearLayout linear_progress;
     NumberProgressBar numberProgressBar;
     GifImageView restoreLoad;
     boolean running;
@@ -39,7 +38,6 @@ public class ReceiverActivity extends Activity {
     int sizeOld = 0;
     int speed = 0;
     int[] time = new int[3];
-    TextView title_time;
     TextView txt_speed;
 
     /* access modifiers changed from: protected */
@@ -48,10 +46,8 @@ public class ReceiverActivity extends Activity {
         setContentView(R.layout.receive_data);
         this.numberProgressBar = findViewById(R.id.number_progress_bar);
         this.txt_speed = findViewById(R.id.txt_speed);
-        this.title_time = findViewById(R.id.title_time);
-        this.btn_done = findViewById(R.id.choose_done);
+        this.btn_done = findViewById(R.id.btn_disconnect);
         this.restoreLoad = findViewById(R.id.restore_load);
-        this.linear_progress = findViewById(R.id.linear_progress);
         this.numberProgressBar.setMax(serverSocket.SIZE_ALL_FILE);
         this.numberProgressBar.setProgressTextSize(30.0f);
         this.numberProgressBar.setReachedBarHeight(30.0f);
@@ -132,7 +128,6 @@ public class ReceiverActivity extends Activity {
             }
         }
         runOnUiThread(() -> {
-            ReceiverActivity.this.title_time.setVisibility(View.GONE);
             ReceiverActivity.this.restoreLoad.setVisibility(View.VISIBLE);
             ReceiverActivity.this.numberProgressBar.setMax(100);
             ReceiverActivity.this.numberProgressBar.setProgress(100);
@@ -154,7 +149,7 @@ public class ReceiverActivity extends Activity {
                 new getApplication(ReceiverActivity.this).restoreApps();
             }
             ReceiverActivity.this.runOnUiThread(() -> {
-                ReceiverActivity.this.linear_progress.setVisibility(View.GONE);
+                ReceiverActivity.this.numberProgressBar.setVisibility(View.GONE);
                 ReceiverActivity.this.btn_done.setVisibility(View.VISIBLE);
             });
         }).start();
