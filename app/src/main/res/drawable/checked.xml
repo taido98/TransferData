@@ -4,12 +4,12 @@
         <layer-list>
             <item>
                 <shape android:shape="oval">
-                    <gradient android:angle="0" android:centerColor="#718fd0" android:endColor="#718fd0" android:startColor="#718fd0" />
+                    <gradient android:angle="0" android:centerColor="@color/doneButton" android:endColor="@color/doneButton" android:startColor="@color/doneButton" />
                     <size android:width="20dp" android:height="20dp" />
                 </shape>
             </item>
 
-            <item android:width="7.5dp" android:height="2dp" android:left="3dp" android:top="11.5dp">
+            <item android:width="5dp" android:height="2dp" android:left="4.5dp" android:top="10.5dp">
                 <rotate android:fromDegrees="45">
                     <shape android:shape="rectangle">
                         <solid android:color="#fff" />
@@ -17,7 +17,7 @@
                 </rotate>
             </item>
 
-            <item android:width="12dp" android:height="2dp" android:left="6.2dp" android:top="10dp">
+            <item android:width="11dp" android:height="2dp" android:left="6.2dp" android:top="9dp">
                 <rotate android:fromDegrees="-45">
                     <shape android:shape="rectangle">
                         <solid android:color="#fff" />
@@ -28,7 +28,7 @@
     </item>
     <item android:state_checked="false">
         <shape android:shape="oval">
-            <stroke android:width="1dp" android:color="#718fd0" />
+            <stroke android:width="1dp" android:color="@color/doneButton" />
             <gradient android:angle="0" android:centerColor="#00FFFFFF" android:endColor="#00FFFFFF" android:startColor="#00FFFFFF" />
             <size android:width="20dp" android:height="20dp" />
         </shape>

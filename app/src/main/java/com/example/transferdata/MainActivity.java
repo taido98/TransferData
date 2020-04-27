@@ -1,132 +1,78 @@
 package com.example.transferdata;
 
+import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
 
-import com.example.transferdata.contact.TestContacts;
-import com.example.transferdata.media.TestMedia;
-import com.example.transferdata.selectdata.SelectDataActivity;
+import com.example.transferdata.connect.ConnectActivity;
 import com.jaeger.library.StatusBarUtil;
 
+import java.security.KeyFactory;
+import java.security.PublicKey;
+import java.security.spec.X509EncodedKeySpec;
+import java.util.Base64;
+
 public class MainActivity extends AppCompatActivity {
+    String[] PERMISSIONS = {"android.permission.READ_CONTACTS", "android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.READ_EXTERNAL_STORAGE", "android.permission.ACCESS_FINE_LOCATION", "android.permission.READ_CONTACTS", "android.permission.WRITE_CONTACTS", "android.permission.READ_SMS", "android.permission.READ_CALL_LOG", "android.permission.WRITE_CALL_LOG", "android.permission.INSTALL_PACKAGES", "android.permission.ACCESS_COARSE_LOCATION"};
+    int PERMISSION_ALL = 1;
     private ConstraintLayout mImgSendData, mImgReceiveData;
-    protected OnBackPressedListener onBackPressedListener;
-    private SharedPreferences sharedPreferences;
-//    private Button mBtnChooseDirectory;
-//    private Button mBtnContact;
-//    private Button mBtnVideo;
-//    private Button mBtnSelectData;
-    private String chosenDir = "";
-    private boolean newFolderEnabled = true;
-    private SharedPreferences.Editor sharedPreferencesEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        checkAndRequestPermission();
         initView();
         initAction();
+        StatusBarUtil.setTransparent(this);
+        StatusBarUtil.setLightMode(this);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static PublicKey getPublicKey(String s) throws Exception {
+        return KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(Base64.getDecoder().decode(s)));
     }
 
     private void initView() {
         mImgSendData = findViewById(R.id.img_send_data);
         mImgReceiveData = findViewById(R.id.img_receive_data);
-//        mBtnChooseDirectory = findViewById(R.id.btn_choose_directory);
-//        mBtnContact = findViewById(R.id.btn_contact);
-//        mBtnVideo = findViewById(R.id.btn_video);
-//        mBtnSelectData = findViewById(R.id.btn_select_data);
-
         StatusBarUtil.setTransparent(this);
         StatusBarUtil.setLightMode(this);
     }
 
     private void initAction() {
-        mImgSendData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ClientActivity.class);
-                startActivity(intent);
+        mImgSendData.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ConnectActivity.class);
+            intent.putExtra("NewPhone", false);
+            startActivity(intent);
+        });
+        mImgReceiveData.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ConnectActivity.class);
+            intent.putExtra("NewPhone", true);
+            MainActivity.this.startActivity(intent);
+        });
+    }
+
+    public void checkAndRequestPermission() {
+        if (!hasPermissions(this, this.PERMISSIONS)) {
+            ActivityCompat.requestPermissions(this, this.PERMISSIONS, this.PERMISSION_ALL);
+        }
+    }
+
+    public static boolean hasPermissions(Context context, String... permissions) {
+        if (!(context == null || permissions == null)) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != 0) {
+                    return false;
+                }
             }
-        });
-        mImgReceiveData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, HostActivity.class);
-                startActivity(intent);
-            }
-        });
-
-//        mBtnContact.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, TestContacts.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        mBtnSelectData.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, SelectDataActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        mBtnVideo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, TestMedia.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        mBtnChooseDirectory.setOnClickListener(l -> {
-//
-//            // Create DirectoryChooserDialog and register a callback
-//            DirectoryChooserDialog directoryChooserDialog =
-//                    new DirectoryChooserDialog(MainActivity.this, chosenDir -> {
-//                        this.chosenDir = chosenDir;
-//                        Toast.makeText(MainActivity.this, "Chosen directory: " + chosenDir, Toast.LENGTH_LONG).show();
-//
-//                        sharedPreferencesEditor = sharedPreferences.edit();
-//                        sharedPreferencesEditor.putString(Variables.APP_TYPE, chosenDir);
-//                        sharedPreferencesEditor.commit();
-//                    });
-//            // Toggle new folder button enabling
-//            directoryChooserDialog.setNewFolderEnabled(this.newFolderEnabled);
-//            // Load directory chooser dialog for initial 'm_chosenDir' directory.
-//            // The registered callback will be called upon final directory selection.
-//            directoryChooserDialog.chooseDirectory(this.chosenDir);
-//            this.newFolderEnabled = !this.newFolderEnabled;
-//
-//        });
+        }
+        return true;
     }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        this.onBackPressedListener = (() -> {
-            Toast.makeText(MainActivity.this, "Please press again to exit", Toast.LENGTH_SHORT).show();
-            MainActivity.this.onBackPressedListener = null;
-        });
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (onBackPressedListener != null)
-            onBackPressedListener.doBack();
-        else
-            super.onBackPressed();
-    }
-
 }

@@ -12,25 +12,29 @@
         android:id="@+id/gifImageView"
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:layout_marginTop="56dp"
         android:scaleX="1.5"
-        android:src="@mipmap/preview"
-        app:layout_constraintBottom_toTopOf="@+id/rcv_list_data"
+        android:src="@drawable/preview"
+        app:layout_constraintBottom_toTopOf="@+id/list_item"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="0dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="24dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="48dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="48dp"
+        android:gravity="center"
         android:text="@string/select_data"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcv_list_data"
+        android:id="@+id/list_item"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
@@ -84,14 +88,14 @@
         android:id="@+id/selected_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/_9gb"
+        android:text="@string/total_size_text"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/selected_items"
         app:layout_constraintTop_toBottomOf="@+id/selected_items" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="419dp"
+        android:layout_width="0dp"
         android:layout_height="75dp"
         android:background="#fafafa"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -99,20 +103,20 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/btn_send"
+            android:id="@+id/choose_done"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginEnd="48dp"
             android:background="@drawable/button"
             android:stateListAnimator="@null"
-            android:text="@string/transfer"
-            android:textColor="#718fd0"
+            android:text="@string/ClientActivity_button_send"
+            android:textColor="@color/doneButton"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:targetApi="lollipop" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
