@@ -43,13 +43,12 @@ public class ConnectActivity extends Activity implements PeerListListener {
     private ListView list_device;
     private RecyclerView.LayoutManager layoutManager;
     private final List<String> list_device_near = new ArrayList();
-    /* access modifiers changed from: private */
     private final List<WifiP2pDevice> peersList = new ArrayList();
     private BroadcastReceiver receiver;
     private TextView txtNotFound;
     public String DeviceConnected;
 
-    /* access modifiers changed from: protected */
+    
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         isGPSEnabled(this);
@@ -161,19 +160,19 @@ public class ConnectActivity extends Activity implements PeerListListener {
         }
     }
 
-    /* access modifiers changed from: protected */
+    
     public void onResume() {
         super.onResume();
         registerReceiver(this.receiver, this.intentFilter);
     }
 
-    /* access modifiers changed from: protected */
+    
     public void onPause() {
         super.onPause();
         unregisterReceiver(this.receiver);
     }
 
-    /* access modifiers changed from: protected */
+    
     public void onDestroy() {
         ProgressDialog progressDialog = this.dialog;
         if (progressDialog != null && progressDialog.isShowing()) {

@@ -49,13 +49,13 @@
         android:id="@+id/list_tranfer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tranfer_done"
+        app:layout_constraintBottom_toBottomOf="@+id/choose_done"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.35"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/tranfer_done"
+        android:id="@+id/choose_done"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"

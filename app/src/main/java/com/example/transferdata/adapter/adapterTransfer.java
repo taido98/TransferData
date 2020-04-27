@@ -17,9 +17,9 @@ public class adapterTransfer extends BaseAdapter {
     GifImageView gifLoad;
     List<DataItem> listItem;
     int resource;
-    LinkedList<Integer> size;
+    LinkedList<Long> size;
 
-    public adapterTransfer(Activity contex, int resource2, List<DataItem> listItem2, LinkedList<Integer> size2) {
+    public adapterTransfer(Activity contex, int resource2, List<DataItem> listItem2, LinkedList<Long> size2) {
         this.listItem = listItem2;
         this.resource = resource2;
         this.context = contex;
@@ -45,7 +45,7 @@ public class adapterTransfer extends BaseAdapter {
         View row = this.context.getLayoutInflater().inflate(this.resource, null);
         TextView txt_size = (TextView) row.findViewById(R.id.tranfer_size_title);
         ((TextView) row.findViewById(R.id.txt_item_tranfer)).setText(((DataItem) this.listItem.get(position)).name);
-        if (((Integer) this.size.get(position)).intValue() > 0) {
+        if (((Long) this.size.get(position)).intValue() > 0) {
             StringBuilder sb = new StringBuilder();
             sb.append(this.size.get(position));
             sb.append(" MB");

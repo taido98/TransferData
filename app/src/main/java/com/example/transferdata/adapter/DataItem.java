@@ -24,12 +24,12 @@ public class DataItem implements Parcelable {
     boolean statusLoad;
 
     protected DataItem(Parcel in) {
-        boolean z = true;
+        boolean check = true;
         this.checked = in.readByte() != 0;
         if (in.readByte() == 0) {
-            z = false;
+            check = false;
         }
-        this.statusLoad = z;
+        this.statusLoad = check;
         this.img_resource = in.readInt();
         this.size = in.readInt();
         this.name = in.readString();

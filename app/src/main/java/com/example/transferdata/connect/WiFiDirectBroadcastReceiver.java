@@ -8,7 +8,6 @@ import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.net.wifi.p2p.WifiP2pManager.Channel;
 import android.os.Build.VERSION;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.example.transferdata.R;
@@ -21,10 +20,8 @@ import java.util.Objects;
 public class WiFiDirectBroadcastReceiver extends BroadcastReceiver {
     Boolean NewPhone;
     WifiP2pDevice device;
-    /* access modifiers changed from: private */
     public ConnectActivity mActivity;
     private Channel mChannel;
-    /* access modifiers changed from: private */
     public WifiP2pManager mManager;
     String name = null;
 
@@ -77,21 +74,21 @@ public class WiFiDirectBroadcastReceiver extends BroadcastReceiver {
                 if (info.groupFormed && info.isGroupOwner) {
                     Intent intent1 = new Intent(WiFiDirectBroadcastReceiver.this.mActivity, ServerActivity.class);
                     intent1.putExtra("Device Connected",mActivity.DeviceConnected);
-                    Log.d("Device Connected",mActivity.DeviceConnected);
-//                        intent.setFlags(67108864);
+//                    Log.d("Device Connected",mActivity.DeviceConnected);
+                    intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     WiFiDirectBroadcastReceiver.this.mActivity.startActivity(intent1);
                     WiFiDirectBroadcastReceiver.this.mActivity.finish();
                 } else if (info.groupFormed) {
                     Intent intent1 = new Intent(WiFiDirectBroadcastReceiver.this.mActivity, ClientActivity.class);
                     intent1.putExtra("address", info.groupOwnerAddress.getHostAddress());
-//                        intent2.setFlags(67108864);
+                    intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     WiFiDirectBroadcastReceiver.this.mActivity.startActivity(intent1);
                     WiFiDirectBroadcastReceiver.this.mActivity.finish();
                 }
             }
         });
         if (VERSION.SDK_INT >= 29) {
-            mManager.requestNetworkInfo(this.mChannel, networkInfo -> System.out.println("+++++++++++++++"));
+            mManager.requestNetworkInfo(this.mChannel, networkInfo -> System.out.println("android 10"));
         }
     }
 }

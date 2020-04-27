@@ -39,7 +39,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox
-        android:id="@+id/detail_check"
+        android:id="@+id/select_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -68,9 +68,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/all"
-        app:layout_constraintEnd_toEndOf="@+id/detail_check"
-        app:layout_constraintStart_toStartOf="@+id/detail_check"
-        app:layout_constraintTop_toBottomOf="@+id/detail_check" />
+        app:layout_constraintEnd_toEndOf="@+id/select_all"
+        app:layout_constraintStart_toStartOf="@+id/select_all"
+        app:layout_constraintTop_toBottomOf="@+id/select_all" />
 
     <TextView
         android:id="@+id/selected_items"
@@ -80,9 +80,9 @@
         android:text="@string/selected_item"
         android:textColor="#000000"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/detail_check"
-        app:layout_constraintStart_toEndOf="@+id/detail_check"
-        app:layout_constraintTop_toTopOf="@+id/detail_check" />
+        app:layout_constraintBottom_toBottomOf="@+id/select_all"
+        app:layout_constraintStart_toEndOf="@+id/select_all"
+        app:layout_constraintTop_toTopOf="@+id/select_all" />
 
     <TextView
         android:id="@+id/selected_size"
@@ -103,7 +103,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/tranfer_done"
+            android:id="@+id/choose_done"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"

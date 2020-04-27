@@ -101,7 +101,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/tranfer_done"
+                android:id="@+id/choose_done"
                 android:layout_width="200dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"

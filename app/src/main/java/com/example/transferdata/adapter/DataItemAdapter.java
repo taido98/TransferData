@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.transferdata.R;
 import com.example.transferdata.Interface.ClickCheckBoxListener;
 import com.example.transferdata.Interface.ClickItemDataListener;
+import com.example.transferdata.tranferdata.ClientActivity;
 
 import java.util.List;
 
@@ -25,9 +26,6 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
     private ClickCheckBoxListener mClickCheckBoxListener;
     private Context mContext;
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         private TextView mTxtItem;
@@ -42,7 +40,7 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
             super(itemView);
             mTxtItem = itemView.findViewById(R.id.detail_name);
             mImgItem = itemView.findViewById(R.id.detail_icon);
-            mCbItem = itemView.findViewById(R.id.detail_check);
+            mCbItem = itemView.findViewById(R.id.select_all);
             mGifWait = itemView.findViewById(R.id.iconWaitGetData);
             mImgDetailItem = itemView.findViewById(R.id.img_show_more);
             mTxtTotalItemSelected = itemView.findViewById(R.id.total_item_select);
@@ -80,7 +78,7 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
         holder.mTxtItem.setText(mListItem.get(position).name);
         holder.mImgItem.setImageResource((mListItem.get(position)).img_resource);
         holder.mCbItem.setChecked((mListItem.get(position)).checked);
-        holder.mTxtTotalItemSelected.setText(mListItem.get(position).info);
+        holder.mTxtTotalItemSelected.setText(item.sizeToString((ClientActivity.SIZE_ALL_ITEM[position])));
         if ((mListItem.get(position)).statusLoad) {
             holder.mGifWait.setVisibility(View.VISIBLE);
         } else {
@@ -94,16 +92,17 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
                 }
             }
         });
+        holder.mImgDetailItem.setOnClickListener(v -> {
+            if (mClickItemDataListener != null) {
+                mClickItemDataListener.onItemData(position);
+            }
+        });
 
-        holder.mCbItem.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                //is chkIos checked?
-                item.setChecked(((CheckBox) v).isChecked());
-                if (mClickCheckBoxListener != null) {
-                    mClickCheckBoxListener.onItem(position);
-                }
+        holder.mCbItem.setOnClickListener(v -> {
+            //is chkIos checked?
+            item.setChecked(((CheckBox) v).isChecked());
+            if (mClickCheckBoxListener != null) {
+                mClickCheckBoxListener.onItem(position);
             }
         });
 

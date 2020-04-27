@@ -15,41 +15,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DetailListVideo extends AppCompatActivity {
-    public com.example.transferdata.adapter.adapterVideo adapter;
-    public adapterVideo adapterVideo;
+    public adapterVideo adapterVideo, adapterFolder;
     GridView gridView;
     GridView gridViewFolder;
     List<itemVideo> list;
+    List<itemVideo> mListVideo;
+
     TextView txt_type;
 
     /* access modifiers changed from: protected */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getData();
         setContentView(R.layout.image);
         TextView textView = findViewById(R.id.type);
+        new getVideo();
         this.txt_type = textView;
         textView.setText("Videos");
-        this.adapter = new adapterVideo(this, R.layout.grid_item_image, getVideo.listVideo, Boolean.TRUE);
-        GridView gridView2 = findViewById(R.id.grid_image);
-        this.gridView = gridView2;
-        gridView2.setAdapter(this.adapter);
+        this.adapterFolder = new adapterVideo(this, R.layout.grid_item_image, mListVideo, Boolean.TRUE);
+        gridView = findViewById(R.id.grid_image);
+        gridView.setAdapter(this.adapterFolder);
         this.list = new ArrayList();
-        if (!getVideo.listVideo.isEmpty()) {
-            this.list.add(getVideo.listVideo.get(0));
+        if (!mListVideo.isEmpty()) {
+            this.list.add(mListVideo.get(0));
         }
-        this.adapterVideo = new adapterVideo(this, R.layout.grid_item_image, this.list, Boolean.FALSE);
-        GridView gridView3 = findViewById(R.id.grid_image_folder);
-        this.gridViewFolder = gridView3;
-        gridView3.setAdapter(this.adapterVideo);
-        clickItemGridView(this.gridView, this.adapterVideo);
+        this.adapterVideo = new adapterVideo(this, R.layout.grid_item_image, list, Boolean.FALSE);
+        gridViewFolder = findViewById(R.id.grid_image_folder);
+        gridViewFolder.setAdapter(adapterVideo);
+        clickItemGridView(gridView, adapterVideo);
         saveChooseVideo();
         StatusBarUtil.setTransparent(this);
         StatusBarUtil.setLightMode(this);
     }
 
     private void getData() {
-        if(getIntent()!=null){
+        if (getIntent() != null) {
+            mListVideo = new ArrayList<>();
             getVideo.listVideo = getIntent().getParcelableArrayListExtra("listVideo");
+            mListVideo = getVideo.listVideo;
         }
     }
 
@@ -57,14 +60,14 @@ public class DetailListVideo extends AppCompatActivity {
     public void clickItemGridView(GridView gridView2, final adapterVideo adapter2) {
         gridView2.setOnItemClickListener((adapterView, view, position, id) -> {
             DetailListVideo.this.list.clear();
-            DetailListVideo.this.list.add(getVideo.listVideo.get(position));
+            DetailListVideo.this.list.add(mListVideo.get(position));
             adapter2.notifyDataSetChanged();
         });
     }
 
     /* access modifiers changed from: 0000 */
     public void saveChooseVideo() {
-        findViewById(R.id.tranfer_done).setOnClickListener(v -> {
+        findViewById(R.id.choose_done).setOnClickListener(v -> {
             DetailListVideo.this.setResult(-1);
             DetailListVideo.this.finish();
         });
@@ -72,6 +75,5 @@ public class DetailListVideo extends AppCompatActivity {
 
     public void onBackPressed() {
         super.onBackPressed();
-        getData();
     }
 }

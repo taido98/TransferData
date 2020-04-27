@@ -2,16 +2,15 @@ package com.example.transferdata.adapter;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
 
-public class infoItemVideo implements Parcelable {
-    public static final Creator<infoItemVideo> CREATOR = new Creator<infoItemVideo>() {
-        public infoItemVideo createFromParcel(Parcel in) {
-            return new infoItemVideo(in);
+public class infoItemAudio implements Parcelable {
+    public static final Creator<infoItemAudio> CREATOR = new Creator<infoItemAudio>() {
+        public infoItemAudio createFromParcel(Parcel in) {
+            return new infoItemAudio(in);
         }
 
-        public infoItemVideo[] newArray(int size) {
-            return new infoItemVideo[size];
+        public infoItemAudio[] newArray(int size) {
+            return new infoItemAudio[size];
         }
     };
     String name;
@@ -19,14 +18,14 @@ public class infoItemVideo implements Parcelable {
     int size;
     String source;
 
-    public infoItemVideo(boolean select2, int size2, String name2, String source2) {
+    public infoItemAudio(boolean select2, int size2, String name2, String source2) {
         this.select = select2;
         this.size = size2;
         this.name = name2;
         this.source = source2;
     }
 
-    protected infoItemVideo(Parcel in) {
+    protected infoItemAudio(Parcel in) {
         this.select = in.readByte() != 0;
         this.size = in.readInt();
         this.name = in.readString();

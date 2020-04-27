@@ -43,7 +43,7 @@ public class adapterDetail extends BaseAdapter {
 
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = context.getLayoutInflater().inflate(this.resource, null);
-        CheckBox cb_detail = row.findViewById(R.id.detail_check);
+        CheckBox cb_detail = row.findViewById(R.id.select_all);
         ImageView img_detail = row.findViewById(R.id.detail_icon);
         ((TextView) row.findViewById(R.id.detail_name)).setText((list.get(position)).name);
         cb_detail.setChecked(( list.get(position)).isChecked());

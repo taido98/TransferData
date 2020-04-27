@@ -49,7 +49,7 @@ public class ReceiverActivity extends Activity {
         this.numberProgressBar = findViewById(R.id.number_progress_bar);
         this.txt_speed = findViewById(R.id.txt_speed);
         this.title_time = findViewById(R.id.title_time);
-        this.btn_done = findViewById(R.id.tranfer_done);
+        this.btn_done = findViewById(R.id.choose_done);
         this.restoreLoad = findViewById(R.id.restore_load);
         this.linear_progress = findViewById(R.id.linear_progress);
         this.numberProgressBar.setMax(serverSocket.SIZE_ALL_FILE);
@@ -127,7 +127,7 @@ public class ReceiverActivity extends Activity {
     public void restoreData() {
         countThreadStop = 0;
         for (int i = 0; i < serverSocket.listItem.length; i++) {
-            if (!(i == 3 || i == 4 || i == 6 || !serverSocket.listItem[i])) {
+            if (!(i == 3 || i == 4 || i == 6|| i == 7 || !serverSocket.listItem[i])) {
                 countThreadStop++;
             }
         }

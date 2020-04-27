@@ -44,7 +44,7 @@ public class clientSocket extends Thread {
         super.run();
         try {
             this.socket.connect(new InetSocketAddress(this.host, 8888), 500);
-//            System.out.println("Star client .................");
+            System.out.println("Star client ................."+host);
             BufferedOutputStream bos = new BufferedOutputStream(this.socket.getOutputStream());
             DataOutputStream dos = new DataOutputStream(bos);
             OutputStream outputStream = this.socket.getOutputStream();

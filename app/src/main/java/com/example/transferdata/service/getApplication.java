@@ -1,6 +1,7 @@
 package com.example.transferdata.service;
 
 import android.app.Activity;
+import android.app.DirectAction;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
@@ -25,7 +26,8 @@ import java.util.Objects;
 
 public class getApplication {
     public static ArrayList<DataItem> listItem = new ArrayList<>();
-    Activity context;
+    private Activity context;
+    DataItem dataItem = new DataItem();
 
     public getApplication(Activity context2) {
         this.context = context2;
@@ -50,10 +52,9 @@ public class getApplication {
                 try {
                     File f1 = new File(info.activityInfo.applicationInfo.publicSourceDir);
                     String fileName = info.loadLabel(this.context.getPackageManager()).toString();
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(fileName);
-                    sb.append(".apk");
-                    File fileApp = new File(file, sb.toString());
+                    String sb = fileName +
+                            ".apk";
+                    File fileApp = new File(file, sb);
                     if (!fileApp.exists()) {
                         fileApp.createNewFile();
                         InputStream inputStream = new FileInputStream(f1);
@@ -89,20 +90,15 @@ public class getApplication {
                         this.context.runOnUiThread(() -> DetailListApp.adapterdetail.notifyDataSetChanged());
                     }
                     sizeApp += fileApp.length();
+
                     countApp = countApp2;
                 } catch (IOException ignored) {
 
                 }
             }
         }
-        float size = (float) (((double) (((float) sizeApp) / 1024.0f)) * 0.001d);
-        ClientActivity.SIZE_ALL_ITEM[5] = (int) size;
-        String sb2 = "Selected : " +
-                countApp +
-                " item  - " +
-                String.format("%.03f", new Object[]{Float.valueOf(size)}) +
-                " MB";
-        return String.valueOf(sb2);
+        ClientActivity.SIZE_ALL_ITEM[5] = sizeApp;
+        return dataItem.sizeToString(sizeApp);
     }
 
     public void restoreApps() {
@@ -114,9 +110,9 @@ public class getApplication {
                 Intent intent = new Intent("android.intent.action.VIEW");
                 String str = "application/vnd.android.package-archive";
                 if (VERSION.SDK_INT >= 24) {
-                    Uri data = FileProvider.getUriForFile(this.context, "tranferdata.home.provider", file);
+                    Uri data = FileProvider.getUriForFile(this.context, "com.example.transferdata.provider", file);
 //                    intent.addFlags(1);
-//                    intent.addFlags(67108864);
+                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
                     intent.setDataAndType(data, str);
                     this.context.startActivity(intent);
                 } else {

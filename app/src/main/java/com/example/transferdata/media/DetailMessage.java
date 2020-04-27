@@ -43,7 +43,7 @@ public class DetailMessage extends Activity implements OnClickListener, ClickIte
 
     public void mapping() {
         this.lvListItem = findViewById(R.id.list_detail);
-        TextView btnSave = findViewById(R.id.tranfer_done);
+        TextView btnSave = findViewById(R.id.choose_done);
 //        TextView btnCancel = findViewById(R.id.detail_cancel);
         this.checkAll = findViewById(R.id.detail_checl_all);
         btnSave.setOnClickListener(this);
@@ -83,7 +83,7 @@ public class DetailMessage extends Activity implements OnClickListener, ClickIte
     public void onClick(View v) {
         int id = v.getId();
 //        if (id != R.id.detail_cancel) {
-            if (id == R.id.tranfer_done) {
+            if (id == R.id.choose_done) {
                 try {
                     if (isEmtyCheck()) {
                         getMessenger.backupMessages();
