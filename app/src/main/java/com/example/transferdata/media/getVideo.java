@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.Log;
+
 import com.example.transferdata.adapter.DataItem;
 import com.example.transferdata.adapter.infoItemVideo;
 import com.example.transferdata.adapter.itemVideo;
@@ -32,27 +34,32 @@ public class getVideo {
             }
         }
         for (String folder : arrayList) {
-//            ArrayList arrayList2 = arrayList;
             Cursor cursor2 = activity.getContentResolver().query(uri, projection, null, null, null);
             List<infoItemVideo> listPathVideo = new ArrayList<>();
             while (cursor2.moveToNext()) {
                 String folder2 = folder;
                 if (folder2.equals(cursor2.getString(cursor2.getColumnIndexOrThrow(str4)))) {
-                    listPathVideo.add(new infoItemVideo(true, cursor2.getInt(cursor2.getColumnIndexOrThrow(str2)), cursor2.getString(cursor2.getColumnIndexOrThrow(str)), cursor2.getString(cursor2.getColumnIndexOrThrow(str3))));
+                    String pathVideo;
+                    pathVideo = cursor2.getString(cursor2.getColumnIndexOrThrow(str3));
+//                    Log.d("Path Image>>",pathVideo);
+                    if(!pathVideo.contains("/storage/emulated/0/")){
+                        pathVideo ="/storage/emulated/0" + pathVideo.substring(pathVideo.indexOf("/",pathVideo.indexOf("/", pathVideo.indexOf("/")+1)+1));
+                    }
+                    Log.d("Path Image>>",pathVideo);
+                    listPathVideo.add(new infoItemVideo(true, cursor2.getInt(cursor2.getColumnIndexOrThrow(str2)), cursor2.getString(cursor2.getColumnIndexOrThrow(str)), pathVideo));
                     folder = folder2;
                 } else {
                     folder = folder2;
                 }
             }
             listItemVideo.add(new itemVideo(folder, Boolean.TRUE, listPathVideo));
-//            arrayList = arrayList2;
         }
         listVideo = listItemVideo;
     }
 
     public String getSize() {
         DataItem dataItem = new DataItem();
-        int size = 0;
+        long size = 0;
         for (itemVideo item : listVideo) {
             for (infoItemVideo video : item.getListVideo()) {
                 if (video.isSelect()) {

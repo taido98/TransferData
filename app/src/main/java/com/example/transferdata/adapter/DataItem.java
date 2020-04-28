@@ -19,7 +19,7 @@ public class DataItem implements Parcelable {
     int img_resource;
     String info;
     String name;
-    int size;
+    long size;
     String source;
     boolean statusLoad;
 
@@ -49,11 +49,11 @@ public class DataItem implements Parcelable {
         return this.checked;
     }
 
-    public int getSize() {
+    public long getSize() {
         return this.size;
     }
 
-    public void setSize(int size2) {
+    public void setSize(long size2) {
         this.size = size2;
     }
 
@@ -136,7 +136,7 @@ public class DataItem implements Parcelable {
         dest.writeByte(this.checked ? (byte) 1 : 0);
         dest.writeByte(this.statusLoad ? (byte) 1 : 0);
         dest.writeInt(this.img_resource);
-        dest.writeInt(this.size);
+        dest.writeLong(this.size);
         dest.writeString(this.name);
         dest.writeString(this.info);
         dest.writeString(this.source);

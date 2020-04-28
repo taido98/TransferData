@@ -109,7 +109,6 @@ public class getMessenger {
                 Object obj2 = obj;
                 String selection2 = "Do:";
                 if (integer == i) {
-//                    arrayList = arrayList2;
                     calendar.add(Calendar.HOUR_OF_DAY, -24);
                     String dateType = dateFormat.format(calendar.getTime());
                     StringBuilder sb = new StringBuilder();
@@ -124,7 +123,6 @@ public class getMessenger {
                     minDate = Objects.requireNonNull(currentDate).getTime();
                 } else {
                     str2 = str3;
-//                    arrayList = arrayList2;
                 }
                 if (integer == 2) {
                     calendar.add(Calendar.DAY_OF_WEEK, -7);

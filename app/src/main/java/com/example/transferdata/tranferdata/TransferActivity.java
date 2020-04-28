@@ -72,10 +72,10 @@ public class TransferActivity extends Activity {
         DataItem item8 = new DataItem(true, R.drawable.ic_file, "File", "info", true);
         this.item = item8;
         listItem.add(item8);
+        listItem = new ArrayList<>();
         for (int i = ClientActivity.listItem.size() - 1; i >= 0; i--) {
-            if (!ClientActivity.listItem.get(i).isChecked()) {
-                listItem.remove(i);
-            } else {
+            if (ClientActivity.listItem.get(i).isChecked()) {
+                listItem.add(ClientActivity.listItem.get(i));
                 sizeItem.addFirst(ClientActivity.SIZE_ALL_ITEM[i]);
             }
         }

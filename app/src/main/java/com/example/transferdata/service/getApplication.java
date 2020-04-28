@@ -83,7 +83,7 @@ public class getApplication {
                     Drawable icon = info.loadIcon(this.context.getPackageManager());
                     DataItem item = new DataItem(true, -1, fileName, "", Boolean.FALSE);
                     item.setImgDrawable(icon);
-                    item.setSize((int) fileApp.length());
+                    item.setSize((long) fileApp.length());
                     item.setSource(fileApp.getPath());
                     listItem.add(item);
                     if (DetailListApp.adapterdetail != null) {

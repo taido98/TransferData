@@ -112,7 +112,7 @@ public class getFile {
     public String getSize() {
         DataItem dataItem = new DataItem();
         int count = 0;
-        int size = 0;
+        long size = 0;
 //        int sizeRound = 0;
         for (DataItem it : listFile) {
             if (it.isChecked()) {

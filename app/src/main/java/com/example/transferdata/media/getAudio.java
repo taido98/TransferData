@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.transferdata.adapter.DataItem;
@@ -34,27 +35,32 @@ public class getAudio {
             }
         }
         for (String folder : arrayList) {
-//            ArrayList arrayList2 = arrayList;
             Cursor cursor2 = activity.getContentResolver().query(uri, projection, null, null, null);
             List<infoItemAudio> listPathAudio = new ArrayList<>();
             while (cursor2.moveToNext()) {
                 String folder2 = folder;
                 if (folder2.equals(cursor2.getString(cursor2.getColumnIndexOrThrow(str4)))) {
-                    listPathAudio.add(new infoItemAudio(true, cursor2.getInt(cursor2.getColumnIndexOrThrow(str2)), cursor2.getString(cursor2.getColumnIndexOrThrow(str)), cursor2.getString(cursor2.getColumnIndexOrThrow(str3))));
+                    String pathAudio;
+                    pathAudio = cursor2.getString(cursor2.getColumnIndexOrThrow(str3));
+//                    Log.d("Path Image>>",pathAudio);
+                    if(!pathAudio.contains("/storage/emulated/0/")){
+                        pathAudio ="/storage/emulated/0" + pathAudio.substring(pathAudio.indexOf("/",pathAudio.indexOf("/", pathAudio.indexOf("/")+1)+1));
+                    }
+                    Log.d("Path Image>>",pathAudio);
+                    listPathAudio.add(new infoItemAudio(true, cursor2.getInt(cursor2.getColumnIndexOrThrow(str2)), cursor2.getString(cursor2.getColumnIndexOrThrow(str)), pathAudio));
                     folder = folder2;
                 } else {
                     folder = folder2;
                 }
             }
             listItemImage.add(new itemAudio(folder, Boolean.TRUE, listPathAudio));
-//            arrayList = arrayList2;
         }
         listAudio = listItemImage;
     }
 
     public String getSize() {
         DataItem dataItem = new DataItem();
-        int size = 0;
+        long size = 0;
         for (itemAudio item : listAudio) {
             for (infoItemAudio info : item.getListPathAudio()) {
                 if (info.isSelect()) {
