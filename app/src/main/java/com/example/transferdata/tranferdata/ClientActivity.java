@@ -20,6 +20,7 @@ import com.example.transferdata.R;
 import com.example.transferdata.adapter.DataItemAdapter;
 import com.example.transferdata.adapter.DataItem;
 import com.example.transferdata.connect.ConnectActivity;
+import com.example.transferdata.contact.getAllContact;
 import com.example.transferdata.media.DetailListAudio;
 import com.example.transferdata.media.getAudio;
 import com.example.transferdata.security.AES;
@@ -33,7 +34,7 @@ import com.example.transferdata.media.DetailListImage;
 import com.example.transferdata.media.DetailMessage;
 import com.example.transferdata.service.getApplication;
 import com.example.transferdata.service.getCallLog;
-import com.example.transferdata.service.getContact;
+//import com.example.transferdata.service.getContact;
 import com.example.transferdata.service.getMessenger;
 import com.jaeger.library.StatusBarUtil;
 
@@ -49,7 +50,8 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
     private getApplication application;
     private TextView mSelectedItems,mTxtSizeSelected;
     private getCallLog callLog;
-    private getContact contact;
+//    private getContact contact;
+    private getAllContact  mContact;
     private getFile file;
     private final getDataImage getImage = new getDataImage();
     final String info = "0 MB";
@@ -150,9 +152,9 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
     /* access modifiers changed from: 0000 */
     private void getData() {
         new Thread(() -> {
-            ClientActivity.this.contact = new getContact(ClientActivity.this);
+            ClientActivity.this.mContact = new getAllContact();
             ClientActivity client = ClientActivity.this;
-            client.item = new DataItem(true, R.drawable.person, "Contact", getContact.backupContacts(), Boolean.FALSE);
+            client.item = new DataItem(true, R.drawable.person, "Contact",getAllContact.getVCF(ClientActivity.this) , Boolean.FALSE);
             listItem.set(0, ClientActivity.this.item);
             ClientActivity.this.updateUI();
         }).start();
@@ -214,7 +216,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
                 (ClientActivity.listItem.get(0)).setStatusLoad(true);
                 ClientActivity.this.updateUI();
                 ClientActivity client = ClientActivity.this;
-                client.item = new DataItem(true, R.drawable.person, "Contact", getContact.backupContacts(), Boolean.FALSE);
+                client.item = new DataItem(true, R.drawable.person, "Contact", getAllContact.getVCF(ClientActivity.this), Boolean.FALSE);
                 listItem.set(0, ClientActivity.this.item);
                 ClientActivity.this.updateUI();
             }).start();
@@ -312,7 +314,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
                 intent = new Intent();
                 break;
         }
-        if (position != 1) {
+        if (position != 1 && position !=0) {
             this.startActivityForResult(intent, position);
         }
         updateSelectedItem(listItem);

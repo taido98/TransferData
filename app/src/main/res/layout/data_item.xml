@@ -5,7 +5,8 @@
     android:id="@+id/data_item"
     android:background="@drawable/custom_data_item"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:minHeight="64dp">
 
     <TextView
         android:id="@+id/divider4"

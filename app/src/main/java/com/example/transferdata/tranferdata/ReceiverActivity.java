@@ -13,9 +13,10 @@ import android.widget.TextView;
 import com.daimajia.numberprogressbar.NumberProgressBar;
 import com.example.transferdata.R;
 import com.example.transferdata.connect.ConnectActivity;
+import com.example.transferdata.contact.getAllContact;
 import com.example.transferdata.service.getApplication;
 import com.example.transferdata.service.getCallLog;
-import com.example.transferdata.service.getContact;
+//import com.example.transferdata.service.getContact;
 import com.example.transferdata.service.getMessenger;
 import com.example.transferdata.socket.serverSocket;
 import com.jaeger.library.StatusBarUtil;
@@ -135,7 +136,7 @@ public class ReceiverActivity extends Activity {
         });
         new Thread(() -> {
             if (serverSocket.listItem[0]) {
-                new getContact(ReceiverActivity.this).restoreContacts();
+                new getAllContact().restoreVCF(ReceiverActivity.this);
             }
             if (serverSocket.listItem[1]) {
                 new getCallLog(ReceiverActivity.this).restoreCallogs();

@@ -31,7 +31,7 @@ public class DataItem implements Parcelable {
         }
         this.statusLoad = check;
         this.img_resource = in.readInt();
-        this.size = in.readInt();
+        this.size = in.readLong();
         this.name = in.readString();
         this.info = in.readString();
         this.source = in.readString();
@@ -53,8 +53,8 @@ public class DataItem implements Parcelable {
         return this.size;
     }
 
-    public void setSize(long size2) {
-        this.size = size2;
+    public long setSize(long size2) {
+       return this.size = size2;
     }
 
     public String getSource() {
@@ -122,7 +122,7 @@ public class DataItem implements Parcelable {
         this.img_resource = img_resource2;
         this.name = name2;
         this.info = info2;
-        this.statusLoad = statusLoad2.booleanValue();
+        this.statusLoad = statusLoad2;
     }
 
     public DataItem() {
@@ -177,3 +177,4 @@ public class DataItem implements Parcelable {
         return result;
     }
 }
+

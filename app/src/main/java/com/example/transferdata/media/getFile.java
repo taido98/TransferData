@@ -61,7 +61,7 @@ public class getFile {
                     contentResolver = contentResolver2;
                     int nameColumnIndex = cursor.getColumnIndex("_display_name");
                     pathColumnIndex = pathColumnIndex2;
-                    int fileSize = cursor.getInt(sizeColumnIndex);
+                    long fileSize = cursor.getInt(sizeColumnIndex);
                     String string = cursor.getString(nameColumnIndex);
                     String fileTitle = cursor.getString(titleColumnIndex);
                     DataItem item2 = new DataItem();

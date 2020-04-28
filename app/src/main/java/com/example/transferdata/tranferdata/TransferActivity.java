@@ -95,7 +95,7 @@ public class TransferActivity extends Activity {
         List<String> data = new ArrayList<>();
         if (ClientActivity.listItem.get(0).isChecked()) {
             String sb = getExternalFilesDir(null) +
-                    "/contacts/contacts.csv";
+                    "/Contacts.vcf";
             data.add(sb);
         }
         if (ClientActivity.listItem.get(1).isChecked()) {
