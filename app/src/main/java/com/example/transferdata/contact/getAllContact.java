@@ -1,25 +1,20 @@
 package com.example.transferdata.contact;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Environment;
 import android.provider.ContactsContract;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
-import com.example.transferdata.R;
+import androidx.core.app.ActivityCompat;
+
+import com.example.transferdata.adapter.DataItem;
+import com.example.transferdata.security.AES;
+import com.example.transferdata.tranferdata.ClientActivity;
 
 import java.io.Closeable;
 import java.io.File;
@@ -30,62 +25,7 @@ import java.io.IOException;
 import ezvcard.VCard;
 import ezvcard.io.text.VCardReader;
 
-public class TestContacts extends AppCompatActivity {
-
-    private Button mBtnGetContact;
-    private Button mBtnRestoreContact;
-    private TextView mTxtSize;
-    private TextView mTxtPath;
-    private String path = "";
-    private static final String TAG = TestContacts.class.getSimpleName();
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contacts);
-        initView();
-        initAction();
-    }
-
-    private void initView() {
-        mBtnGetContact = (Button) findViewById(R.id.get_vcf);
-        mBtnRestoreContact = (Button) findViewById(R.id.restore_vcf);
-        mTxtSize = (TextView) findViewById(R.id.size_vcf);
-        mTxtPath = (TextView) findViewById(R.id.path_vcf);
-    }
-
-    private void initAction() {
-        mBtnGetContact.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onClick(View v) {
-                path = getVCF(TestContacts.this);
-                File vcf = new File(path);
-                double size = vcf.length();
-                mTxtPath.setText(path);
-                mTxtSize.setText(size + "");
-            }
-        });
-        mBtnRestoreContact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                restoreVCF(path, TestContacts.this);
-            }
-        });
-    }
-
-    public static boolean hasPermissions(Context context, String... permissions) {
-        if (context != null && permissions != null) {
-            for (String permission : permissions) {
-                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    ///Return path of vcf file
+public class getAllContact {
     public static String getVCF(Activity activity) {
         String results = "";
         Context mContext = activity.getApplicationContext();
@@ -99,11 +39,10 @@ public class TestContacts extends AppCompatActivity {
 
 
         String path = activity.getExternalFilesDir(null).toString() + "/Contacts.vcf";
-        results = path;
-        Log.d("Get contact>>>",path);
-        File fdelete = new File(path);
-        if (fdelete.exists()) {
-            if (fdelete.delete()) {
+        Log.d("Get contact>>>", path);
+        File fileVcf = new File(path);
+        if (fileVcf.exists()) {
+            if (fileVcf.delete()) {
                 System.out.println("file Deleted :" + path);
             } else {
                 System.out.println("file not Deleted :" + path);
@@ -135,10 +74,18 @@ public class TestContacts extends AppCompatActivity {
                 e1.printStackTrace();
             }
         }
+        DataItem dataItem = new DataItem();
+        ClientActivity.SIZE_ALL_ITEM[0] = fileVcf.length();
+        results = dataItem.sizeToString(fileVcf.length());
+        AES encryptaes = new AES();
+        encryptaes.encrypt(fileVcf);
+
+
         return results;
     }
 
-    public static void restoreVCF(String filePath, Activity activity) {
+    public static void restoreVCF(Activity activity) {
+        String filePath = activity.getExternalFilesDir(null).toString() + "/Contacts.vcf";
         Log.d("PATH", filePath);
         if (filePath.equals("")) {
             Log.e("Restore Error", "vCard path is empty");

@@ -61,7 +61,7 @@ public class getFile {
                     contentResolver = contentResolver2;
                     int nameColumnIndex = cursor.getColumnIndex("_display_name");
                     pathColumnIndex = pathColumnIndex2;
-                    int fileSize = cursor.getInt(sizeColumnIndex);
+                    long fileSize = cursor.getInt(sizeColumnIndex);
                     String string = cursor.getString(nameColumnIndex);
                     String fileTitle = cursor.getString(titleColumnIndex);
                     DataItem item2 = new DataItem();
@@ -112,7 +112,7 @@ public class getFile {
     public String getSize() {
         DataItem dataItem = new DataItem();
         int count = 0;
-        int size = 0;
+        long size = 0;
 //        int sizeRound = 0;
         for (DataItem it : listFile) {
             if (it.isChecked()) {

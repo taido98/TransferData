@@ -146,7 +146,7 @@ public class getCallLog {
         File file = encryptaes.decrypt(new File(path));
         if (file.exists()) {
             try {
-                NodeList nl = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file).getElementsByTagName("callogs");
+                NodeList nl = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file).getElementsByTagName("callog");
                 int i = 0;
                 while (i < nl.getLength()) {
                     ContentValues contentValues = new ContentValues();

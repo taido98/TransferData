@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore.Images.Media;
+import android.util.Log;
 
 import com.example.transferdata.adapter.DataItem;
 import com.example.transferdata.adapter.infoImage;
@@ -32,27 +33,32 @@ public class getDataImage {
             }
         }
         for (String folder : arrayList) {
-//            ArrayList arrayList2 = arrayList;
             Cursor cursor2 = activity.getContentResolver().query(uri, projection, null, null, null);
             List<infoImage> listPathImage = new ArrayList<>();
             while (cursor2.moveToNext()) {
                 String folder2 = folder;
                 if (folder2.equals(cursor2.getString(cursor2.getColumnIndexOrThrow(str4)))) {
-                    listPathImage.add(new infoImage(true, cursor2.getInt(cursor2.getColumnIndexOrThrow(str2)), cursor2.getString(cursor2.getColumnIndexOrThrow(str)), cursor2.getString(cursor2.getColumnIndexOrThrow(str3))));
+                    String pathImage;
+                    pathImage = cursor2.getString(cursor2.getColumnIndexOrThrow(str3));
+//                    Log.d("Path Image>>",pathImage);
+                    if(!pathImage.contains("/storage/emulated/0/")){
+                        pathImage ="/storage/emulated/0" + pathImage.substring(pathImage.indexOf("/",pathImage.indexOf("/", pathImage.indexOf("/")+1)+1));
+                    }
+                    Log.d("Path Image>>",pathImage);
+                    listPathImage.add(new infoImage(true, cursor2.getInt(cursor2.getColumnIndexOrThrow(str2)), cursor2.getString(cursor2.getColumnIndexOrThrow(str)), pathImage));
                     folder = folder2;
                 } else {
                     folder = folder2;
                 }
             }
             listItemImage.add(new itemImage(folder, Boolean.TRUE, listPathImage));
-//            arrayList = arrayList2;
         }
         listImage = listItemImage;
     }
 
     public String getSize() {
         DataItem dataItem = new DataItem();
-        int size = 0;
+        long size = 0;
         for (itemImage item : listImage) {
             for (infoImage info : item.getListPathImage()) {
                 if (info.isSelect()) {

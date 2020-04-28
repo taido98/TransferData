@@ -47,9 +47,9 @@ public class adapterDetail extends BaseAdapter {
         ImageView img_detail = row.findViewById(R.id.detail_icon);
         ((TextView) row.findViewById(R.id.detail_name)).setText((list.get(position)).name);
         cb_detail.setChecked(( list.get(position)).isChecked());
-        if (this.context.getClass().getSimpleName().contains("message")) {
+        if (this.context.getClass().getSimpleName().contains("Message")) {
             img_detail.setVisibility(View.GONE);
-        } else if (context.getClass().getSimpleName().contains("app")) {
+        } else if (context.getClass().getSimpleName().contains("App")) {
             img_detail.setImageDrawable(( list.get(position)).imgDrawable);
             img_detail.setVisibility(View.VISIBLE);
         } else {

@@ -37,7 +37,6 @@ public class serverSocket extends AsyncTask<String, String, String> {
         this.context = context2;
     }
 
-    /* access modifiers changed from: protected */
     public String doInBackground(String... params) {
         ObjectOutputStream outputStream;
         try {
