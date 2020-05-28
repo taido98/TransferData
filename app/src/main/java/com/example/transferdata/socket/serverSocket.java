@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.wifi.p2p.WifiP2pManager.ActionListener;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.util.Log;
 
 import com.example.transferdata.connect.ConnectActivity;
 import com.example.transferdata.security.RSA;
@@ -76,7 +77,12 @@ public class serverSocket extends AsyncTask<String, String, String> {
                 String sb2 = "++++++++ file name" +
                         fileName;
                 printStream2.println(sb2);
+                if(!fileName.contains("/storage/emulated/0/")){
+                    fileName ="/storage/emulated/0" + fileName.substring(fileName.indexOf("/",fileName.indexOf("/", fileName.indexOf("/")+1)+1));
+                }
+                Log.d("Path Image>>",fileName);
                 File f = new File(fileName);
+                Log.d("Recevie ::::",fileName);
                 File dirs = new File(Objects.requireNonNull(f.getParent()));
                 if (!dirs.exists()) {
                     dirs.mkdirs();

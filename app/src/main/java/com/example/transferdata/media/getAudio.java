@@ -19,6 +19,7 @@ public class getAudio {
     public static List<itemAudio> listAudio = new ArrayList();
 
     public void getAudiosPath(Activity activity) {
+        String disPlayName = null;
         ArrayList<String> arrayList = new ArrayList<>();
         List<itemAudio> listItemImage = new ArrayList<>();
         Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
@@ -40,20 +41,17 @@ public class getAudio {
             while (cursor2.moveToNext()) {
                 String folder2 = folder;
                 if (folder2.equals(cursor2.getString(cursor2.getColumnIndexOrThrow(str4)))) {
+                    disPlayName = cursor2.getString( cursor2.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME));
+                    Log.d("Display audio >>>", disPlayName);
                     String pathAudio;
                     pathAudio = cursor2.getString(cursor2.getColumnIndexOrThrow(str3));
-//                    Log.d("Path Image>>",pathAudio);
-                    if(!pathAudio.contains("/storage/emulated/0/")){
-                        pathAudio ="/storage/emulated/0" + pathAudio.substring(pathAudio.indexOf("/",pathAudio.indexOf("/", pathAudio.indexOf("/")+1)+1));
-                    }
-                    Log.d("Path Image>>",pathAudio);
                     listPathAudio.add(new infoItemAudio(true, cursor2.getInt(cursor2.getColumnIndexOrThrow(str2)), cursor2.getString(cursor2.getColumnIndexOrThrow(str)), pathAudio));
                     folder = folder2;
                 } else {
                     folder = folder2;
                 }
             }
-            listItemImage.add(new itemAudio(folder, Boolean.TRUE, listPathAudio));
+            listItemImage.add(new itemAudio(folder, Boolean.TRUE, listPathAudio,disPlayName));
         }
         listAudio = listItemImage;
     }

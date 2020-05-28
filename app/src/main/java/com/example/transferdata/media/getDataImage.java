@@ -41,10 +41,7 @@ public class getDataImage {
                     String pathImage;
                     pathImage = cursor2.getString(cursor2.getColumnIndexOrThrow(str3));
 //                    Log.d("Path Image>>",pathImage);
-                    if(!pathImage.contains("/storage/emulated/0/")){
-                        pathImage ="/storage/emulated/0" + pathImage.substring(pathImage.indexOf("/",pathImage.indexOf("/", pathImage.indexOf("/")+1)+1));
-                    }
-                    Log.d("Path Image>>",pathImage);
+
                     listPathImage.add(new infoImage(true, cursor2.getInt(cursor2.getColumnIndexOrThrow(str2)), cursor2.getString(cursor2.getColumnIndexOrThrow(str)), pathImage));
                     folder = folder2;
                 } else {

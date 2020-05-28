@@ -4,13 +4,11 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.util.Log;
-
+//import android.util.Log;
 import com.example.transferdata.adapter.DataItem;
 import com.example.transferdata.adapter.infoItemVideo;
 import com.example.transferdata.adapter.itemVideo;
 import com.example.transferdata.tranferdata.ClientActivity;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,11 +39,6 @@ public class getVideo {
                 if (folder2.equals(cursor2.getString(cursor2.getColumnIndexOrThrow(str4)))) {
                     String pathVideo;
                     pathVideo = cursor2.getString(cursor2.getColumnIndexOrThrow(str3));
-//                    Log.d("Path Image>>",pathVideo);
-                    if(!pathVideo.contains("/storage/emulated/0/")){
-                        pathVideo ="/storage/emulated/0" + pathVideo.substring(pathVideo.indexOf("/",pathVideo.indexOf("/", pathVideo.indexOf("/")+1)+1));
-                    }
-                    Log.d("Path Image>>",pathVideo);
                     listPathVideo.add(new infoItemVideo(true, cursor2.getInt(cursor2.getColumnIndexOrThrow(str2)), cursor2.getString(cursor2.getColumnIndexOrThrow(str)), pathVideo));
                     folder = folder2;
                 } else {

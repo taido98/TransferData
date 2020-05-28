@@ -18,7 +18,8 @@
             android:layout_centerHorizontal="true"
             android:contentDescription="grview_image"
             android:scaleType="centerCrop"
-            tools:ignore="HardcodedText" />
+            tools:ignore="HardcodedText"
+            app:srcCompat="@drawable/audio_file"/>
 
         <CheckBox
             android:id="@+id/cb_select_image"

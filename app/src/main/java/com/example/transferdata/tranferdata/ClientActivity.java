@@ -76,25 +76,25 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
         DataItem item2 = new DataItem(true, R.drawable.person, "Contact", "0 MB", true);
         this.item = item2;
         listItem.add(item2);
-        DataItem item3 = new DataItem(true, R.drawable.call_log, "Call log", "0 MB", true);
+        DataItem item3 = new DataItem(true, R.drawable.call_log, getResources().getString(R.string.call_logs), "0 MB", true);
         this.item = item3;
         listItem.add(item3);
-        DataItem item4 = new DataItem(true, R.drawable.messages, "Messenger", "0 MB", true);
+        DataItem item4 = new DataItem(true, R.drawable.messages, getResources().getString(R.string.messages), "0 MB", true);
         this.item = item4;
         listItem.add(item4);
-        DataItem item5 = new DataItem(true, R.drawable.images, "Images", "0 MB", true);
+        DataItem item5 = new DataItem(true, R.drawable.images, getResources().getString(R.string.images), "0 MB", true);
         this.item = item5;
         listItem.add(item5);
-        DataItem item6 = new DataItem(true, R.drawable.videos, "Video", "0 MB", true);
+        DataItem item6 = new DataItem(true, R.drawable.videos, getResources().getString(R.string.videos), "0 MB", true);
         this.item = item6;
         listItem.add(item6);
-        DataItem item7 = new DataItem(true, R.drawable.ic_apps, "App", "0 MB", true);
+        DataItem item7 = new DataItem(true, R.drawable.apps, getResources().getString(R.string.apps), "0 MB", true);
         this.item = item7;
         listItem.add(item7);
-        DataItem item8 = new DataItem(true, R.drawable.ic_file, "File", "0 MB", true);
+        DataItem item8 = new DataItem(true, R.drawable.files, getResources().getString(R.string.files), "0 MB", true);
         this.item = item8;
         listItem.add(item8);
-        DataItem Audio = new DataItem(true, R.drawable.musics, "Audio", "0 MB", true);
+        DataItem Audio = new DataItem(true, R.drawable.musics,  getResources().getString(R.string.audios), "0 MB", true);
         this.item = Audio;
         listItem.add(Audio);
         mDataItemAdapter = new DataItemAdapter(this,listItem);
@@ -117,15 +117,12 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
         mCheckBoxSelectAll = findViewById(R.id.select_all);
         mSelectedItems =findViewById(R.id.selected_items);
         mCheckBoxSelectAll.setOnClickListener(v -> {
-//            int totalSize=0;
             for (DataItem item : listItem) {
                 item.setChecked(((CheckBox) v).isChecked());
-//                totalSize+=item.getSize();
                 Log.d("Size??", "" + item.getSize());
             }
             mDataItemAdapter.notifyDataSetChanged();
             updateSelectedItem(listItem);
-//            mSelectedItems.setText((new item()).sizeToString(totalSize));
         });
 
         Button button = findViewById(R.id.btn_disconnect);
@@ -161,7 +158,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
         new Thread(() -> {
             ClientActivity.this.callLog = new getCallLog(ClientActivity.this);
             ClientActivity client = ClientActivity.this;
-            client.item = new DataItem(true, R.drawable.call_log, "Call log", callLog.backupCallogs(), Boolean.FALSE);
+            client.item = new DataItem(true, R.drawable.call_log, getResources().getString(R.string.call_logs), callLog.backupCallogs(), Boolean.FALSE);
             listItem.set(1, ClientActivity.this.item);
             ClientActivity.this.updateUI();
         }).start();
@@ -170,7 +167,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
             try {
                 ClientActivity client = ClientActivity.this;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    client.item = new DataItem(true, R.drawable.messages, "Messenger", getMessenger.backupMessages(), Boolean.FALSE);
+                    client.item = new DataItem(true, R.drawable.messages, getResources().getString(R.string.messages), getMessenger.backupMessages(), Boolean.FALSE);
                 }
                 listItem.set(2, ClientActivity.this.item);
                 ClientActivity.this.updateUI();
@@ -185,17 +182,17 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
             listItem.set(3, ClientActivity.this.item);
             ClientActivity.this.getvideo.getVideosPath(ClientActivity.this);
             ClientActivity client2 = ClientActivity.this;
-            client2.item = new DataItem(true, R.drawable.videos, "Video", getvideo.getSize(), false);
+            client2.item = new DataItem(true, R.drawable.videos, getResources().getString(R.string.videos), getvideo.getSize(), false);
             listItem.set(4, ClientActivity.this.item);
             ClientActivity.this.getAudio.getAudiosPath(ClientActivity.this);
-            ClientActivity.this.item =  new DataItem(true, R.drawable.musics, "Audio", getAudio.getSize(), false);
+            ClientActivity.this.item =  new DataItem(true, R.drawable.musics, getResources().getString(R.string.audios), getAudio.getSize(), false);
             listItem.set(7, ClientActivity.this.item);
             ClientActivity.this.updateUI();
         }).start();
         Thread threadApplication = new Thread(() -> {
             ClientActivity.this.application = new getApplication(ClientActivity.this);
             ClientActivity client = ClientActivity.this;
-            client.item = new DataItem(true, R.drawable.ic_apps, "App", application.backupApps(), Boolean.FALSE);
+            client.item = new DataItem(true, R.drawable.apps, getResources().getString(R.string.apps), application.backupApps(), Boolean.FALSE);
             listItem.set(5, ClientActivity.this.item);
             ClientActivity.this.updateUI();
         });
@@ -203,7 +200,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
             ClientActivity.this.file = new getFile(ClientActivity.this);
             ClientActivity.this.file.getAllFile();
             ClientActivity client = ClientActivity.this;
-            client.item = new DataItem(true, R.drawable.ic_file, "File", file.getSize(), Boolean.FALSE);
+            client.item = new DataItem(true, R.drawable.files,  getResources().getString(R.string.files), file.getSize(), Boolean.FALSE);
             listItem.set(6, ClientActivity.this.item);
         }).start();
         threadApplication.start();
@@ -227,7 +224,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
                     ClientActivity.this.updateUI();
                     ClientActivity client = ClientActivity.this;
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                        client.item = new DataItem(true, R.drawable.messages, "Messenger", getMessenger.backupMessages(), Boolean.FALSE);
+                        client.item = new DataItem(true, R.drawable.messages, getResources().getString(R.string.messages), getMessenger.backupMessages(), Boolean.FALSE);
                     }
                     listItem.set(2, ClientActivity.this.item);
                     ClientActivity.this.updateUI();
@@ -247,21 +244,21 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
         } else if (requestCode == 4 && resultCode == -1) {
             listItem.get(4).setStatusLoad(true);
             updateUI();
-            DataItem item3 = new DataItem(true, R.drawable.videos, "Video", getvideo.getSize(), Boolean.FALSE);
+            DataItem item3 = new DataItem(true, R.drawable.videos, getResources().getString(R.string.videos), getvideo.getSize(), Boolean.FALSE);
             this.item = item3;
             listItem.set(4, item3);
             updateUI();
         } else if (requestCode == 5 && resultCode == -1) {
             listItem.get(5).setStatusLoad(true);
             updateUI();
-            DataItem item4 = new DataItem(true, R.drawable.apps, "App", DetailListApp.getInfo(), Boolean.FALSE);
+            DataItem item4 = new DataItem(true, R.drawable.apps, getResources().getString(R.string.apps), DetailListApp.getInfo(), Boolean.FALSE);
             this.item = item4;
             listItem.set(5, item4);
             updateUI();
         } else if (requestCode == 6 && resultCode == -1) {
             listItem.get(6).setStatusLoad(true);
             updateUI();
-            DataItem item5 = new DataItem(true, R.drawable.ic_file, "File", file.getSize(), Boolean.FALSE);
+            DataItem item5 = new DataItem(true, R.drawable.files,  getResources().getString(R.string.files), file.getSize(), Boolean.FALSE);
             this.item = item5;
             listItem.set(6, item5);
             updateUI();
@@ -269,7 +266,7 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
         else if (requestCode == 7 && resultCode == -1) {
             listItem.get(7).setStatusLoad(true);
             updateUI();
-            DataItem audioItem = new DataItem(true, R.drawable.musics, "Audio", getAudio.getSize(), Boolean.FALSE);
+            DataItem audioItem = new DataItem(true, R.drawable.musics, getResources().getString(R.string.audios), getAudio.getSize(), Boolean.FALSE);
             this.item = audioItem;
             listItem.set(7, audioItem);
             updateUI();
@@ -320,17 +317,22 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
         updateSelectedItem(listItem);
     }
     public void updateUI() {
-        runOnUiThread(() -> mDataItemAdapter.notifyDataSetChanged());
+        runOnUiThread(() ->{
+            this.mDataItemAdapter.notifyDataSetChanged();
+            updateSelectedItem(listItem);
+        });
     }
 
     public void updateSelectedItem(List<DataItem> listItem) {
         long size = 0;
         int items = 0;
+        int count =0;
         for (DataItem dataItem : listItem) {
             if (dataItem.isChecked()) {
-                size += SIZE_ALL_ITEM[items];
+                size += SIZE_ALL_ITEM[count];
+                items++;
             }
-            items++;
+            count++;
         }
         DataItem dataItem = new DataItem();
         mTxtSizeSelected.setText(dataItem.sizeToString(size));
@@ -345,5 +347,6 @@ public class ClientActivity extends AppCompatActivity implements ClickItemDataLi
                 mCheckBoxSelectAll.setChecked(false);
         }
         updateSelectedItem(listItem);
+//        updateUI();
     }
 }

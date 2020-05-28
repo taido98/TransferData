@@ -21,8 +21,11 @@ import com.example.transferdata.service.getMessenger;
 import com.example.transferdata.socket.serverSocket;
 import com.jaeger.library.StatusBarUtil;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.PrintStream;
 import pl.droidsonroids.gif.GifImageView;
 
@@ -132,25 +135,35 @@ public class ReceiverActivity extends Activity {
             ReceiverActivity.this.restoreLoad.setVisibility(View.VISIBLE);
             ReceiverActivity.this.numberProgressBar.setMax(100);
             ReceiverActivity.this.numberProgressBar.setProgress(100);
+            ReceiverActivity.this.numberProgressBar.setVisibility(View.GONE);
             ReceiverActivity.this.txt_speed.setText("Restore Data");
         });
         new Thread(() -> {
             if (serverSocket.listItem[0]) {
                 new getAllContact().restoreVCF(ReceiverActivity.this);
+                runOnUiThread(() -> {
+                    this.txt_speed.setText(getResources().getString(R.string.restoring_contact));
+                });
             }
             if (serverSocket.listItem[1]) {
                 new getCallLog(ReceiverActivity.this).restoreCallogs();
+                runOnUiThread(() -> {
+                    this.txt_speed.setText(getResources().getString(R.string.restoring_calllog));
+                });
             }
             if (serverSocket.listItem[2]) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                     new getMessenger(ReceiverActivity.this).restoreMessages();
                 }
+                runOnUiThread(() -> {
+                    this.txt_speed.setText(getResources().getString(R.string.restoring_message));
+                });
             }
             if (serverSocket.listItem[5]) {
                 new getApplication(ReceiverActivity.this).restoreApps();
             }
             ReceiverActivity.this.runOnUiThread(() -> {
-                ReceiverActivity.this.numberProgressBar.setVisibility(View.GONE);
+                ReceiverActivity.this.txt_speed.setVisibility(View.GONE);
                 ReceiverActivity.this.btn_done.setVisibility(View.VISIBLE);
             });
         }).start();
@@ -172,12 +185,28 @@ public class ReceiverActivity extends Activity {
 
     /* access modifiers changed from: 0000 */
     public void clickButtonDone() {
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(getExternalFilesDir(null));
+//        sb.append("");
+//        try {
+//            FileUtils.deleteDirectory(new File(sb.toString()));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         this.btn_done.setOnClickListener(v -> ReceiverActivity.this.finish());
     }
 
     /* access modifiers changed from: protected */
     public void onDestroy() {
         this.running = false;
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(getExternalFilesDir(null));
+//        sb.append("");
+//        try {
+//            FileUtils.deleteDirectory(new File(sb.toString()));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         super.onDestroy();
     }
 }

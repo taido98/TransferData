@@ -15,14 +15,25 @@ public class itemAudio implements Parcelable {
             return new itemAudio[size];
         }
     };
+
+    public String getDisPlayName() {
+        return DisPlayName;
+    }
+
+    public void setDisPlayName(String disPlayName) {
+        DisPlayName = disPlayName;
+    }
+
+    String DisPlayName;
     String folderName;
     List<infoItemAudio> listPathAudio;
     Boolean select;
 
-    public itemAudio(String folderName2, Boolean select2, List<infoItemAudio> listPathAudio2) {
+    public itemAudio(String folderName2, Boolean select2, List<infoItemAudio> listPathAudio2, String disPlayName) {
         this.folderName = folderName2;
         this.select = select2;
         this.listPathAudio = listPathAudio2;
+        this.DisPlayName = disPlayName;
     }
 
     private itemAudio(Parcel in) {

@@ -2,6 +2,7 @@ package com.example.transferdata.adapter;
 
 import android.app.Activity;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,7 +57,7 @@ public class adapterAudio extends BaseAdapter {
         TextView total_image = row.findViewById(R.id.total_image);
         TextView folder_name = row.findViewById(R.id.folder_name);
         CheckBox checkBox = row.findViewById(R.id.cb_select_image);
-        row.findViewById(R.id.play_video).setVisibility(View.VISIBLE);
+//        row.findViewById(R.id.play_video).setVisibility(View.VISIBLE);
         Display display = this.context.getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -71,8 +72,12 @@ public class adapterAudio extends BaseAdapter {
             row.setPadding(1, 0, 1, 30);
             checkBox.setChecked(this.listAudio.get(position).select);
             clickCheckBoxFolder(checkBox, position);
-            ((RequestBuilder) ((RequestBuilder) Glide.with((Activity) this.context).load(this.listAudio.get(position).listPathAudio.get(0).source).centerCrop()).thumbnail(0.1f).placeholder((int) R.color.cardview_light_background)).into(img);
+//            ((RequestBuilder) ((RequestBuilder) Glide.with((Activity) this.context).load(this.listAudio.get(position).listPathAudio.get(0).source).centerCrop()).thumbnail(0.1f).placeholder((int) R.color.cardview_light_background)).into(img);
+//            Drawable audioIcon = get;
+//            int auditest = R.drawable.audio_file;
+//            img.setImageDrawable(R.drawable.audio_file);
         } else {
+            folder_name.setText(this.listAudio.get(0).listPathAudio.get(position).name);
             clickCheckBoxVideo(checkBox, position);
             checkBox.setChecked(this.listAudio.get(0).listPathAudio.get(position).select);
             ((RequestBuilder) ((RequestBuilder) Glide.with((Activity) this.context).load(this.listAudio.get(0).listPathAudio.get(position).source).centerCrop()).thumbnail(0.1f).placeholder((int) R.color.cardview_light_background)).into(img);

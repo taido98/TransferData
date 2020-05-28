@@ -68,7 +68,7 @@ public class ConnectActivity extends Activity implements PeerListListener {
         receiver = new WiFiDirectBroadcastReceiver(manager, channel, this, NewPhone);
         IntentFilter intentFilter2 = new IntentFilter();
         intentFilter = intentFilter2;
-        intentFilter2.addAction("android.net.wifi.p2p.STATE_CHANGED");
+        intentFilter.addAction("android.net.wifi.p2p.STATE_CHANGED");
         intentFilter.addAction("android.net.wifi.p2p.PEERS_CHANGED");
         intentFilter.addAction("android.net.wifi.p2p.CONNECTION_STATE_CHANGE");
         intentFilter.addAction("android.net.wifi.p2p.THIS_DEVICE_CHANGED");

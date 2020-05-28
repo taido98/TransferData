@@ -14,6 +14,7 @@ import android.util.Log;
 import androidx.annotation.RequiresApi;
 import androidx.exifinterface.media.ExifInterface;
 
+import com.example.transferdata.R;
 import com.example.transferdata.adapter.DataItem;
 import com.example.transferdata.security.AES;
 import com.example.transferdata.tranferdata.ClientActivity;
@@ -55,16 +56,16 @@ public class getMessenger {
         context = contex;
         ArrayList<DataItem> arrayList = new ArrayList<>();
         listItem = arrayList;
-        DataItem item = new DataItem(true, -1, "One day ago", "1", false);
+        DataItem item = new DataItem(true, -1, context.getResources().getString(R.string.one_day_ago), "1", false);
         arrayList.add(item);
         ArrayList<DataItem> arrayList2 = listItem;
-        DataItem item2 = new DataItem(true, -1, "One week ago", ExifInterface.GPS_MEASUREMENT_2D, false);
+        DataItem item2 = new DataItem(true, -1,context.getResources().getString(R.string.one_week_ago), ExifInterface.GPS_MEASUREMENT_2D, false);
         arrayList2.add(item2);
         ArrayList<DataItem> arrayList3 = listItem;
-        DataItem item3 = new DataItem(true, -1, "One month ago", ExifInterface.GPS_MEASUREMENT_3D, false);
+        DataItem item3 = new DataItem(true, -1, context.getResources().getString(R.string.one_month_ago), ExifInterface.GPS_MEASUREMENT_3D, false);
         arrayList3.add(item3);
         ArrayList<DataItem> arrayList4 = listItem;
-        DataItem item4 = new DataItem(true, -1, "One year ago", "4", false);
+        DataItem item4 = new DataItem(true, -1, context.getResources().getString(R.string.one_year_ago), "4", false);
         arrayList4.add(item4);
     }
 

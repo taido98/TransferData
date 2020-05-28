@@ -41,6 +41,7 @@ public class getAllContact {
         String path = activity.getExternalFilesDir(null).toString() + "/Contacts.vcf";
         Log.d("Get contact>>>", path);
         File fileVcf = new File(path);
+        Log.d("filePath Contact", fileVcf.getPath());
         if (fileVcf.exists()) {
             if (fileVcf.delete()) {
                 System.out.println("file Deleted :" + path);
@@ -95,8 +96,7 @@ public class getAllContact {
                 Log.e("Restore Error", "No external storage mounted.");
             }
 
-            File vcardFile;
-            vcardFile = new File(filePath);
+            File vcardFile = new AES().decrypt(new File(filePath));
             if (!vcardFile.exists()) {
                 Log.e("Restore Error", "vCard file does not exist: " + filePath);
             } else {
